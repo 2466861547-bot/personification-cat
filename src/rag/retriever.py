@@ -55,6 +55,7 @@ class PetRetriever:
     def build_index(self):
         """构建向量索引"""
         """构建向量索引"""
+        """构建向量索引"""
         self._init_embeddings()
         self._init_chroma()
 
