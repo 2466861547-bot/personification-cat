@@ -1,0 +1,25 @@
+# 1. 生成训练数据
+python data/synthetic/generate_synthetic_data.py
+
+# 2. 训练 Whisper (宠物声音→文字)
+python scripts/train_whisper.py --data ./data/synthetic/whisper_labels.json
+
+# 3. 训练 LLM (情绪理解+翻译)
+python scripts/train_llm.py --data ./data/synthetic/llm_training_data.json
+
+# 4. 推理
+python scripts/inference.py --mode pet_to_text --audio test.wav --pet cat
+python scripts/inference.py --mode text_to_pet --text "过来吃饭" --pet cat
+python scripts/inference.py --mode chat
+
+Python >= 3.12,需 GPU 训练(Whisper 16GB+,LLM 24GB+)。
+
+# 立即唱首歌给猫
+python scripts/entertain.py --mode singing --pet cat
+
+# 多智能体模式,一天5次自动逗狗
+python scripts/entertain.py --multi-agent --pet dog --times 5
+
+cd /Users/apple/Downloads/ai/personification-cat
+pip install -r requirements.txt
+python3 run.py

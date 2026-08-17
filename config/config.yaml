@@ -1,0 +1,113 @@
+# personification-cat 配置文件
+# =====================================
+
+project:
+  name: personification-cat
+  version: "0.1.0"
+  description: "宠物声音与人声双向翻译大模型"
+
+# 音频参数
+audio:
+  sample_rate: 16000
+  mono: true
+  segment_duration: 5.0        # 音频分段时长(秒)
+  hop_duration: 2.0            # 滑动窗口步长
+  n_mels: 128                   # Mel 频谱数
+  n_fft: 1024
+  win_length: 1024
+  hop_length: 512
+  f_min: 50
+  f_max: 8000
+
+# Whisper 微调配置 (宠物声音 ASR)
+whisper:
+  model_name: "openai/whisper-large-v3"
+  language: "zh"
+  task: "transcribe"
+  lora_r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  learning_rate: 1.0e-5
+  batch_size: 8
+  num_train_epochs: 30
+  warmup_steps: 500
+  max_steps: -1                 # -1 表示使用 epoch
+  save_steps: 500
+  eval_steps: 500
+  fp16: true
+  gradient_checkpointing: true
+
+# LLM 微调配置 (理解 + 翻译)
+llm:
+  base_model: "Qwen/Qwen2.5-7B-Instruct"
+  lora_r: 64
+  lora_alpha: 128
+  lora_dropout: 0.05
+  target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+  learning_rate: 2.0e-4
+  batch_size: 4
+  gradient_accumulation_steps: 8
+  num_train_epochs: 10
+  warmup_ratio: 0.03
+  max_seq_length: 2048
+  save_steps: 200
+  eval_steps: 200
+  bf16: true
+
+# 音频生成模型 (人声→宠物声音)
+audio_gen:
+  model_name: "suno/bark"
+  voice_preset_cat: "v2/cat_sounds"
+  voice_preset_dog: "v2/dog_sounds"
+
+# RAG 知识库配置
+rag:
+  embedding_model: "BAAI/bge-large-zh-v1.5"
+  chunk_size: 512
+  chunk_overlap: 50
+  top_k: 5
+  collection_name: "pet_knowledge"
+  persist_dir: "./data/chroma_db"
+  knowledge_dir: "./data/knowledge"
+
+# LangChain Agent 配置
+agent:
+  model_name: "Qwen/Qwen2.5-7B-Instruct"
+  temperature: 0.3
+  max_tokens: 1024
+  verbose: true
+
+# 训练数据配置
+data:
+  raw_dir: "./data/raw"
+  processed_dir: "./data/processed"
+  synthetic_dir: "./data/synthetic"
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+  # 私域数据类别
+  pet_types: ["cat", "dog"]
+  emotion_labels:
+    - "hungry"          # 饥饿
+    - "happy"           # 开心
+    - "angry"           # 生气
+    - "fear"            # 恐惧
+    - "sad"             # 悲伤
+    - "seek_attention"  # 求关注
+    - "pain"            # 疼痛
+    - "alert"           # 警觉
+    - "content"         # 满足
+    - "playful"         # 想玩耍
+  breed_list:
+    cat: ["英短", "美短", "布偶", "橘猫", "暹罗", "波斯", "缅因", "狸花",
+          "矮脚拿破仑", "苏格兰折耳", "阿比西尼亚", "孟加拉豹猫",
+          "斯芬克斯无毛猫", "俄罗斯蓝猫", "加菲猫", "美国卷耳猫"]
+    dog: ["金毛", "拉布拉多", "哈士奇", "柯基", "泰迪", "边牧", "德牧", "柴犬",
+          "萨摩耶", "阿拉斯加", "比熊", "博美", "法国斗牛犬",
+          "雪纳瑞", "比格犬", "秋田犬"]
+
+# 输出目录
+output:
+  checkpoint_dir: "./checkpoints"
+  log_dir: "./logs"
+  result_dir: "./results"
