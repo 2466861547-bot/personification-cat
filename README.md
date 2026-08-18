@@ -163,6 +163,103 @@ personification-cat/
 
 ---
 
+## 数据集与知识库说明
+
+### 数据集划分 (train / val / test)
+
+项目数据集采用 **80/10/10 分层抽样** 划分，确保每个 (品种, 情绪) 组合在三个集合中均匀分布。
+
+| 集合 | 样本数 | 比例 | 文件 |
+|------|--------|------|------|
+| 训练集 train | 2560 | 80.0% | [data/dataset/train.json](data/dataset/train.json) |
+| 验证集 val | 320 | 10.0% | [data/dataset/val.json](data/dataset/val.json) |
+| 测试集 test | 320 | 10.0% | [data/dataset/test.json](data/dataset/test.json) |
+
+**划分脚本**: [data/dataset/split_dataset.py](data/dataset/split_dataset.py)
+
+**样本结构**:
+```json
+{
+  "id": "cat_缅因_seek_attention_听到_8205",
+  "system": "你是一个宠物语言翻译专家...",
+  "input": "宠物类型: cat\n品种: 缅因\n声音特征: ...\n基础 F0: 200-500 Hz\n性格倾向: 温柔巨人...",
+  "output": "## 情绪解读\n## 声音分析\n## 情境分析\n## 品种背景\n## 建议措施",
+  "metadata": {
+    "pet_type": "cat",
+    "breed": "缅因",
+    "emotion": "seek_attention",
+    "f0_range_hz": "200-500",
+    "f0_mean_hz": 350.0,
+    "temperament": "温柔巨人、亲人、像狗一样忠诚...",
+    "genetic_diseases": ["肥厚性心肌病(HCM)", ...],
+    "ethology_notes": "北美最古老自然长毛品种...",
+    "vocalization_ref": "meow",
+    "vocalization_sources": ["https://pmc.ncbi.nlm.nih.gov/..."]
+  }
+}
+```
+
+### 真实动物学数据来源
+
+数据基于爬取的**真实动物学数据**生成，涵盖权威品种数据库和学术论文：
+
+| 数据源 | 内容 | 文件 |
+|--------|------|------|
+| CFA / TICA / 维基百科 | 16 猫品种真实数据 | [data/crawler/cat_breeds_real.json](data/crawler/cat_breeds_real.json) |
+| AKC / FCI / Britannica | 16 狗品种真实数据 | [data/crawler/dog_breeds_real.json](data/crawler/dog_breeds_real.json) |
+| 12 篇学术论文 | 声学行为学研究 | [data/crawler/ethology_research.json](data/crawler/ethology_research.json) |
+
+**学术论文来源**:
+- Nicastro & Owren (2003) 家猫声音分类 - J Comp Psychol
+- McComb et al. (2009) 呼噜声中的哭声 - Current Biology
+- Taylor, Reby & McComb (2010) 大型犬为何听起来更凶 - Ethology
+- Yin & McCowan (2004) 家犬吠叫分类 - Animal Behaviour
+- Pongrácz et al. (2006) 犬吠携带情绪信息 - Appl Anim Behav Sci
+- Schötz (2015) 家猫攻击性发声 - Fonetik
+- Tavernier et al. (2020) 猫发声沟通 - J Vet Sci
+- Sibiryakova et al. (2021) 家犬呜咽多声性 - Current Zoology
+- Marangoni et al. (2023) 猫急性疼痛行为谱 - PLoS ONE
+- Piczak (2015) ESC-50 数据集
+
+**每个品种的真实字段**:
+- 起源国家、体型、体重、寿命
+- F0 范围、典型叫声、共振峰
+- 性格特征、毛发类型
+- 遗传病倾向
+- 动物学行为学笔记
+- 数据源 URL
+
+### 扩充知识库
+
+基于真实数据扩充的知识库，共 **363 条** 知识条目：
+
+| 类别 | 条目数 | 说明 |
+|------|--------|------|
+| 品种特定知识 | 320 | 32 品种 × 10 情绪 |
+| 声学行为学研究 | 38 | 猫狗发声类型 + 情绪理论框架 |
+| 公开数据集 | 5 | ESC-50, CatMeows, UrbanSound8K 等 |
+
+**知识库文件**: [data/knowledge/expanded_knowledge.json](data/knowledge/expanded_knowledge.json)
+
+**构建脚本**: [data/knowledge/build_expanded_knowledge.py](data/knowledge/build_expanded_knowledge.py)
+
+### 数据集生成命令
+
+```bash
+# 1. 重新生成数据集
+cd personification-cat
+python3 data/dataset/split_dataset.py
+
+# 2. 重新构建知识库
+python3 data/knowledge/build_expanded_knowledge.py
+
+# 3. 查看统计
+cat data/dataset/stats.json
+cat data/knowledge/knowledge_stats.json
+```
+
+---
+
 ## 模型推理优化 (AI 基础模型专家 Review)
 
 ### 优化总览

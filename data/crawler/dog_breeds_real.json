@@ -1,0 +1,666 @@
+[
+  {
+    "breed_cn": "金毛寻回犬",
+    "breed_en": "Golden Retriever",
+    "origin": "英国苏格兰",
+    "body_type": "大型",
+    "weight_kg": "25-34",
+    "height_cm": "55-61",
+    "lifespan_years": "10-12",
+    "f0_range_hz": "180-500",
+    "bark_frequency": 3,
+    "typical_sounds": [
+      "中频吠叫，柔和但响亮",
+      "兴奋时高频呜咽",
+      "玩耍时短促的爆破音",
+      "欢迎时低频呜呜声"
+    ],
+    "temperament": "友善、可靠、信任、忠诚、温顺、聪明、渴望取悦",
+    "coat_type": "浓密防水双层被毛，直毛或波浪毛，金色/奶油色",
+    "genetic_diseases": [
+      "髋关节发育不良",
+      "肘关节发育不良",
+      "血管肉瘤",
+      "淋巴瘤",
+      "遗传性心脏病",
+      "进行性视网膜萎缩(PRA)"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "200-450",
+      "howl_freq_hz": "150-350",
+      "whine_freq_hz": "300-800",
+      "bark_duration_s": "0.15-0.40"
+    },
+    "ethology_notes": "原为苏格兰水鸟寻回犬，具备'软口'本能可无损衔取猎物。对人极度友善，吠叫多用于兴奋或欢迎情境而非守卫。Cohen & Fox (1976) 与 Taylor et al. (2014) 研究显示，金毛的吠叫为典型中大型犬中频范围，F0 集中在 200-450 Hz 区间，谐波结构丰富，符合 Taylor 等提出的'source-filter'模型对中型犬声学输出预测。Yin & McCowan (2004) 的研究显示金毛在不同情境下吠声具备语境特异性：扰敌情境下表现为低频长时爆鸣；隔离/玩耍情境下表现为高频调频和声。属社交性发声，分离焦虑时易出现过度吠叫。",
+    "sources": [
+      "https://grca.org/about-the-breed/akc-breed-standard/",
+      "https://www.akc.org/dog-breeds/golden-retriever/",
+      "https://www.britannica.com/animal/golden-retriever",
+      "https://breedbible.com/breeds/golden-retriever/",
+      "http://sro.sussex.ac.uk/id/eprint/50634/1/6._Taylor_et_al._The_SOCIAL_DOG_2014.pdf",
+      "http://cattledogpublishing.com/wp-content/uploads/2022/01/YinMcCowan04.pdf"
+    ]
+  },
+  {
+    "breed_cn": "拉布拉多寻回犬",
+    "breed_en": "Labrador Retriever",
+    "origin": "加拿大纽芬兰岛（英国繁育成形）",
+    "body_type": "大型",
+    "weight_kg": "25-36",
+    "height_cm": "55-62",
+    "lifespan_years": "10-14",
+    "f0_range_hz": "180-500",
+    "bark_frequency": 3,
+    "typical_sounds": [
+      "中频响亮吠叫",
+      "兴奋时高频呜咽",
+      "寻回时短促爆破音",
+      "POMC基因变异相关'饥饿乞求'呜咽声"
+    ],
+    "temperament": "外向、温和、友善、亲人、易训练、贪吃",
+    "coat_type": "短而密的双层防水被毛，黑/黄/巧克力三色",
+    "genetic_diseases": [
+      "髋关节发育不良",
+      "肘关节发育不良",
+      "PRA进行性视网膜萎缩",
+      "EIC运动诱发崩溃(DNM1基因)",
+      "肥胖相关代谢综合征(POMC基因)",
+      "耳道感染"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "200-460",
+      "howl_freq_hz": "150-330",
+      "whine_freq_hz": "300-850",
+      "bark_duration_s": "0.15-0.45"
+    },
+    "ethology_notes": "源自圣约翰水犬(St. John's Water Dog)，为水鸟寻回与渔获寻回工作犬。POMC基因变异使其生物性饥饿感增强约25%，常以呜咽声乞食。声学行为类似金毛，属中大型犬典型中频吠叫。Yin & McCowan (2004) 关于犬吠声学研究指出拉布拉多在隔离情境下吠声呈高频调频和声，扰敌情境下为低频长时爆鸣。体长比身高略大，胸深使得声学共振腔较大，吠声具有浑厚感。曾连续31年(1991-2021)位居AKC注册榜首，是工作伴侣犬代表。",
+    "sources": [
+      "https://www.britannica.com/animal/Labrador-retriever",
+      "https://breedbible.com/breeds/labrador-retriever/",
+      "https://petsalpha.com/dogs/labrador-retriever/",
+      "http://sro.sussex.ac.uk/id/eprint/50634/1/6._Taylor_et_al._The_SOCIAL_DOG_2014.pdf",
+      "http://cattledogpublishing.com/wp-content/uploads/2022/01/YinMcCowan04.pdf"
+    ]
+  },
+  {
+    "breed_cn": "西伯利亚雪橇犬",
+    "breed_en": "Siberian Husky",
+    "origin": "俄罗斯西伯利亚（楚科奇族培育）",
+    "body_type": "中型",
+    "weight_kg": "16-27",
+    "height_cm": "51-60",
+    "lifespan_years": "12-14",
+    "f0_range_hz": "200-600",
+    "bark_frequency": 2,
+    "typical_sounds": [
+      "嚎叫为主（极少吠叫）",
+      "独特的'woo-woo'对话式发声",
+      "高频chirp与短促啾啾声",
+      "持续长嚎可达数秒"
+    ],
+    "temperament": "友善、外向、独立、淘气、温和、群居性强、捕猎本能强",
+    "coat_type": "中等长度双层被毛，柔软厚实底绒+直硬针毛，所有颜色（黑到纯白）",
+    "genetic_diseases": [
+      "髋关节发育不良",
+      "白内障",
+      "进行性视网膜萎缩(PRA)",
+      "角膜营养不良",
+      "甲状腺功能减退",
+      "锌反应性皮炎"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "300-700",
+      "howl_freq_hz": "200-700",
+      "whine_freq_hz": "400-1000",
+      "bark_duration_s": "0.10-0.30"
+    },
+    "ethology_notes": "楚科奇族驯养用于长距离轻载雪橇，工作犬群居性发声行为显著。Coppinger & Feinstein (1991) 研究指出哈士奇吠叫稀少，但嚎叫发达，这与原始犬群间长距离通讯需求相关。其发声谱以低频长嚎(200-700Hz)和'woo'对话式发声为主。DNA分析显示其与已灭绝北亚泰米尔狼血缘相近，是 basal breed，保留了较原始的发声行为模式。被开发出独特的'对话'式发声而非短促吠叫，常被戏称为'会说话的狗'。Yin & McCowan (2004) 研究表明犬类吠叫受情境特异化，但哈士奇长期被选育为群体协作犬，发声偏嚎叫通讯型。",
+    "sources": [
+      "https://www.akc.org/dog-breeds/siberian-husky",
+      "https://www.britannica.com/animal/Siberian-Husky",
+      "https://bestdog.au/siberian-husky/",
+      "https://furrycritter.com/pages/descriptions/dogs/s/siberian_husky.htm",
+      "http://sro.sussex.ac.uk/id/eprint/50634/1/6._Taylor_et_al._The_SOCIAL_DOG_2014.pdf"
+    ]
+  },
+  {
+    "breed_cn": "彭布罗克威尔士柯基",
+    "breed_en": "Pembroke Welsh Corgi",
+    "origin": "英国威尔士彭布罗克郡",
+    "body_type": "小型",
+    "weight_kg": "10-14",
+    "height_cm": "25-30",
+    "lifespan_years": "12-15",
+    "f0_range_hz": "400-900",
+    "bark_frequency": 5,
+    "typical_sounds": [
+      "高频尖锐警戒吠叫",
+      "兴奋时连续爆鸣",
+      "牧群时短促高频驱赶音",
+      "撒娇时中频哼鸣"
+    ],
+    "temperament": "聪明、活泼、固执、勇敢、忠诚、警觉、'大体型灵魂的小型犬'",
+    "coat_type": "中等长度双层被毛，防水外毛+柔软底绒，红/黑貂/三色/黑褐色",
+    "genetic_diseases": [
+      "退行性脊髓病(DM)",
+      "椎间盘疾病(IVDD) 约25%发病率",
+      "髋关节发育不良",
+      "进行性视网膜萎缩",
+      "软骨发育不良(Chondrodysplasia)"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "450-950",
+      "howl_freq_hz": "350-700",
+      "whine_freq_hz": "500-1200",
+      "bark_duration_s": "0.08-0.25"
+    },
+    "ethology_notes": "为咬牛脚跟驱赶牛群的'跟咬牧法'工作犬，矮小体型使其能躲避牛蹄。胸部较深、声学共振腔相对体长偏大，发声能量密度高。小型犬特征性高频吠叫用于长距离警戒，与体长反相关。Cohen & Fox (1976) 提出小型犬F0显著高于大型犬。研究显示小型犬平均F0≈1240±310 Hz，大型犬F0≈185±65 Hz（声带长度差异：吉娃娃≈8mm vs 纽芬兰犬≈22mm）。柯基的F0估计落于二者过渡区间。是伊丽莎白二世女王挚爱品种，80余年皇家饲养超过30只。",
+    "sources": [
+      "https://www.akc.org/dog-breeds/pembroke-welsh-corgi/",
+      "https://sidewalkdog.com/articles/pembroke-welsh-corgi",
+      "https://petsalpha.com/category/dogs/pembroke-welsh-corgi/",
+      "https://www.chongbaike.cn/dog/kjq.html",
+      "https://ask.csdn.net/questions/9255902"
+    ]
+  },
+  {
+    "breed_cn": "贵宾犬（含泰迪玩具型）",
+    "breed_en": "Poodle (incl. Toy Poodle)",
+    "origin": "德国（法国深度发展）",
+    "body_type": "小型-中型（依品种类型）",
+    "weight_kg": "1.5-30（玩具型2-4 / 迷你型5-7 / 标准型20-30）",
+    "height_cm": "24-60（玩具≤25 / 迷你28-35 / 标准45-60）",
+    "lifespan_years": "12-18（玩具型12-15 / 标准型10-13）",
+    "f0_range_hz": "350-1200",
+    "bark_frequency": 4,
+    "typical_sounds": [
+      "高频尖锐吠叫（玩具型尤其明显）",
+      "敏感警戒性短促连续吠",
+      "兴奋时高频呜咽",
+      "训练互动时低频哼鸣"
+    ],
+    "temperament": "聪明（智商排名第2）、警觉、忠诚、可训练、活泼、亲人、易近人",
+    "coat_type": "卷曲单层被毛（不换毛），多种颜色（黑/白/棕/灰/杏等）",
+    "genetic_diseases": [
+      "进行性视网膜萎缩(PRA)",
+      "髋关节发育不良（标准型）",
+      "Legg-Calvé-Perthes病",
+      "癫痫",
+      "Von Willebrand病",
+      "耳道感染（垂耳结构）",
+      "气管塌陷（玩具型）"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "400-1200",
+      "howl_freq_hz": "300-700",
+      "whine_freq_hz": "600-1500",
+      "bark_duration_s": "0.08-0.30"
+    },
+    "ethology_notes": "原为德国水鸟寻回犬(Pudel='溅水'之意)，后法国发展出标准/迷你/玩具三型。被毛不换毛使其成为低敏犬。Coren 在《The Intelligence of Dogs》中将其工作服从智商列第2。玩具型为最小尺寸（≤25.4cm），声带最短，F0集中于犬类高频区段(900-1500Hz)。Yin & McCowan (2004) 关于犬吠声学特征的研究显示，玩具型贵宾的吠声属于高频调频和声类型，多出现于隔离/玩耍情境。Britannica指出贵宾可能是马戏团表演史最悠久的犬种之一，长期被人为选育互动式发声行为，吠声情境特异化明显。",
+    "sources": [
+      "https://cdn.akc.org/Poodle.pdf",
+      "https://www.britannica.com/animal/poodle",
+      "https://m.baike.com/wiki/%E8%B4%B5%E5%AE%BE%E7%8A%AC/219657",
+      "https://vgl.ucdavis.edu/sites/g/files/dgvnsk15116/files/media/documents/ToyPoodle20191010.pdf",
+      "https://pupprofiles.dog/breeds/poodle-toy"
+    ]
+  },
+  {
+    "breed_cn": "边境牧羊犬",
+    "breed_en": "Border Collie",
+    "origin": "英国苏格兰-英格兰边境",
+    "body_type": "中型",
+    "weight_kg": "14-25",
+    "height_cm": "46-56",
+    "lifespan_years": "12-15",
+    "f0_range_hz": "250-650",
+    "bark_frequency": 3,
+    "typical_sounds": [
+      "工作驱赶时连续高频吠",
+      "醒觉时低频爆鸣",
+      "羊群管理时短促指令式发声",
+      "'凝视'驱赶时安静无声"
+    ],
+    "temperament": "极聪明（Stanley Coren 排名第1）、精力充沛、警觉、忠诚、工作驱动强、对人依赖",
+    "coat_type": "双层防水被毛，粗糙型(中长)或平滑型(短)，黑白色为主/红白/三色/貂色/陨石色",
+    "genetic_diseases": [
+      "髋关节发育不良",
+      "Collie眼异常(CEA)",
+      "TNS隧道中性粒细胞病",
+      "NCL神经元蜡样脂褐质沉积症",
+      "MDR1基因多药敏感(约35%)",
+      "癫痫",
+      "进行性视网膜萎缩"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "280-680",
+      "howl_freq_hz": "200-500",
+      "whine_freq_hz": "400-1000",
+      "bark_duration_s": "0.10-0.30"
+    },
+    "ethology_notes": "被Stanley Coren在《The Intelligence of Dogs》中列为智商第1，可5次内学新指令并>95%服从。'凝视驱赶'(the eye)是其典型工作行为，此情境下极少发声。但群体驱赶时以高频短促吠叫传递指令。Old Hemp (1893-1901) 是现代边牧始祖。Yin & McCowan (2004) 关于犬吠情境特异化的研究显示，工作型犬的吠声调频与基频随驱赶/警戒情境显著变化。边牧属吠声情境敏感品种，需早期训练否则易过度吠叫。AKC迟至1995年才承认，因工作犬社区长期反对'外形优先于工作能力'的选育模式。",
+    "sources": [
+      "https://www.britannica.com/animal/Border-Collie",
+      "https://breedtools.com/breeds/border-collie",
+      "https://www.nearbypetcare.com/pet-breeds/dogs/border-collie",
+      "https://propawpicks.com/breeds/dogs/border-collie/",
+      "http://cattledogpublishing.com/wp-content/uploads/2022/01/YinMcCowan04.pdf"
+    ]
+  },
+  {
+    "breed_cn": "德国牧羊犬",
+    "breed_en": "German Shepherd",
+    "origin": "德国",
+    "body_type": "大型",
+    "weight_kg": "22-43",
+    "height_cm": "55-66",
+    "lifespan_years": "9-13",
+    "f0_range_hz": "150-450",
+    "bark_frequency": 4,
+    "typical_sounds": [
+      "深沉低频警戒吠叫",
+      "威慑性持续低频爆鸣",
+      "工作驱赶时中频短促音",
+      "对家人撒娇时低频哼鸣"
+    ],
+    "temperament": "忠诚、自信、警觉、勇敢、易训练、对家庭忠诚、对陌生人保留",
+    "coat_type": "中长双层被毛，刚毛质+柔软底绒，黑/黑棕/貂色/灰色/白色",
+    "genetic_diseases": [
+      "髋关节发育不良（高发）",
+      "肘关节发育不良",
+      "退行性脊髓病(DM)",
+      "胃扩张扭转(GDV)",
+      "胰腺外分泌不足(EPI)",
+      "过敏"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "160-400",
+      "howl_freq_hz": "150-350",
+      "whine_freq_hz": "300-800",
+      "bark_duration_s": "0.18-0.50"
+    },
+    "ethology_notes": "1899年由Max von Stephanitz上尉创立，Horand von Grafrath (SZ1)为始祖。声学行为属大型犬低频特征。Taylor et al. (2010) 论文《Why Do Large Dogs Sound More Aggressive to Human Listeners》研究证实，人类基于F0和共振峰间距Δf两个尺寸声学线索评估狗体型，大型犬F0低(约185±65 Hz)被认为是更具攻击性，存在'尺寸-攻击性误归因'偏差。德牧由于用途为军警工作犬，警戒吠叫声学结构具备显著低频长时特征，与Taylor et al. (2014) 关于扰动情境下吠声特征描述一致。被广泛用于全球警犬、搜救犬、导盲犬工作。",
+    "sources": [
+      "https://www.britannica.com/animal/German-shepherd",
+      "https://m.baike.com/wiki/%E5%BE%B7%E5%9B%BD%E7%89%A7%E7%BE%8A%E7%8A%AC/258787",
+      "https://petsalpha.com/dogs/german-shepherd/",
+      "https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1439-0310.2010.01829.x",
+      "http://sro.sussex.ac.uk/id/eprint/50634/1/6._Taylor_et_al._The_SOCIAL_DOG_2014.pdf"
+    ]
+  },
+  {
+    "breed_cn": "柴犬",
+    "breed_en": "Shiba Inu",
+    "origin": "日本本州中部（绳文时代起源）",
+    "body_type": "小型",
+    "weight_kg": "8-12",
+    "height_cm": "33-43",
+    "lifespan_years": "13-16",
+    "f0_range_hz": "400-1100",
+    "bark_frequency": 3,
+    "typical_sounds": [
+      "中高频警戒吠叫",
+      "标志性'柴犬尖叫'(Shiba Scream)",
+      "挑衅时低频喉音",
+      "撒娇时中频哼鸣"
+    ],
+    "temperament": "自信、独立、忠诚、机警、倔强、'kan-i spirited boldness'、'ryosei good nature'、'soboku alertness'",
+    "coat_type": "双层被毛，硬直外毛+柔软底绒，红色/黑芝麻/黑褐/奶油色",
+    "genetic_diseases": [
+      "过敏/特应性皮炎",
+      "髌骨脱位(可达20%)",
+      "髋关节发育不良(5-10%)",
+      "遗传性白内障",
+      "进行性视网膜萎缩",
+      "青光眼"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "450-1100",
+      "howl_freq_hz": "300-800",
+      "whine_freq_hz": "500-1400",
+      "bark_duration_s": "0.08-0.30"
+    },
+    "ethology_notes": "DNA研究确认柴犬是 basal breed，与狼血缘最近之一，可追溯至绳文时代约2300年前。1936年被指定为日本天然纪念物。其'柴犬尖叫'(Shiba Scream)是犬类独特发声行为，在应激或极度兴奋时发出高频长时尖叫，介于吠叫与嚎叫之间，与犬类应激-激动情绪复合表达相关。Yin & McCowan (2004) 关于犬吠情境特异化的研究指出，犬吠声可在个体内基于情境分化为亚型，柴犬的尖叫即此类情境特异化发声的极端表现。NIPPO育种传统强调'Kan-i, Ryosei, Soboku'三理想气质。猫式自我清洁行为在犬类中罕见。",
+    "sources": [
+      "http://cdn.akc.org/ShibaInu.pdf",
+      "https://www.britannica.com/animal/Shiba-Inu",
+      "https://bestdog.au/shiba-inu-japans/",
+      "https://vetnique.com/blogs/vets-corner/shiba-inu-breed-guide",
+      "http://cattledogpublishing.com/wp-content/uploads/2022/01/YinMcCowan04.pdf"
+    ]
+  },
+  {
+    "breed_cn": "萨摩耶",
+    "breed_en": "Samoyed",
+    "origin": "俄罗斯西伯利亚（涅涅茨族/萨摩耶族培育）",
+    "body_type": "中型",
+    "weight_kg": "16-30",
+    "height_cm": "48-60",
+    "lifespan_years": "12-15",
+    "f0_range_hz": "220-650",
+    "bark_frequency": 4,
+    "typical_sounds": [
+      "中频响亮吠叫",
+      "对话式'woo-woo'嚎叫",
+      "高频兴奋哼鸣",
+      "欢迎时持续吠叫"
+    ],
+    "temperament": "友善、温和、适应性强、活跃、社交性强、独立但易分心",
+    "coat_type": "双层被毛，银光白外毛+柔软底绒，纯白/奶油/饼干色",
+    "genetic_diseases": [
+      "萨摩耶遗传性肾小球肾炎(SHG)",
+      "髋关节发育不良",
+      "进行性视网膜萎缩",
+      "视网膜发育不良",
+      "心脏病",
+      "糖尿病"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "240-650",
+      "howl_freq_hz": "200-600",
+      "whine_freq_hz": "350-900",
+      "bark_duration_s": "0.10-0.35"
+    },
+    "ethology_notes": "DNA研究确认为 basal breed，与狼血缘相近，由涅涅茨族（旧称萨摩耶族）驯养用于驯鹿放牧与雪橇。被Nansen的1893-96年Fram北极探险使用。'萨摩耶式微笑'由嘴角自然上翘形成，可防止流涎冻成冰柱。声学行为属中频犬吠叫与原始犬嚎叫混合型，群居协作历史使其发出对话式'woo'发声，类似哈士奇。Taylor et al. (2014) 关于犬类听觉通讯研究指出，原始basal breeds保留了更丰富的发声行为谱。Britannica确认AKC于1906年承认此品种，是世界最古老犬种之一。",
+    "sources": [
+      "https://www.britannica.com/animal/Samoyed",
+      "https://m.baike.com/wiki/%E8%90%A8%E6%91%A9%E8%80%B6%E7%8A%AC/1105952",
+      "https://cliffipedia.org/content/wikipedia_en_all_maxi_2025-08/Samoyed_dog",
+      "https://furrycritter.com/pages/descriptions/dogs/s/sammy.htm",
+      "http://sro.sussex.ac.uk/id/eprint/50634/1/6._Taylor_et_al._The_SOCIAL_DOG_2014.pdf"
+    ]
+  },
+  {
+    "breed_cn": "阿拉斯加雪橇犬",
+    "breed_en": "Alaskan Malamute",
+    "origin": "美国阿拉斯加（Mahlemut/Inupiat族培育）",
+    "body_type": "大型",
+    "weight_kg": "34-45",
+    "height_cm": "58-71",
+    "lifespan_years": "10-14",
+    "f0_range_hz": "150-450",
+    "bark_frequency": 2,
+    "typical_sounds": [
+      "低频深沉吠叫",
+      "持续长嚎（多于吠叫）",
+      "工作驱赶时低频短促音",
+      "兴奋时对话式woo声"
+    ],
+    "temperament": "忠诚、深情、顽皮、固执、群居性强、独立、尊严感强",
+    "coat_type": "双层被毛，厚硬外毛+绒密底绒，狼灰/黑/红/貂色，必备白色标记",
+    "genetic_diseases": [
+      "髋关节发育不良",
+      "白内障",
+      "进行性视网膜萎缩",
+      "多发性神经病(PN)",
+      "锥体变性(CD)",
+      "_day blindness",
+      "软骨病"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "150-380",
+      "howl_freq_hz": "150-450",
+      "whine_freq_hz": "300-750",
+      "bark_duration_s": "0.18-0.50"
+    },
+    "ethology_notes": "由Inupiat族之Mahlemut部落培育为重载雪橇犬，与哈士奇(轻载快运)用途不同。Federation Cynologique Internationale (FCI) 将其归类为Group 5 Section 1 Nordic Sledge Dogs。1935年AKC承认。考古与DNA证据表明祖先约4000年前自西伯利亚跨越白令陆桥进入北美。声学行为属大型犬低频特征，发声偏嚎叫通讯型，与原始犬群协作历史相关。Taylor et al. (2010) 关于大型犬声学感知的研究指出，F0低与体型大相关，人类将其吠声误判为更具攻击性，但实际阿拉斯加雪橇犬是友善守卫型，攻击性低。",
+    "sources": [
+      "https://www.britannica.com/animal/Alaskan-Malamute",
+      "https://m.baike.com/wiki/%E9%98%BF%E6%8B%89%E6%96%AF%E5%8A%A0%E9%9B%AA%E6%A9%87%E7%8A%AC/336",
+      "https://furrycritter.com/pages/descriptions/dogs/a/alaskan_malamute.htm",
+      "https://breedbible.com/breeds/alaskan-malamute/",
+      "https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1439-0310.2010.01829.x"
+    ]
+  },
+  {
+    "breed_cn": "比熊犬",
+    "breed_en": "Bichon Frise",
+    "origin": "地中海区域（特内里费岛西班牙水手传播）",
+    "body_type": "小型",
+    "weight_kg": "5-10",
+    "height_cm": "23-30",
+    "lifespan_years": "14-15",
+    "f0_range_hz": "500-1300",
+    "bark_frequency": 4,
+    "typical_sounds": [
+      "高频柔和吠叫",
+      "兴奋时连续爆鸣",
+      "撒娇时中频哼鸣",
+      "玩耍时短促高频音"
+    ],
+    "temperament": "开朗、社交、温和、贪玩、亲人、容易相处、亲人",
+    "coat_type": "卷曲双层被毛（不换毛），柔软底绒+卷曲外毛，纯白（允许奶油/杏色斑）",
+    "genetic_diseases": [
+      "过敏/特应性皮炎",
+      "髌骨脱位",
+      "遗传性白内障",
+      "耳道感染（垂耳结构）",
+      "早期牙齿脱落与牙龈炎",
+      "膀胱感染"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "550-1300",
+      "howl_freq_hz": "300-700",
+      "whine_freq_hz": "700-1600",
+      "bark_duration_s": "0.05-0.20"
+    },
+    "ethology_notes": "源自地中海Barbet水猎犬祖先，与马耳他犬/博洛尼亚犬/哈瓦那犬同族。法国名'Bichon à poil frisé'意为'卷毛膝犬'。1933年FCI正式承认，1973年AKC承认。小型犬特征性高频吠叫，声带较短，F0集中于500-1300Hz区间。Cohen & Fox (1976) 与 Taylor et al. (2014) 关于犬吠声学的研究均指出小型犬F0显著高于大型犬，比熊是典型高频吠叫犬。Yin & McCowan (2004) 关于犬吠情境特异化的研究显示，玩具伴侣型犬的吠声调频和声特征在隔离/玩耍情境下显著。早期曾作为街头表演犬，发声行为接受人为选育。",
+    "sources": [
+      "https://www.britannica.com/animal/bichon-frise",
+      "https://www.westminsterkennelclub.org/breed/bichon-frise/",
+      "https://furrycritter.com/pages/descriptions/dogs/b/bichon.htm",
+      "https://sidewalkdog.com/articles/bichon-frise",
+      "http://cdn.akc.org/BichonFrise-club-flyer.pdf",
+      "http://sro.sussex.ac.uk/id/eprint/50634/1/6._Taylor_et_al._The_SOCIAL_DOG_2014.pdf"
+    ]
+  },
+  {
+    "breed_cn": "博美犬",
+    "breed_en": "Pomeranian",
+    "origin": "德国/波兰波美拉尼亚地区（英国维多利亚女王时期小型化）",
+    "body_type": "小型",
+    "weight_kg": "1.4-3.2",
+    "height_cm": "15-23",
+    "lifespan_years": "12-16",
+    "f0_range_hz": "700-1600",
+    "bark_frequency": 5,
+    "typical_sounds": [
+      "高频尖锐警报吠",
+      "持续警戒吠叫",
+      "兴奋时连续高频短促爆鸣",
+      "撒娇时中频哼鸣"
+    ],
+    "temperament": "活泼、勇敢、好奇、警觉、聪明、忠诚、'大体型灵魂的小型犬'",
+    "coat_type": "双层被毛，柔软底绒+粗糙长外毛形成颈毛蓬松，多种颜色（橙/红/黑/奶油/貂色等）",
+    "genetic_diseases": [
+      "气管塌陷（高发）",
+      "髌骨脱位",
+      "进行性视网膜萎缩",
+      "黑毛皮毛囊发育不良（脱发X症）",
+      "心脏疾病",
+      "低血糖（玩具犬综合征）"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "750-1600",
+      "howl_freq_hz": "400-900",
+      "whine_freq_hz": "900-1800",
+      "bark_duration_s": "0.05-0.15"
+    },
+    "ethology_notes": "源自波美拉尼亚地区Spitz型犬，19世纪英国维多利亚女王推动选育小型化（从原30磅缩小至3-7磅）。AKC 1888年承认。极小型犬特征性高频尖锐吠叫，F0显著高于中大型犬。声带长度约8-10mm（vs 大型犬18-22mm），F0落于700-1600Hz区间，是犬类高频吠声代表品种之一。AKC标准描述其'cocky, commanding, animated'气质使其警戒性吠叫频繁，需早期训练控制。研究显示玩具型犬吠声情境多集中于扰动情境，符合Yin & McCowan (2004) 关于情境特异化吠声的描述。'teacup'超小型版本易出现健康问题与发声异常。",
+    "sources": [
+      "http://cdn.akc.org/Pomeranian.pdf",
+      "https://m.baike.com/wiki/%E5%8D%9A%E7%BE%8E%E7%8A%AC/260054",
+      "https://allinpets.com/blog/dog-breeds/pomeranian-breed-guide-temperament-health-care-56/",
+      "https://furrycritter.com/pages/descriptions/dogs/p/pomeranian.htm",
+      "https://ask.csdn.net/questions/9255902"
+    ]
+  },
+  {
+    "breed_cn": "法国斗牛犬",
+    "breed_en": "French Bulldog",
+    "origin": "法国（英国诺丁汉蕾丝工人迁移带入小型斗牛犬）",
+    "body_type": "小型",
+    "weight_kg": "8-14",
+    "height_cm": "24-35",
+    "lifespan_years": "10-12",
+    "f0_range_hz": "350-1000",
+    "bark_frequency": 3,
+    "typical_sounds": [
+      "中高频吠叫（不频繁）",
+      "短头颅打鼾/鼻息声显著",
+      "反向喷嚏现象明显",
+      "撒娇时低频哼鸣"
+    ],
+    "temperament": "适应性强、贪玩、聪明、固执、温和、亲人、爱玩耍",
+    "coat_type": "短而细的单层被毛，虎斑/驼色/白色/奶油色/黑色斑纹",
+    "genetic_diseases": [
+      "短头颅呼吸道综合征(Brachycephalic syndrome)",
+      "椎间盘疾病/脊椎异常",
+      "髌骨脱位",
+      "过敏",
+      "软腭过长/裂腭",
+      "麻醉困难",
+      "难产率高(剖腹产)"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "400-1000",
+      "howl_freq_hz": "300-700",
+      "whine_freq_hz": "500-1200",
+      "bark_duration_s": "0.08-0.25"
+    },
+    "ethology_notes": "原为19世纪英国诺丁汉蕾丝工人小型斗牛犬迁移至法国后培育而成，'Bouledogue Français'得名于法语'球+獒犬'。AKC 1898年承认。Britannica 2016-2020研究30563只狗的死亡率数据，法斗出生预期寿命仅4.53年，是所有犬种最低，主要因短头颅呼吸道综合征(Brachycephalic Airway Obstructive Syndrome)导致的呼吸并发症。短头颅结构使其发出独特的打鼾/鼻息声（非吠叫但显著）。2022年超过拉布拉多成为AKC注册数第1。Taylor et al. (2014) 关于犬类听觉通讯研究指出，狗的发声与发声器官解剖强相关，法斗的呼吸道结构异常导致其非吠声行为谱与同体长品种差异显著。",
+    "sources": [
+      "https://www.frenchbulldog.com/wikipedia-org-wiki-french-bulldog",
+      "https://m.baike.com/wiki/%E6%B3%95%E5%9B%BD%E6%96%97%E7%89%9B%E7%8A%AC/259966",
+      "https://breedbible.com/breeds/french-bulldog/",
+      "https://fbdca.org/images/DogFancy-FrenchBulldogs.pdf",
+      "http://sro.sussex.ac.uk/id/eprint/50634/1/6._Taylor_et_al._The_SOCIAL_DOG_2014.pdf"
+    ]
+  },
+  {
+    "breed_cn": "迷你雪纳瑞",
+    "breed_en": "Miniature Schnauzer",
+    "origin": "德国",
+    "body_type": "小型",
+    "weight_kg": "5-8",
+    "height_cm": "30-36",
+    "lifespan_years": "12-15",
+    "f0_range_hz": "400-1100",
+    "bark_frequency": 5,
+    "typical_sounds": [
+      "高频警戒性吠叫",
+      "持续警报吠",
+      "工作驱赶时连续短促爆鸣",
+      "撒娇时中频哼鸣"
+    ],
+    "temperament": "机警、勇敢、友好、聪明、亲人、服从、活泼、有点倔强",
+    "coat_type": "双层被毛，硬粗外毛+柔软底绒，椒盐色/纯黑/黑银色",
+    "genetic_diseases": [
+      "高脂血症",
+      "胰腺炎",
+      "糖尿病",
+      "膀胱结石",
+      "进行性视网膜萎缩",
+      "耳聋"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "450-1100",
+      "howl_freq_hz": "300-700",
+      "whine_freq_hz": "500-1300",
+      "bark_duration_s": "0.08-0.25"
+    },
+    "ethology_notes": "19世纪末由标准雪纳瑞与阿芬平嘉犬(Affenpinscher)和贵宾杂交培育，原为农场捕鼠与守卫犬。1926年AKC承认，归Terrier组。Britannica确认雪纳瑞名源自德语'schnauze'(口鼻)。小型犬特征性高频吠叫，原农场守卫用途使其警戒性发声行为显著，是看门犬典型代表。Yin & McCowan (2004) 关于犬吠声学情境特异化的研究指出，警觉型犬的扰动情境吠声表现为低频长时爆鸣，但小型犬因生理F0整体上移，雪纳瑞表现为高频长时警戒吠叫。F1跨犬种研究表明，吠声行为受遗传选育历史显著影响。",
+    "sources": [
+      "https://www.britannica.com/animal/schnauzer",
+      "https://www.nearbypetcare.com/pet-breeds/dogs/miniature-schnauzer",
+      "https://m.baike.com/wiki/%E5%B0%8F%E5%9E%8B%E9%9B%AA%E7%BA%B3%E7%91%9E%E7%8A%AC/19774685",
+      "https://tennesseeminiatureschnauzers.com/about-the-breed/",
+      "http://cattledogpublishing.com/wp-content/uploads/2022/01/YinMcCowan04.pdf"
+    ]
+  },
+  {
+    "breed_cn": "比格犬",
+    "breed_en": "Beagle",
+    "origin": "英国",
+    "body_type": "小型-中型",
+    "weight_kg": "9-14",
+    "height_cm": "33-41",
+    "lifespan_years": "10-15",
+    "f0_range_hz": "300-800",
+    "bark_frequency": 5,
+    "typical_sounds": [
+      "标志性'比格湾'(bay)持续嚎叫",
+      "尖锐警报吠叫",
+      "群猎协调发声",
+      "嗅闻时低频哼鸣"
+    ],
+    "temperament": "友善、外向、贪玩、群居性强、好奇、固执、嗅觉敏锐、独立",
+    "coat_type": "短密双层防水被毛，三色（黑白褐）/红白/柠色/蓝斑等多种",
+    "genetic_diseases": [
+      "髋关节发育不良",
+      "甲状腺功能减退",
+      "耳道感染（垂耳结构）",
+      "癫痫",
+      "眼异常（如樱桃眼）",
+      "肥胖相关代谢综合征",
+      "MLS(黏多糖病)"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "350-800",
+      "howl_freq_hz": "300-900",
+      "whine_freq_hz": "500-1200",
+      "bark_duration_s": "0.15-0.45"
+    },
+    "ethology_notes": "名源自法语'begueule'(开口喉咙=大声吠叫)或古英语'beag'(小)。1830年代英国Reverend Phillip Honeywood建立基础群，1885年AKC承认。是群猎协调通讯代表犬种，群猎时通过持续'比格湾'(bay)音保持群体协作通讯。其发声谱介于吠叫与嚎叫之间，长时持续低中频音调。Yin & McCowan (2004) 关于犬吠情境特异化研究中比格属'群猎情境特异化发声'典型，吠声具备个体识别能力（'dogs can be identified by their bark spectrograms despite the context of the bark'）。被美国海关'Beagle Brigade'用作检测犬。是史努比原型犬种。",
+    "sources": [
+      "https://www.britannica.com/animal/beagle-dog",
+      "https://www.nearbypetcare.com/pet-breeds/dogs/beagle",
+      "https://breedtools.com/breeds/beagle",
+      "https://breedbible.com/breeds/beagle/",
+      "http://cattledogpublishing.com/wp-content/uploads/2022/01/YinMcCowan04.pdf"
+    ]
+  },
+  {
+    "breed_cn": "秋田犬",
+    "breed_en": "Akita Inu",
+    "origin": "日本秋田县",
+    "body_type": "大型",
+    "weight_kg": "23-50",
+    "height_cm": "58-71",
+    "lifespan_years": "10-14",
+    "f0_range_hz": "150-450",
+    "bark_frequency": 2,
+    "typical_sounds": [
+      "低频深沉警戒吠",
+      "稀少但低频嚎叫",
+      "威慑性低频喉音",
+      "对家人低频哼鸣"
+    ],
+    "temperament": "忠诚、尊严、勇敢、对陌生人保留、独立、警觉、家庭依恋性强、捕猎本能强",
+    "coat_type": "双层被毛，粗糙外毛+柔软厚底绒，红/虎斑/胡麻/白色（urajiro腹侧白）",
+    "genetic_diseases": [
+      "髋关节发育不良",
+      "甲状腺自身免疫疾病(TgAA)",
+      "进行性视网膜萎缩",
+      "癫痫",
+      "VKH-like综合征(葡萄膜皮肤综合征)",
+      "胃扩张扭转",
+      "侏儒症"
+    ],
+    "acoustic_features": {
+      "bark_f0_hz": "160-400",
+      "howl_freq_hz": "150-400",
+      "whine_freq_hz": "300-700",
+      "bark_duration_s": "0.18-0.50"
+    },
+    "ethology_notes": "源于秋田县狩猎熊/鹿的Matagi-Inu，江户时代为斗犬，1931年被指定为日本国家天然纪念物。'忠犬八公'原型秋田犬，1924-1935在涩谷车站守候主人9年。FCI 2001年将日本秋田犬与美国秋田犬分开为两品种。DNA研究表明与狼血缘相近的 basal breed。声学行为属大型犬低频特征，吠叫稀少，符合守卫型品种发声模式。Taylor et al. (2010) 关于犬体型-攻击性感知的研究指出，大型犬F0低与Δf窄使人类误判其更具攻击性，秋田因低频深沉吠叫而被广泛误认为更具威慑力，但实际是对家庭极忠诚的伴侣犬。NIPPO育种强调'Kan-i, Ryosei, Soboku'气质，与柴犬共享。",
+    "sources": [
+      "https://m.baike.com/wiki/%E7%A7%8B%E7%94%B0%E7%8A%AC/265580",
+      "https://furrycritter.com/pages/descriptions/dogs/a/akita_inu.htm",
+      "https://breedbible.com/breeds/akita/",
+      "https://a.osmarks.net/content/wikipedia_en_all_maxi_2020-08/A/Akita_(dog)",
+      "https://akita-inu.com/wp-content/uploads/securepdfs/2022/08/Japanese-Akitainu-AKC-Standard.pdf",
+      "https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1439-0310.2010.01829.x"
+    ]
+  }
+]
