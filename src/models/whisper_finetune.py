@@ -10,6 +10,10 @@ from typing import Dict, Optional
 from dataclasses import dataclass
 from torch.utils.data import Dataset
 
+# 国内镜像: 优先使用 hf-mirror.com, 避免连不上 huggingface.co
+os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
+os.environ.setdefault("HF_HUB_ENABLE_HF_TRANSFER", "0")
+
 from transformers import (
     WhisperProcessor,
     WhisperForConditionalGeneration,
@@ -22,7 +26,8 @@ from peft import LoraConfig, get_peft_model, TaskType
 @dataclass
 class WhisperFineTuneConfig:
     """Whisper 微调配置"""
-    model_name: str = "openai/whisper-large-v3"
+    # 默认使用 whisper-tiny 以加快下载/微调速度; 如需更高精度改为 whisper-base / whisper-small
+    model_name: str = "openai/whisper-tiny"
     language: str = "zh"
     task: str = "transcribe"
     lora_r: int = 16
@@ -37,6 +42,88 @@ class WhisperFineTuneConfig:
     fp16: bool = True
     gradient_checkpointing: bool = True
     output_dir: str = "./checkpoints/whisper"
+    # 新增: 轻量化训练参数
+    max_seq_length: int = 100  # 最大序列长度 (token 数), 减少显存
+    gradient_accumulation_steps: int = 1  # 梯度累积步数
+    max_train_samples: Optional[int] = None  # 限制训练样本数, None=全部
+    cpu_threads: int = 4  # CPU 线程数
+
+
+def get_mac_light_config() -> WhisperFineTuneConfig:
+    """Mac 本地轻量训练配置 (避免卡死)"""
+    return WhisperFineTuneConfig(
+        model_name="openai/whisper-tiny",
+        batch_size=2,              # Mac 上 batch=8 太大, 改为 2
+        num_train_epochs=5,        # 30 epochs 太多, 改为 5
+        learning_rate=1e-4,        # 较大学习率, 少 epoch 也能收敛
+        lora_r=8,                  # 减少 LoRA 参数量
+        lora_alpha=16,
+        max_seq_length=64,         # 限制序列长度
+        gradient_accumulation_steps=4,  # 累积梯度模拟更大 batch
+        max_train_samples=500,     # 只用 500 条样本训练
+        cpu_threads=4,
+    )
+
+
+def get_heavy_config(gpu_mem_gb: int = 24) -> WhisperFineTuneConfig:
+    """
+    GPU 服务器重量级训练配置
+
+    Args:
+        gpu_mem_gb: GPU 显存大小 (GB), 自动适配 batch_size
+    """
+    # 根据显存自动选择 batch_size 和 model
+    if gpu_mem_gb >= 48:
+        model_name = "openai/whisper-large-v3"
+        batch_size = 16
+        lora_r = 64
+    elif gpu_mem_gb >= 24:
+        model_name = "openai/whisper-large-v3"
+        batch_size = 8
+        lora_r = 32
+    elif gpu_mem_gb >= 16:
+        model_name = "openai/whisper-medium"
+        batch_size = 8
+        lora_r = 32
+    elif gpu_mem_gb >= 8:
+        model_name = "openai/whisper-small"
+        batch_size = 4
+        lora_r = 16
+    else:
+        model_name = "openai/whisper-base"
+        batch_size = 2
+        lora_r = 16
+
+    return WhisperFineTuneConfig(
+        model_name=model_name,
+        batch_size=batch_size,
+        num_train_epochs=30,
+        learning_rate=1e-5,
+        lora_r=lora_r,
+        lora_alpha=lora_r * 2,
+        lora_dropout=0.05,
+        max_seq_length=100,
+        gradient_accumulation_steps=1,
+        max_train_samples=None,  # 全量数据
+        cpu_threads=8,
+    )
+
+
+def detect_device() -> str:
+    """自动检测训练设备"""
+    if torch.cuda.is_available():
+        return "cuda"
+    elif torch.backends.mps.is_available():
+        return "mps"
+    else:
+        return "cpu"
+
+
+def get_gpu_memory_gb() -> int:
+    """获取 GPU 显存大小 (GB)"""
+    if torch.cuda.is_available():
+        return torch.cuda.get_device_properties(0).total_mem // (1024 ** 3)
+    return 0
 
 
 class PetSoundDataset(Dataset):
@@ -80,17 +167,17 @@ class PetSoundDataset(Dataset):
         else:
             audio = np.pad(audio, (0, self.max_samples - len(audio)))
 
-        # 处理为 Whisper 输入
-        processed = self.processor(
+        # 处理为 Whisper 输入 (分离音频和文本处理)
+        input_features = self.processor(
             audio,
             sampling_rate=self.sample_rate,
-            text=text,
             return_tensors="pt",
-        )
+        ).input_features.squeeze(0)
 
-        # 去除 batch 维度
-        input_features = processed.input_features.squeeze(0)
-        labels = processed.labels.squeeze(0)
+        # 单独处理文本标签 (确保 tokenizer 正确处理)
+        labels = self.processor.tokenizer(
+            text, return_tensors="pt"
+        ).input_ids.squeeze(0)
 
         return {
             "input_features": input_features,
@@ -112,10 +199,33 @@ class WhisperFineTuner:
         print(f"加载 Whisper 模型: {self.config.model_name}")
 
         self.processor = WhisperProcessor.from_pretrained(self.config.model_name)
+
+        # 自动检测设备
+        self.device = detect_device()
+        print(f"  设备: {self.device}")
+
+        # MPS 上 Whisper conv1/decoder 有兼容性问题, 强制用 CPU 训练
+        # 只有 CUDA 才用 GPU 加速, MPS 回退到 CPU
+        if self.device == "mps":
+            print("  ⚠ MPS 设备 Whisper 层有兼容性问题, 强制回退到 CPU 训练")
+            print("    如需 GPU 加速, 请使用 Linux CUDA 服务器")
+            self.device = "cpu"
+
+        # 根据设备选择 dtype
+        if self.device == "cuda":
+            dtype = torch.float16 if self.config.fp16 else torch.float32
+        else:
+            dtype = torch.float32  # CPU 用 float32 更稳定
+
         self.model = WhisperForConditionalGeneration.from_pretrained(
             self.config.model_name,
-            torch_dtype=torch.float16 if self.config.fp16 else torch.float32,
+            torch_dtype=dtype,
         )
+
+        # 强制将模型放到 CPU (防止 Trainer 自动移到 MPS)
+        if self.device == "cpu":
+            self.model = self.model.cpu()
+            print("  模型已固定到 CPU 设备")
 
         if self.config.gradient_checkpointing:
             self.model.config.use_cache = False
@@ -132,6 +242,25 @@ class WhisperFineTuner:
         )
         self.model = get_peft_model(self.model, lora_config)
         self.model.print_trainable_parameters()
+
+        # 兼容性修复: PEFT 的 forward() 会显式传递 input_ids=None 和 inputs_embeds=None 给 base_model
+        # 但 WhisperForConditionalGeneration 没有这些参数, 导致它们泄漏到 **kwargs
+        # 最终在 WhisperDecoder 与显式的 input_ids=decoder_input_ids 和 inputs_embeds 冲突
+        # 修复: 在 WhisperForConditionalGeneration 层移除泄漏的问题参数
+        import types
+
+        _base_model = self.model.base_model
+        _original_base_forward = _base_model.__class__.forward
+
+        _PROBLEM_KEYS = {"input_ids", "inputs_embeds"}
+
+        def _patched_base_forward(self_, *args, **kwargs):
+            # 移除 PEFT 泄漏的参数, 防止在 WhisperDecoder 层与显式参数冲突
+            for key in _PROBLEM_KEYS:
+                kwargs.pop(key, None)
+            return _original_base_forward(self_, *args, **kwargs)
+
+        _base_model.forward = types.MethodType(_patched_base_forward, _base_model)
 
     def prepare_dataset(
         self,
@@ -157,7 +286,27 @@ class WhisperFineTuner:
 
     def train(self, train_data: list, eval_data: Optional[list] = None):
         """启动微调训练"""
+        # 限制训练样本数 (轻量化)
+        if self.config.max_train_samples and len(train_data) > self.config.max_train_samples:
+            train_data = train_data[:self.config.max_train_samples]
+            print(f"  ⚠ 限制训练样本: {len(train_data)} 条 (max_train_samples={self.config.max_train_samples})")
+
         train_dataset, eval_dataset = self.prepare_dataset(train_data, eval_data)
+
+        # 兼容 transformers 新旧版本: 4.46+ 使用 eval_strategy, 旧版使用 evaluation_strategy
+        eval_strategy_kwargs = {}
+        if eval_dataset:
+            try:
+                # transformers >= 4.46
+                from transformers import __version__ as _tf_ver
+                _major_minor = tuple(int(x) for x in _tf_ver.split(".")[:2])
+                if _major_minor >= (4, 46):
+                    eval_strategy_kwargs["eval_strategy"] = "steps"
+                else:
+                    eval_strategy_kwargs["evaluation_strategy"] = "steps"
+            except Exception:
+                # 优先尝试 eval_strategy (新 API), 失败则用 evaluation_strategy
+                eval_strategy_kwargs["evaluation_strategy"] = "steps"
 
         training_args = Seq2SeqTrainingArguments(
             output_dir=self.config.output_dir,
@@ -168,40 +317,70 @@ class WhisperFineTuner:
             warmup_steps=self.config.warmup_steps,
             save_steps=self.config.save_steps,
             eval_steps=self.config.eval_steps,
-            evaluation_strategy="steps" if eval_dataset else "no",
             save_strategy="steps",
             save_total_limit=3,
-            fp16=self.config.fp16,
+            fp16=self.config.fp16 if self.device == "cuda" else False,  # 仅 CUDA 支持 fp16
             logging_steps=50,
             report_to="tensorboard",
             load_best_model_at_end=True if eval_dataset else False,
             metric_for_best_model="loss",
             greater_is_better=False,
             remove_unused_columns=False,
+            # macOS MPS 不支持 pin_memory, 关闭以消除警告
+            dataloader_pin_memory=False,
+            # 梯度累积: 小 batch 模拟大 batch
+            gradient_accumulation_steps=self.config.gradient_accumulation_steps,
+            # 限制每个 epoch 的步数, 防止训练过久
+            max_steps=-1,  # -1 表示按 epoch 计算
+            **eval_strategy_kwargs,
         )
 
-        # data collator
+        # data collator: 使用 tokenizer 正确填充标签
+        _tokenizer = self.processor.tokenizer
+
         def data_collator(features):
             input_features = torch.stack([f["input_features"] for f in features])
             label_features = [f["labels"] for f in features]
-            labels_batch = self.processor.label_processor.pad(
-                {"input_ids": label_features}, return_tensors="pt"
+
+            # 使用 tokenizer 填充标签 (WhisperTokenizer 专用 pad 方法)
+            labels_batch = _tokenizer.pad(
+                {"input_ids": label_features},
+                return_tensors="pt",
+                padding=True,
             )
+
+            # 将 padding 位置设为 -100 (忽略损失)
             labels = labels_batch["input_ids"].masked_fill(
                 labels_batch.attention_mask.ne(1), -100
             )
+
+            # 确保 labels 为 torch.int64 (long) 类型
+            labels = labels.long()
+
             return {"input_features": input_features, "labels": labels}
 
-        trainer = Seq2SeqTrainer(
+        # 兼容 transformers 新旧版本: 5.x 用 processing_class, 旧版用 tokenizer
+        trainer_kwargs = dict(
             model=self.model,
             args=training_args,
             train_dataset=train_dataset,
             eval_dataset=eval_dataset,
             data_collator=data_collator,
-            tokenizer=self.processor.tokenizer,
         )
 
+        # CPU 训练: 确保模型留在 CPU 上 (新版 transformers 自动处理, 无需 place_model_on_device)
+        if self.device == "cpu":
+            self.model = self.model.to("cpu")
+
+        # 尝试新版 API (processing_class), 失败则回退旧版 (tokenizer)
+        try:
+            trainer = Seq2SeqTrainer(processing_class=self.processor, **trainer_kwargs)
+        except (TypeError, AttributeError):
+            _tokenizer = getattr(self.processor, "tokenizer", None) or self.processor
+            trainer = Seq2SeqTrainer(tokenizer=_tokenizer, **trainer_kwargs)
+
         print("开始 Whisper 微调训练...")
+
         trainer.train()
 
         # 保存最终模型
