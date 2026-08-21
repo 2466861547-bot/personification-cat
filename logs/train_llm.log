@@ -1,0 +1,55 @@
+
+==================================================
+🤖 硬件检测结果
+==================================================
+  设备类型: mps
+  设备名称: Apple Silicon (MPS)
+  操作系统: darwin
+==================================================
+
+🤖 自动检测硬件: Apple Silicon (MPS)
+   设备类型: mps
+   操作系统: macOS
+
+📦 使用配置: mps
+   模型: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+   LoRA rank: 8
+   批次大小: 2
+   训练轮数: 3
+   输出目录: ./checkpoints/llm_mps
+
+
+📂 加载训练数据: ./data/synthetic/llm_training_data.json
+   训练集: 1800 条
+   验证集: 200 条
+
+🔧 初始化微调器...
+加载基础模型: TinyLlama/TinyLlama-1.1B-Chat-v1.0
+使用设备: mps (Apple Silicon (MPS))
+网络状态: ✅ 已连接
+trainable params: 6,307,840 || all params: 1,106,356,224 || trainable%: 0.5701
+
+==================================================
+🚀 开始训练
+==================================================
+开始 LLM LoRA 微调训练...
+{'loss': '0.8634', 'grad_norm': '0.1832', 'learning_rate': '0.000181', 'epoch': '0.08889'}
+{'loss': '0.1133', 'grad_norm': '0.0609', 'learning_rate': '0.0001945', 'epoch': '0.1778'}
+{'eval_loss': '0.01249', 'eval_runtime': '1396', 'eval_samples_per_second': '0.143', 'eval_steps_per_second': '0.018', 'epoch': '0.2222'}
+{'loss': '0.01362', 'grad_norm': '0.05677', 'learning_rate': '0.0001884', 'epoch': '0.2667'}
+{'loss': '0.007457', 'grad_norm': '0.01739', 'learning_rate': '0.0001823', 'epoch': '0.3556'}
+{'loss': '0.005283', 'grad_norm': '0.01794', 'learning_rate': '0.0001761', 'epoch': '0.4444'}
+{'eval_loss': '0.004655', 'eval_runtime': '2.341e+04', 'eval_samples_per_second': '0.009', 'eval_steps_per_second': '0.001', 'epoch': '0.4444'}
+{'loss': '0.003963', 'grad_norm': '0.0146', 'learning_rate': '0.00017', 'epoch': '0.5333'}
+{'loss': '0.003091', 'grad_norm': '0.01972', 'learning_rate': '0.0001639', 'epoch': '0.6222'}
+{'eval_loss': '0.003024', 'eval_runtime': '4670', 'eval_samples_per_second': '0.043', 'eval_steps_per_second': '0.005', 'epoch': '0.6667'}
+{'loss': '0.002882', 'grad_norm': '0.009427', 'learning_rate': '0.0001578', 'epoch': '0.7111'}
+{'loss': '0.002831', 'grad_norm': '0.007923', 'learning_rate': '0.0001517', 'epoch': '0.8'}
+{'loss': '0.003189', 'grad_norm': '0.007195', 'learning_rate': '0.0001456', 'epoch': '0.8889'}
+{'eval_loss': '0.002889', 'eval_runtime': '3092', 'eval_samples_per_second': '0.065', 'eval_steps_per_second': '0.008', 'epoch': '0.8889'}
+{'loss': '0.004011', 'grad_norm': '0.007607', 'learning_rate': '0.0001394', 'epoch': '0.9778'}
+{'loss': '0.004664', 'grad_norm': '0.01393', 'learning_rate': '0.0001333', 'epoch': '1.067'}
+{'eval_loss': '0.005698', 'eval_runtime': '2057', 'eval_samples_per_second': '0.097', 'eval_steps_per_second': '0.012', 'epoch': '1.111'}
+{'loss': '0.006347', 'grad_norm': '0.01718', 'learning_rate': '0.0001272', 'epoch': '1.156'}
+{'loss': '0.01107', 'grad_norm': '0.03076', 'learning_rate': '0.0001211', 'epoch': '1.244'}
+{'loss': '0.01109', 'grad_norm': '0.01861', 'learning_rate': '0.000115', 'epoch': '1.333'}

@@ -1,0 +1,6002 @@
+[
+  {
+    "audio_path": "./data/synthetic/audio/sample_00000.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00001.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00002.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00003.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00004.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00005.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00006.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00007.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00008.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00009.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00010.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00011.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00012.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00013.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00014.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00015.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00016.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00017.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00018.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00019.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00020.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00021.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00022.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00023.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00024.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00025.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00026.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00027.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00028.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00029.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00030.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00031.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00032.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00033.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00034.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00035.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00036.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00037.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00038.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00039.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00040.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00041.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00042.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00043.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00044.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00045.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00046.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00047.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00048.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00049.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00050.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00051.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00052.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00053.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00054.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00055.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00056.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00057.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00058.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00059.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00060.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00061.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00062.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00063.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00064.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00065.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00066.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00067.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00068.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00069.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00070.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00071.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00072.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00073.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00074.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00075.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00076.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00077.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00078.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00079.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00080.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00081.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00082.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00083.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00084.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00085.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00086.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00087.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00088.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00089.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00090.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00091.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00092.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00093.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00094.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00095.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00096.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00097.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00098.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00099.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00100.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00101.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00102.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00103.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00104.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00105.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00106.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00107.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00108.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00109.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00110.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00111.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00112.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00113.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00114.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00115.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00116.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00117.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00118.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00119.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00120.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00121.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00122.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00123.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00124.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00125.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00126.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00127.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00128.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00129.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00130.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00131.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00132.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00133.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00134.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00135.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00136.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00137.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00138.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00139.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00140.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00141.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00142.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00143.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00144.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00145.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00146.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00147.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00148.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00149.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00150.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00151.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00152.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00153.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00154.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00155.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00156.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00157.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00158.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00159.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00160.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00161.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00162.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00163.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00164.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00165.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00166.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00167.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00168.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00169.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00170.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00171.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00172.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00173.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00174.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00175.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00176.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00177.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00178.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00179.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00180.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00181.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00182.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00183.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00184.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00185.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00186.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00187.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00188.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00189.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00190.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00191.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00192.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00193.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00194.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00195.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00196.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00197.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00198.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00199.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00200.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00201.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00202.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00203.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00204.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00205.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00206.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00207.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00208.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00209.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00210.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00211.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00212.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00213.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00214.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00215.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00216.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00217.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00218.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00219.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00220.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00221.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00222.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00223.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00224.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00225.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00226.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00227.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00228.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00229.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00230.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00231.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00232.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00233.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00234.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00235.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00236.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00237.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00238.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00239.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00240.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00241.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00242.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00243.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00244.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00245.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00246.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00247.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00248.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00249.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00250.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00251.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00252.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00253.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00254.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00255.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00256.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00257.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00258.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00259.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00260.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00261.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00262.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00263.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00264.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00265.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00266.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00267.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00268.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00269.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00270.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00271.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00272.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00273.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00274.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00275.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00276.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00277.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00278.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00279.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00280.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00281.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00282.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00283.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00284.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00285.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00286.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00287.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00288.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00289.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00290.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00291.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00292.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00293.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00294.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00295.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00296.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00297.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00298.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00299.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00300.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00301.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00302.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00303.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00304.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00305.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00306.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00307.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00308.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00309.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00310.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00311.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00312.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00313.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00314.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00315.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00316.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00317.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00318.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00319.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00320.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00321.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00322.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00323.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00324.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00325.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00326.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00327.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00328.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00329.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00330.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00331.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00332.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00333.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00334.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00335.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00336.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00337.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00338.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00339.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00340.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00341.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00342.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00343.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00344.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00345.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00346.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00347.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00348.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00349.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00350.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00351.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00352.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00353.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00354.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00355.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00356.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00357.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00358.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00359.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00360.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00361.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00362.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00363.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00364.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00365.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00366.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00367.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00368.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00369.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00370.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00371.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00372.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00373.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00374.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00375.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00376.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00377.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00378.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00379.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00380.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00381.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00382.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00383.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00384.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00385.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00386.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00387.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00388.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00389.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00390.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00391.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00392.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00393.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00394.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00395.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00396.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00397.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00398.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00399.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00400.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00401.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00402.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00403.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00404.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00405.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00406.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00407.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00408.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00409.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00410.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00411.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00412.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00413.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00414.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00415.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00416.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00417.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00418.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00419.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00420.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00421.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00422.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00423.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00424.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00425.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00426.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00427.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00428.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00429.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00430.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00431.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00432.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00433.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00434.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00435.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00436.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00437.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00438.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00439.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00440.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00441.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00442.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00443.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00444.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00445.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00446.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00447.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00448.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00449.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00450.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00451.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00452.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00453.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00454.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00455.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00456.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00457.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00458.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00459.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00460.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00461.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00462.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00463.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00464.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00465.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00466.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00467.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00468.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00469.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00470.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00471.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00472.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00473.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00474.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00475.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00476.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00477.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00478.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00479.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00480.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00481.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00482.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00483.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00484.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00485.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00486.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00487.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00488.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00489.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00490.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00491.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00492.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00493.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00494.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00495.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00496.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00497.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00498.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00499.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00500.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00501.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00502.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00503.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00504.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00505.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00506.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00507.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00508.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00509.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00510.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00511.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00512.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00513.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00514.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00515.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00516.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00517.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00518.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00519.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00520.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00521.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00522.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00523.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00524.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00525.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00526.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00527.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00528.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00529.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00530.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00531.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00532.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00533.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00534.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00535.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00536.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00537.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00538.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00539.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00540.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00541.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00542.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00543.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00544.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00545.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00546.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00547.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00548.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00549.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00550.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00551.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00552.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00553.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00554.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00555.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00556.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00557.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00558.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00559.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00560.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00561.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00562.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00563.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00564.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00565.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00566.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00567.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00568.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00569.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00570.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00571.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00572.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00573.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00574.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00575.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00576.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00577.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00578.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00579.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00580.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00581.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00582.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00583.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00584.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00585.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00586.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00587.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00588.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00589.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00590.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00591.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00592.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00593.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00594.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00595.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00596.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00597.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00598.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00599.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00600.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00601.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00602.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00603.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00604.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00605.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00606.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00607.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00608.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00609.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00610.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00611.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00612.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00613.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00614.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00615.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00616.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00617.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00618.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00619.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00620.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00621.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00622.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00623.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00624.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00625.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00626.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00627.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00628.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00629.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00630.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00631.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00632.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00633.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00634.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00635.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00636.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00637.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00638.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00639.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00640.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00641.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00642.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00643.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00644.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00645.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00646.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00647.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00648.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00649.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00650.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00651.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00652.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00653.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00654.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00655.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00656.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00657.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00658.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00659.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00660.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00661.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00662.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00663.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00664.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00665.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00666.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00667.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00668.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00669.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00670.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00671.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00672.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00673.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00674.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00675.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00676.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00677.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00678.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00679.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00680.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00681.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00682.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00683.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00684.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00685.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00686.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00687.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00688.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00689.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00690.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00691.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00692.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00693.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00694.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00695.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00696.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00697.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00698.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00699.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00700.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00701.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00702.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00703.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00704.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00705.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00706.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00707.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00708.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00709.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00710.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00711.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00712.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00713.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00714.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00715.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00716.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00717.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00718.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00719.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00720.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00721.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00722.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00723.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00724.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00725.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00726.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00727.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00728.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00729.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00730.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00731.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00732.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00733.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00734.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00735.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00736.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00737.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00738.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00739.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00740.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00741.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00742.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00743.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00744.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00745.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00746.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00747.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00748.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00749.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00750.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00751.wav",
+    "text": "[angry] 嘶哑的低吼，身体僵硬",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00752.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00753.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00754.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00755.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00756.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00757.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00758.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00759.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00760.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00761.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00762.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00763.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00764.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00765.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00766.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00767.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00768.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00769.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00770.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00771.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00772.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00773.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00774.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00775.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00776.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00777.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00778.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00779.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00780.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00781.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00782.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00783.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00784.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00785.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00786.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00787.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00788.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00789.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00790.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00791.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00792.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00793.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00794.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00795.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00796.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00797.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00798.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00799.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00800.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00801.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00802.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00803.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00804.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00805.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00806.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00807.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00808.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00809.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00810.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00811.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00812.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00813.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00814.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00815.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00816.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00817.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00818.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00819.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00820.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00821.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00822.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00823.wav",
+    "text": "[pain] 不规律的呻吟，蜷缩不动",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00824.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00825.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00826.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00827.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00828.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00829.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00830.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00831.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00832.wav",
+    "text": "[alert] 短促高频的咯咯声，盯着窗外",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00833.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00834.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00835.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00836.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00837.wav",
+    "text": "[angry] 低沉的嘶嘶声，弓背炸毛",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00838.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00839.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00840.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00841.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00842.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00843.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00844.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00845.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00846.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00847.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00848.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00849.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00850.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00851.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00852.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00853.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00854.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00855.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00856.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00857.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00858.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00859.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00860.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00861.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00862.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00863.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00864.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00865.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00866.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00867.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00868.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00869.wav",
+    "text": "[fear] 持续的呜呜叫，耳朵下垂",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00870.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00871.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00872.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00873.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00874.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00875.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00876.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00877.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00878.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00879.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00880.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00881.wav",
+    "text": "[happy] 欢快的汪叫，转圈",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00882.wav",
+    "text": "[hungry] 高频持续的喵喵叫，伴随蹭腿",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00883.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00884.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00885.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00886.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00887.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00888.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00889.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00890.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00891.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00892.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00893.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00894.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00895.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00896.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00897.wav",
+    "text": "[happy] 柔和的喵叫，尾巴竖起",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00898.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00899.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00900.wav",
+    "text": "[hungry] 低沉的呜咽，看向主人",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00901.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00902.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00903.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00904.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00905.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00906.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00907.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00908.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00909.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00910.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00911.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00912.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00913.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00914.wav",
+    "text": "[alert] 短促有力的汪叫，竖耳",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00915.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00916.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00917.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00918.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00919.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00920.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00921.wav",
+    "text": "[pain] 持续的哀嚎，不愿被触碰",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00922.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00923.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00924.wav",
+    "text": "[hungry] 短促的喵叫，重复2-3次，音调上扬",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00925.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00926.wav",
+    "text": "[seek_attention] 用爪子扒门，持续喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00927.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00928.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00929.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00930.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00931.wav",
+    "text": "[content] 满足的呼噜，趴在温暖处",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00932.wav",
+    "text": "[fear] 颤抖的呜咽，夹着尾巴",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00933.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00934.wav",
+    "text": "[alert] 急促的吠叫，朝门口方向",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00935.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00936.wav",
+    "text": "[hungry] 短促的汪汪叫2声，舔食盆",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00937.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00938.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00939.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00940.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00941.wav",
+    "text": "[angry] 连续的低吼，耳朵后压",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00942.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00943.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00944.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00945.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00946.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00947.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00948.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00949.wav",
+    "text": "[hungry] 急促的喵叫，看向食物方向",
+    "pet_type": "cat",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00950.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00951.wav",
+    "text": "[fear] 颤抖的哀鸣，躲在角落",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00952.wav",
+    "text": "[angry] 连续的低吼，毛发竖起",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00953.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00954.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00955.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00956.wav",
+    "text": "[happy] 轻柔的短喵，伴随呼噜声",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00957.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00958.wav",
+    "text": "[seek_attention] 坐在主人面前，反复喵叫",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00959.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00960.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00961.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00962.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00963.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00964.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00965.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00966.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00967.wav",
+    "text": "[happy] 轻快的汪汪叫，摇尾巴",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00968.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00969.wav",
+    "text": "[content] 轻柔的呼噜，缓慢眨眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00970.wav",
+    "text": "[fear] 尖锐的长嚎，身体缩成一团",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00971.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00972.wav",
+    "text": "[pain] 突然的尖叫，异常尖锐",
+    "pet_type": "cat",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00973.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00974.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00975.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00976.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00977.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00978.wav",
+    "text": "[pain] 尖锐的哀嚎，躲避触碰",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00979.wav",
+    "text": "[angry] 低沉的咆哮，露牙",
+    "pet_type": "dog",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00980.wav",
+    "text": "[hungry] 急促的汪叫，在食物区徘徊",
+    "pet_type": "dog",
+    "emotion": "hungry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00981.wav",
+    "text": "[content] 低频持续的呼噜声，闭眼",
+    "pet_type": "cat",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00982.wav",
+    "text": "[happy] 愉悦的喵叫，蹭主人手",
+    "pet_type": "cat",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00983.wav",
+    "text": "[alert] 急促的叫声，身体前倾",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00984.wav",
+    "text": "[fear] 尖锐的哀嚎，躲在沙发后",
+    "pet_type": "dog",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00985.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00986.wav",
+    "text": "[fear] 微弱的呜咽，不敢出来",
+    "pet_type": "cat",
+    "emotion": "fear"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00987.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00988.wav",
+    "text": "[content] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "content"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00989.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00990.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00991.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00992.wav",
+    "text": "[happy] 活泼的叫声，前肢下压",
+    "pet_type": "dog",
+    "emotion": "happy"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00993.wav",
+    "text": "[seek_attention] 普通叫声",
+    "pet_type": "dog",
+    "emotion": "seek_attention"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00994.wav",
+    "text": "[pain] 异常的低吟，不愿移动",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00995.wav",
+    "text": "[angry] 尖锐的嘶叫，瞳孔放大",
+    "pet_type": "cat",
+    "emotion": "angry"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00996.wav",
+    "text": "[alert] 尖锐的喵叫，耳朵转向声源",
+    "pet_type": "cat",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00997.wav",
+    "text": "[alert] 连续快速的汪汪叫",
+    "pet_type": "dog",
+    "emotion": "alert"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00998.wav",
+    "text": "[pain] 突然的尖叫，跛行",
+    "pet_type": "dog",
+    "emotion": "pain"
+  },
+  {
+    "audio_path": "./data/synthetic/audio/sample_00999.wav",
+    "text": "[seek_attention] 持续有节奏的喵叫，跟随主人",
+    "pet_type": "cat",
+    "emotion": "seek_attention"
+  }
+]
