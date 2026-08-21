@@ -526,9 +526,22 @@ python scripts/train_whisper.py \
 #### 训练 LLM (情绪理解 + 翻译)
 
 ```bash
+# 方式 1: 自动检测硬件 (推荐)
+python scripts/train_llm.py --auto
+
+# 方式 2: 指定硬件配置
+python scripts/train_llm.py --machine auto      # 自动检测 (等同于 --auto)
+python scripts/train_llm.py --machine cpu       # Mac CPU
+python scripts/train_llm.py --machine mps       # Apple Silicon M1/M2/M3
+python scripts/train_llm.py --machine gpu_8g    # GPU 8GB (T4/P100)
+python scripts/train_llm.py --machine gpu_16g   # GPU 16GB (V100 16GB/A10)
+python scripts/train_llm.py --machine gpu_24g   # GPU 24GB (RTX 4090)
+python scripts/train_llm.py --machine gpu_32g   # GPU 32GB (V100 32GB)
+
+# 方式 3: 自定义参数覆盖
 python scripts/train_llm.py \
-    --data ./data/synthetic/llm_training_data.json \
-    --model Qwen/Qwen2.5-7B-Instruct \
+    --auto \
+    --model "your-custom-model" \
     --epochs 10 \
     --batch_size 4 \
     --lr 2e-4 \
@@ -536,34 +549,261 @@ python scripts/train_llm.py \
     --output ./checkpoints/llm
 ```
 
+**硬件自动检测逻辑**:
+
+| 操作系统 | 设备 | 显存 | 自动选择模型 | 参数量 |
+|----------|------|------|-------------|--------|
+| macOS | MPS (M1/M2/M3) | 统一内存 | TinyLlama-1.1B-Chat | 1.1B |
+| macOS/Linux | CPU | - | SmolLM2-135M-Instruct | 135M |
+| Linux | CUDA | 8GB | Qwen2.5-1.5B-Instruct | 1.5B |
+| Linux | CUDA | 16GB | Qwen2.5-3B-Instruct | 3B |
+| Linux | CUDA | 24GB | Qwen2.5-7B-Instruct | 7B |
+| Linux | CUDA | 32GB | Qwen2.5-7B-Instruct | 7B (高配置) |
+
+#### 训练中断与断点续训
+
+训练过程中如果需要暂停或意外中断，支持**自动保存 checkpoint**、**优雅中断保存**和**断点恢复训练**。
+
+**自动保存策略**:
+- 每 `save_steps` 步自动保存一次 checkpoint (MPS 默认 50 步, GPU 默认 200 步)
+- 最多保留最近 3 个 checkpoint (`save_total_limit=3`)
+- 训练完成后自动保存 LoRA adapter 到 `output_dir/final/`
+
+**如何检查训练是否仍在运行**:
+```bash
+# 方法 1: 查看训练进程
+ps aux | grep train_llm | grep -v grep
+
+# 方法 2: 查看 GPU 是否在使用 (CUDA 环境)
+nvidia-smi
+
+# 方法 3: 查看 checkpoint 目录是否在更新
+ls -lt ./checkpoints/llm_mps/
+
+# 方法 4: 使用状态检查命令 (无需停止训练)
+python scripts/train_llm.py --auto --status
+```
+
+**如何中断训练（优雅保存）**:
+1. **在运行训练的终端窗口按 `Ctrl+C`** 或 `Cmd+C` (macOS)
+2. 系统会自动保存当前训练状态（包括模型权重、优化器状态等）
+3. 等待显示「checkpoint 已保存」提示后再操作
+4. **二次按 `Ctrl+C` 会强制退出**（不保存，可能丢失进度）
+
+**如果终端已关闭或无法 Ctrl+C（强制停止）**:
+```bash
+# 查找训练进程
+ps aux | grep train_llm | grep -v grep
+
+# 优雅终止 (推荐，进程会保存当前状态)
+kill -SIGINT <PID>
+
+# 强制终止 (可能丢失未保存的进度)
+kill -9 <PID>
+
+# 一键停止所有 train_llm 进程
+pkill -f train_llm.py
+```
+
+**使用后台守护脚本（推荐）**:
+```bash
+# 启动后台训练 (终端关闭后继续运行)
+./scripts/train_daemon.sh start
+
+# 停止训练 (优雅保存后退出)
+./scripts/train_daemon.sh stop
+
+# 查看训练状态
+./scripts/train_daemon.sh status
+
+# 实时查看训练日志
+./scripts/train_daemon.sh log
+
+# 查看错误日志
+./scripts/train_daemon.sh err
+
+# 重启训练 (先停后启)
+./scripts/train_daemon.sh restart
+```
+
+**后台守护脚本说明**:
+- 使用 `nohup` 在后台运行，关闭终端不影响训练
+- 日志输出到 `logs/train_llm.log`，错误输出到 `logs/train_llm_err.log`
+- PID 保存在 `.train_pid`，避免重复启动
+- `stop` 发送 `SIGTERM` 优雅停止，会自动保存当前 checkpoint
+
+**训练中提示信息示例**:
+```
+💡 提示: 训练中按 Ctrl+C 可优雅中断并自动保存
+   checkpoint 间隔: 每 50 步
+   最多保留: 3 个 checkpoint
+```
+
+**如何恢复训练**:
+```bash
+# 方式 1: 自动检测最新 checkpoint 恢复 (推荐)
+python scripts/train_llm.py --auto --resume auto
+
+# 方式 2: 指定具体 checkpoint 路径恢复
+python scripts/train_llm.py --auto --resume ./checkpoints/llm_mps/checkpoint-550
+
+# 方式 3: 不指定 --resume，从头开始训练 (默认行为)
+python scripts/train_llm.py --auto
+```
+
+**如何检查训练状态**:
+```bash
+# 查看训练进度和已有 checkpoint
+python scripts/train_llm.py --auto --status
+```
+
+**状态检查输出示例**:
+```
+==================================================
+📊 训练状态检查
+==================================================
+  输出目录: ./checkpoints/llm_mps
+  目录存在: ✅
+
+  📁 已有 Checkpoints (3 个):
+    • checkpoint-50
+      路径: ./checkpoints/llm_mps/checkpoint-50
+      时间: 2025-08-21 14:30:00, step=50, epoch=0.06
+    • checkpoint-100
+      路径: ./checkpoints/llm_mps/checkpoint-100
+      时间: 2025-08-21 14:35:00, step=100, epoch=0.12
+    • checkpoint-interrupted 🔴 (中断)
+      路径: ./checkpoints/llm_mps/checkpoint-interrupted
+      时间: 2025-08-21 14:40:00, step=127, epoch=0.15
+
+  🔄 训练未完成
+
+  ⚠️  上次训练已中断:
+    中断时间: 2025-08-21 14:40:00
+    恢复命令: python scripts/train_llm.py --auto --resume ./checkpoints/llm_mps/checkpoint-interrupted
+
+  💡 使用以下命令恢复训练:
+    python scripts/train_llm.py --auto --resume auto
+==================================================
+```
+
+**Checkpoint 目录结构**:
+```
+checkpoints/llm_mps/
+├── checkpoint-50/              # 第 50 步自动保存
+├── checkpoint-100/             # 第 100 步自动保存
+├── checkpoint-interrupted/     # Ctrl+C 优雅中断保存
+├── interrupted_info.json       # 中断信息 (含恢复命令)
+└── final/                      # 训练完成后的最终 LoRA adapter
+```
+
+> **注意**: 断点续训会恢复模型权重、优化器状态、学习率调度器和 global_step，相当于从未中断过。优雅中断保存的 checkpoint 可以像普通 checkpoint 一样恢复。
+
 ### 4. 推理
+
+#### 自动检测模型
+
+推理时会自动查找 `./checkpoints/` 目录下最新的模型 (优先 `final/`，其次最新 `checkpoint-*/`)。
+
+```bash
+# 查看可用模型
+python scripts/inference.py --list-models
+
+# 自动检测模型进行推理 (无需指定 --llm_adapter / --whisper_model)
+python scripts/inference.py --mode pet_to_text --audio ./data/raw/cat_sounds/test.wav
+```
 
 #### 宠物声音 → 人类语言
 
 ```bash
+# 自动检测模型 (推荐)
+python scripts/inference.py \
+    --mode pet_to_text \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --pet cat \
+    --breed 橘猫
+
+# 手动指定模型路径
 python scripts/inference.py \
     --mode pet_to_text \
     --audio ./data/raw/cat_sounds/test.wav \
     --pet cat \
     --breed 橘猫 \
     --whisper_model ./checkpoints/whisper/final \
-    --llm_adapter ./checkpoints/llm/final
+    --llm_adapter ./checkpoints/llm_mps/final
 ```
 
 #### 人类语言 → 宠物声音
 
 ```bash
+# 自动检测模型
 python scripts/inference.py \
     --mode text_to_pet \
     --text "过来吃饭啦" \
     --pet cat \
     --output ./output/cat_sound.wav
+
+# 手动指定模型路径
+python scripts/inference.py \
+    --mode text_to_pet \
+    --text "过来吃饭啦" \
+    --pet cat \
+    --output ./output/cat_sound.wav \
+    --llm_adapter ./checkpoints/llm_mps/final
 ```
 
 #### 对话模式
 
 ```bash
+# 自动检测模型
 python scripts/inference.py --mode chat
+```
+
+#### 测试音频说明
+
+项目已内置测试音频文件：
+
+| 文件 | 说明 |
+|------|------|
+| `./data/raw/cat_sounds/test.wav` | 1.5秒模拟猫叫 (16kHz, 单声道) |
+| `./data/raw/dog_sounds/` | 放置你的狗叫音频 |
+| `./data/raw/human_sounds/` | 放置你的人类语音 |
+
+> 如需生成更多测试音频：
+> ```bash
+> # 使用 ffmpeg 录制 5 秒音频
+> ffmpeg -f avfoundation -i ":0" -t 5 ./data/raw/cat_sounds/my_cat.wav
+> ```
+
+#### 常见问题 (FAQ)
+
+**Q: 提示 "Whisper 基础模型未就绪 (网络不可用或未缓存)"？**
+
+A: 按以下优先级解决：
+1. **连接网络后重试** — 最简单，模型会自动下载到本地缓存
+2. **使用已训练好的 Whisper 模型** — 如果你已经训练过，指定路径：
+   ```bash
+   python scripts/inference.py --mode pet_to_text \
+       --audio ./data/raw/cat_sounds/test.wav \
+       --whisper_model ./checkpoints/whisper/final
+   ```
+3. **手动下载模型到本地** — 从另一台有网络的机器下载，或使用代理：
+   ```bash
+   huggingface-cli download openai/whisper-tiny
+   # 或使用国内镜像:
+   HF_ENDPOINT=https://hf-mirror.com huggingface-cli download openai/whisper-tiny
+   ```
+
+**Q: 提示 "LLM 加载失败"？**
+
+A: 类似处理：
+1. 连接网络后重试
+2. 使用已训练好的 adapter: `--llm_adapter ./checkpoints/llm_mps/final`
+3. 手动下载基础模型到本地缓存
+
+**Q: 如何查看当前可用的模型？**
+```bash
+python scripts/inference.py --list-models
 ```
 
 ---
@@ -679,7 +919,7 @@ python scripts/inference.py --mode chat
 
 ## 配置说明
 
-所有配置在 `config/config.yaml`:
+所有配置在 `config/config.yaml`，LLM 训练支持自动检测硬件，无需手动配置：
 
 ```yaml
 # Whisper 微调
@@ -689,17 +929,28 @@ whisper:
   learning_rate: 1.0e-5
   num_train_epochs: 30
 
-# LLM 微调
+# LLM 微调 (自动检测硬件，通常无需手动配置)
+# 如果需要覆盖自动配置，可以设置以下参数：
 llm:
-  base_model: "Qwen/Qwen2.5-7B-Instruct"
-  lora_r: 64
-  learning_rate: 2.0e-4
-  num_train_epochs: 10
+  # base_model: "Qwen/Qwen2.5-7B-Instruct"  # 可选，覆盖自动选择
+  # lora_r: 64                                # 可选，覆盖自动选择
+  # learning_rate: 2.0e-4                     # 可选，覆盖默认值
+  # num_train_epochs: 10                      # 可选，覆盖自动选择
+  pass
 
 # RAG
 rag:
   embedding_model: "BAAI/bge-large-zh-v1.5"
   top_k: 5
+```
+
+**命令行参数覆盖自动配置**:
+```bash
+# 使用自动检测，但覆盖模型和 epochs
+python scripts/train_llm.py --auto --model "your-model" --epochs 5
+
+# 强制使用 GPU 24GB 配置，但自定义 batch_size
+python scripts/train_llm.py --machine gpu_24g --batch_size 16
 ```
 
 ---

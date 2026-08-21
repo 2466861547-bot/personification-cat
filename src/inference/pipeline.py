@@ -54,28 +54,49 @@ class TranslationPipeline:
         use_rag: bool,
         use_agent: bool,
     ):
-        """初始化各组件"""
+        """初始化各组件 (网络断开时优雅降级)"""
         # 1. Whisper ASR
         whisper_config = WhisperFineTuneConfig()
         if whisper_path and os.path.exists(whisper_path):
-            self.whisper = WhisperFineTuner(whisper_config)
-            self.whisper.load_finetuned(whisper_path)
+            try:
+                self.whisper = WhisperFineTuner(whisper_config)
+                self.whisper.load_finetuned(whisper_path)
+            except Exception as e:
+                print(f"⚠️  Whisper 微调模型加载失败: {e}")
+                self.whisper = None
         else:
             try:
                 self.whisper = WhisperFineTuner(whisper_config)
+                if not self.whisper.is_ready:
+                    print("⚠️  Whisper 基础模型未就绪 (网络不可用或未缓存)")
+                    print("   pet_to_text 模式需要 Whisper，可尝试:")
+                    print("     1. 连接网络后重试")
+                    print("     2. 使用已训练好的 Whisper 模型: --whisper_model ./checkpoints/whisper/final")
+                    print("     3. 下载 whisper-tiny 模型到本地缓存")
+                    print("   text_to_pet / chat 模式仍可正常使用")
+                    self.whisper = None
             except Exception as e:
-                print(f"Whisper 加载失败(使用基础模型): {e}")
+                print(f"⚠️  Whisper 加载失败: {e}")
+                self.whisper = None
 
         # 2. LLM
         llm_config = LLMFineTuneConfig()
         if llm_path and os.path.exists(llm_path):
-            self.llm = LLMFineTuner(llm_config)
-            self.llm.load_finetuned(llm_path)
+            try:
+                self.llm = LLMFineTuner(llm_config)
+                self.llm.load_finetuned(llm_path)
+            except Exception as e:
+                print(f"⚠️  LLM adapter 加载失败: {e}")
+                self.llm = None
         else:
             try:
                 self.llm = LLMFineTuner(llm_config)
+                if not self.llm.is_ready:
+                    print("⚠️  LLM 基础模型未就绪 (网络不可用或未缓存)")
+                    self.llm = None
             except Exception as e:
-                print(f"LLM 加载失败: {e}")
+                print(f"⚠️  LLM 加载失败: {e}")
+                self.llm = None
 
         # 3. RAG
         if use_rag:
@@ -84,16 +105,17 @@ class TranslationPipeline:
             try:
                 self.rag_retriever.build_index()
             except Exception as e:
-                print(f"RAG 索引构建失败: {e}")
+                print(f"⚠️  RAG 索引构建失败: {e}")
 
         # 4. 音频生成
         try:
             self.audio_generator = AudioGenerator()
         except Exception as e:
-            print(f"音频生成器加载失败: {e}")
+            print(f"⚠️  音频生成器加载失败: {e}")
+            self.audio_generator = None
 
         # 5. Agent
-        if use_agent:
+        if use_agent and self.llm:
             tools = PetTools(
                 retriever=self.rag_retriever,
                 audio_generator=self.audio_generator,
@@ -102,7 +124,10 @@ class TranslationPipeline:
             try:
                 self.agent = PetTranslationAgent(tools=tools, llm=self.llm)
             except Exception as e:
-                print(f"Agent 初始化失败(降级为直接调用): {e}")
+                print(f"⚠️  Agent 初始化失败(降级为直接调用): {e}")
+                self.agent = None
+        else:
+            self.agent = None
 
     def pet_sound_to_text(
         self,

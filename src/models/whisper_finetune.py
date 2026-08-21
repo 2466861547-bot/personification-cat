@@ -13,6 +13,9 @@ from torch.utils.data import Dataset
 # 国内镜像: 优先使用 hf-mirror.com, 避免连不上 huggingface.co
 os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
 os.environ.setdefault("HF_HUB_ENABLE_HF_TRANSFER", "0")
+# 模型已缓存到本地时, 强制离线模式, 避免网络波动导致加载失败
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
 
 from transformers import (
     WhisperProcessor,
@@ -192,35 +195,48 @@ class WhisperFineTuner:
         self.config = config
         self.processor = None
         self.model = None
+        self.is_ready = False
         self._load_model()
 
     def _load_model(self):
-        """加载预训练模型和处理器"""
+        """加载预训练模型和处理器 (网络断开时优雅降级)"""
         print(f"加载 Whisper 模型: {self.config.model_name}")
 
-        self.processor = WhisperProcessor.from_pretrained(self.config.model_name)
+        try:
+            self.processor = WhisperProcessor.from_pretrained(self.config.model_name)
 
-        # 自动检测设备
-        self.device = detect_device()
-        print(f"  设备: {self.device}")
+            # 自动检测设备
+            self.device = detect_device()
+            print(f"  设备: {self.device}")
 
-        # MPS 上 Whisper conv1/decoder 有兼容性问题, 强制用 CPU 训练
-        # 只有 CUDA 才用 GPU 加速, MPS 回退到 CPU
-        if self.device == "mps":
-            print("  ⚠ MPS 设备 Whisper 层有兼容性问题, 强制回退到 CPU 训练")
-            print("    如需 GPU 加速, 请使用 Linux CUDA 服务器")
-            self.device = "cpu"
+            # MPS 上 Whisper conv1/decoder 有兼容性问题, 强制用 CPU 训练
+            # 只有 CUDA 才用 GPU 加速, MPS 回退到 CPU
+            if self.device == "mps":
+                print("  ⚠ MPS 设备 Whisper 层有兼容性问题, 强制回退到 CPU 训练")
+                print("    如需 GPU 加速, 请使用 Linux CUDA 服务器")
+                self.device = "cpu"
 
-        # 根据设备选择 dtype
-        if self.device == "cuda":
-            dtype = torch.float16 if self.config.fp16 else torch.float32
-        else:
-            dtype = torch.float32  # CPU 用 float32 更稳定
+            # 根据设备选择 dtype
+            if self.device == "cuda":
+                dtype = torch.float16 if self.config.fp16 else torch.float32
+            else:
+                dtype = torch.float32  # CPU 用 float32 更稳定
 
-        self.model = WhisperForConditionalGeneration.from_pretrained(
-            self.config.model_name,
-            torch_dtype=dtype,
-        )
+            self.model = WhisperForConditionalGeneration.from_pretrained(
+                self.config.model_name,
+                torch_dtype=dtype,
+            )
+        except Exception as e:
+            print(f"  ❌ Whisper 加载失败: {e}")
+            print(f"     可能原因: 网络不可用或模型未缓存")
+            print(f"     解决方法:")
+            print(f"       1. 连接网络后重试")
+            print(f"       2. 使用已训练好的 Whisper 模型路径")
+            print(f"       3. 手动下载模型到本地: {self.config.model_name}")
+            self.processor = None
+            self.model = None
+            self.is_ready = False
+            return
 
         # 强制将模型放到 CPU (防止 Trainer 自动移到 MPS)
         if self.device == "cpu":
@@ -261,6 +277,8 @@ class WhisperFineTuner:
             return _original_base_forward(self_, *args, **kwargs)
 
         _base_model.forward = types.MethodType(_patched_base_forward, _base_model)
+
+        self.is_ready = True
 
     def prepare_dataset(
         self,
@@ -393,6 +411,8 @@ class WhisperFineTuner:
 
     def inference(self, audio_path: str) -> str:
         """推理: 宠物声音 → 文字描述"""
+        if not self.is_ready:
+            raise RuntimeError("Whisper 模型未就绪，无法推理。请检查网络连接或使用本地缓存模型。")
         import librosa
 
         self.model.eval()
@@ -403,13 +423,15 @@ class WhisperFineTuner:
         )
         input_features = processed.input_features
 
-        if torch.cuda.is_available():
-            input_features = input_features.cuda()
-            self.model = self.model.cuda()
+        # 确保 input_features 和模型在同一设备上
+        model_device = next(self.model.parameters()).device
+        input_features = input_features.to(model_device)
 
         with torch.no_grad():
-            predicted_ids = self.model.generate(
-                input_features,
+            # 推理时用 base_model.generate, 绕过 PEFT 包装层的参数映射问题
+            gen_model = self.model.base_model
+            predicted_ids = gen_model.generate(
+                input_features=input_features,
                 max_new_tokens=200,
                 language=self.config.language,
                 task=self.config.task,
@@ -427,6 +449,10 @@ class WhisperFineTuner:
             model_path,
             torch_dtype=torch.float16 if self.config.fp16 else torch.float32,
         )
-        if torch.cuda.is_available():
+        # 确保模型在正确的设备上 (CPU 训练后的模型保持在 CPU)
+        if self.device == "cpu":
+            self.model = self.model.cpu()
+        elif torch.cuda.is_available():
             self.model = self.model.cuda()
-        print(f"已加载微调模型: {model_path}")
+        self.is_ready = True
+        print(f"✅ 已加载微调模型: {model_path}")
