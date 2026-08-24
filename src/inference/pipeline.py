@@ -447,42 +447,25 @@ class TranslationPipeline:
             result["description"] = description
             print(f"    ↑ ⚠️  无可用模型")
 
-        # Step 2: LLM 生成拟人化描述 (可爱的人类语言)
-        print(f"  Step 2/3: LLM 生成拟人化描述")
+        # Step 2: 生成拟人化描述 (可爱的人类语言)
+        print(f"  Step 2/3: 生成拟人化描述")
         emotion = result.get('emotion', 'unknown')
         description = result.get('description', '')
-        human_text = None
 
-        if self.llm:
-            try:
-                human_text = self.llm.generate_anthropomorphic(
-                    pet_type=pet_type,
-                    breed=breed,
-                    emotion=emotion,
-                    description=description,
-                )
-                if human_text:
-                    result["human_text"] = human_text
-                    print(f"    ↑ 拟人化文本: {human_text[:100]}")
-                else:
-                    print(f"    ⚠️  LLM 生成内容质量不佳，使用模板生成")
-            except Exception as e:
-                print(f"    ⚠️  LLM 生成失败: {e}")
+        # 策略: 使用模板生成 (可靠, 不依赖 LLM, 因为 LLM 未训练过此任务)
+        human_text = self._template_anthropomorphic(
+            pet_type=pet_type,
+            breed=breed,
+            emotion=emotion,
+            description=description,
+        )
+        result["human_text"] = human_text
 
-        # Fallback: 使用模板生成可爱的拟人化文本
-        if not human_text:
-            human_text = self._template_anthropomorphic(
-                pet_type=pet_type,
-                breed=breed,
-                emotion=emotion,
-                description=description,
-            )
-            result["human_text"] = human_text
-            print(f"    ↑ 模板生成: {human_text[:100]}")
-
-        # Log the actual pet_type being used
+        # Log
         pet_names = {"cat": "猫咪", "dog": "狗狗", "bird": "鸟", "rabbit": "兔子"}
-        print(f"    ↑ 宠物类型: {pet_names.get(pet_type, pet_type)} | 品种: {breed} | 情绪: {emotion}")
+        pet_cn = pet_names.get(pet_type, pet_type)
+        print(f"    ↑ 宠物类型: {pet_cn} | 品种: {breed} | 情绪: {emotion}")
+        print(f"    ↑ 拟人化文本: {human_text}")
 
         # Step 3: 文字 → 人类声音 (声纹克隆)
         print(f"  Step 3/3: 文字 → 人类声音 (目标声线: {target_voice})")
@@ -673,85 +656,466 @@ class TranslationPipeline:
         emotion: str,
         description: str,
     ) -> str:
-        """模板生成拟人化文本 (当 LLM 不可用或生成质量差时使用)"""
+        """模板生成拟人化文本 — 丰富多品种、多情绪、口语化"""
 
-        pet_cn = {"cat": "猫咪", "dog": "狗狗"}.get(pet_type, pet_type)
+        pet_cn = {"cat": "猫咪", "dog": "狗狗", "bird": "小鸟", "rabbit": "兔兔"}.get(pet_type, pet_type)
+        pronoun = "它" if pet_type not in ("cat", "dog") else ("猫猫" if pet_type == "cat" else "狗狗")
 
-        emotion_templates = {
-            "hungry": [
-                f"{breed}的{pet_cn}说：我肚子饿啦，快给我点吃的嘛~",
-                f"{pet_cn}拍拍你：铲屎官，我的小零食呢？",
-                f"{breed}的{pet_cn}用眼神杀告诉你：该投喂了！",
-            ],
-            "happy": [
-                f"{breed}的{pet_cn}开心得说：今天天气真好，一起玩嘛！",
-                f"{pet_cn}摇着尾巴：主人主人，我超级喜欢你！",
-                f"{breed}的{pet_cn}：喵~ 被你摸得好舒服呀~",
-            ],
-            "alert": [
-                f"{breed}的{pet_cn}警觉地说：那是什么声音？我去看看！",
-                f"{pet_cn}竖起耳朵：嘘~ 好像有情况！",
-                f"{breed}的{pet_cn}：我听到奇怪的声音，要保护你！",
-            ],
-            "seek_attention": [
-                f"{breed}的{pet_cn}蹭过来：别玩手机了，陪我玩嘛~",
-                f"{pet_cn}盯着你看了好久：铲屎官，快理我呀！",
-                f"{breed}的{pet_cn}：我在这儿呢，摸摸我！",
-            ],
-            "angry": [
-                f"{breed}的{pet_cn}生气了：哼！我不开心了！",
-                f"{pet_cn}低吼着：别碰我，我现在很生气！",
-                f"{breed}的{pet_cn}：再惹我就不理你了哦！",
-            ],
-            "fearful": [
-                f"{breed}的{pet_cn}害怕地躲起来：好可怕...保护我好不好？",
-                f"{pet_cn}颤抖着：我...我有点害怕，能抱抱我吗？",
-                f"{breed}的{pet_cn}：那个东西好吓人，我不要过去！",
-            ],
-            "content": [
-                f"{breed}的{pet_cn}满足地说：这样就好舒服呀~",
-                f"{pet_cn}发出呼噜声：嗯~ 这才是生活嘛。",
-                f"{breed}的{pet_cn}：我最喜欢这样安静的时光了。",
-            ],
-            "pain": [
-                f"{breed}的{pet_cn}痛苦地说：呜...我有点不舒服...",
-                f"{pet_cn}呻吟着：主人，我好像受伤了...",
-                f"{breed}的{pet_cn}：我好痛啊，带我去看医生好不好？",
-            ],
-            "lonely": [
-                f"{breed}的{pet_cn}孤独地说：你什么时候回来呀...",
-                f"{pet_cn}望着门口：一个人好无聊...",
-                f"{breed}的{pet_cn}：我在等你哦，不要离开我。",
-            ],
-            "excited": [
-                f"{breed}的{pet_cn}兴奋地跳起来：哇！有好玩的！",
-                f"{pet_cn}上蹿下跳：今天好开心呀！",
-                f"{breed}的{pet_cn}：主人主人，我们出去玩吧！",
-            ],
-            "playful": [
-                f"{breed}的{pet_cn}邀请你：来玩逗猫棒吧！",
-                f"{pet_cn}伸出爪子：陪我玩嘛~",
-                f"{breed}的{pet_cn}：猜猜看我能抓到逗猫棒吗？",
-            ],
-            "relaxed": [
-                f"{breed}的{pet_cn}慵懒地说：今天就想这样躺着~",
-                f"{pet_cn}眯着眼睛：阳光好舒服呀。",
-                f"{breed}的{pet_cn}：我觉得好安心，就这样吧。",
-            ],
-            "curious": [
-                f"{breed}的{pet_cn}好奇地看过去：那是什么？",
-                f"{pet_cn}歪着头：咦？这东西怎么玩？",
-                f"{breed}的{pet_cn}：我发现了新东西，来看看嘛！",
-            ],
+        # 品种特定的口语习惯
+        breed_hints = {
+            "橘猫": ["橘胖", "小胖橘"],
+            "英短": ["英短", "蓝胖子"],
+            "美短": ["美短", "花纹"],
+            "布偶": ["布偶", "小仙女"],
+            "狸花": ["狸花", "小狸"],
+            "加菲猫": ["加菲", "胖喵"],
+            "俄罗斯蓝猫": ["俄蓝", "蓝猫"],
+            "柯基": ["柯基", "小短腿"],
+            "金毛": ["金毛", "大暖男"],
+            "泰迪": ["泰迪", "小机灵"],
+            "柴犬": ["柴犬", "小柴"],
+            "哈士奇": ["二哈", "撒手没"],
+            "比熊": ["比熊", "棉花糖"],
+            "边牧": ["边牧", "小天才"],
+            "阿拉斯加": ["阿拉斯加", "阿拉"],
+            "博美": ["博美", "小狐狸"],
+            "雪纳瑞": ["雪纳瑞", "小老头"],
+            "拉布拉多": ["拉布拉多", "拉拉"],
         }
+        hints = breed_hints.get(breed, [breed])
 
         import random
-        templates = emotion_templates.get(emotion, [
-            f"{breed}的{pet_cn}想说：主人，我在这里哦~",
-            f"{pet_cn}发出声音：嘿，铲屎官！",
-            f"{breed}的{pet_cn}：我有话要对你说呢。",
+
+        # 按宠物类型 + 情绪 组合模板
+        if pet_type == "cat":
+            templates = {
+                "hungry": [
+                    f"{hints[0]}：铲屎官，我的饭碗空啦~快喂我！",
+                    f"{hints[0]}用爪子扒拉你的腿：我饿了啦，别装没看见！",
+                    f"喵~ 主人，你闻到我肚子咕咕叫了吗？",
+                    f"{hints[0]}跳上餐桌：今天的饭点好像有点晚哦？",
+                    f"猫咪蹲在食盆前久久不肯走：主人...难道忘了什么吗？",
+                ],
+                "happy": [
+                    f"喵呜~ 今天阳光好好，主人摸摸我的头嘛~",
+                    f"{hints[0]}翻出肚皮：看！我给你展示我的肚皮！",
+                    f"呼噜呼噜~ 被主人摸得好舒服呀~",
+                    f"{hints[0]}跳起来给你一个贴面礼：主人最棒啦！",
+                    f"尾巴摇成螺旋桨：今天心情特别好，想跟主人玩！",
+                ],
+                "alert": [
+                    f"嘘~ 我好像听到了什么声音，让我去看看！",
+                    f"{hints[0]}竖起耳朵盯着窗外：那是什么？",
+                    f"小声喵呜：主人，你有没有听到奇怪的声音？",
+                    f"{hints[0]}弓起背：有情况！我来保护你！",
+                    f"别出声~ 我在警戒中，发现可疑目标了！",
+                ],
+                "seek_attention": [
+                    f"喵~ 你已经看手机十分钟了，理理我嘛~",
+                    f"{hints[0]}把脑袋塞到你手里：别玩手机啦，摸摸我！",
+                    f"在你脚边转圈圈：主人主人，陪我玩逗猫棒！",
+                    f"用爪子拍拍你的书：看书哪有我重要呀！",
+                    f"{hints[0]}跳到你腿上：嗯~ 这样就对了嘛。",
+                ],
+                "angry": [
+                    f"哈！别碰我的尾巴，我现在很生气！",
+                    f"{hints[0]}甩了甩尾巴：再摸我就咬你了哦！",
+                    f"哼！铲屎官今天做了坏事，我不理你了！",
+                    f"炸毛中...别过来，我很凶的！",
+                    f"{hints[0]}发出低沉的呜呜声：我在生气，快道歉！",
+                ],
+                "fearful": [
+                    f"呜...那个东西好可怕，主人抱抱我好不好？",
+                    f"{hints[0]}躲到沙发后面：我不出去...好害怕。",
+                    f"小声发颤的喵：主人...你会保护我的对吗？",
+                    f"尾巴炸成毛球：那个东西走开了吗？",
+                    f"紧紧扒住你的腿：我...我不太敢动...",
+                ],
+                "content": [
+                    f"呼噜~ 这样晒太阳好舒服呀~",
+                    f"{hints[0]}慵懒地伸懒腰：嗯~ 完美的一天。",
+                    f"眯着眼享受按摩：主人的手艺越来越好了~",
+                    f"蜷在你腿上打呼噜：这样就好，不要动哦。",
+                    f"满足地舔爪子：今天过得真惬意呀。",
+                ],
+                "pain": [
+                    f"呜...主人，我好像有点不舒服...",
+                    f"{hints[0]}蜷缩着不动：别碰我...有点痛。",
+                    f"小声呻吟：主人...带我去看医生好不好？",
+                    f"眼神哀怨地看着你：我...我好像生病了。",
+                    f"慢吞吞地走到你身边：主人...要抱抱。",
+                ],
+                "lonely": [
+                    f"喵...你什么时候才回来呀...",
+                    f"{hints[0]}望着门口发呆：一个人在家好无聊。",
+                    f"趴在你的拖鞋上：主人...快点回来。",
+                    f"看着窗外的夕阳：今天又要一个人睡了呢。",
+                    f"无精打采地叫了一声：有人在家吗...",
+                ],
+                "excited": [
+                    f"哇！主人拿出了逗猫棒！好开心！",
+                    f"{hints[0]}上蹿下跳：看我的三连跳！",
+                    f"尾巴摇得飞快：有好玩的啦！有好玩的啦！",
+                    f"飞扑！精准命中逗猫棒！",
+                    f"喵喵喵~ 今天太开心啦！",
+                ],
+                "playful": [
+                    f"来呀来呀！我们玩躲猫猫~",
+                    f"{hints[0]}扒拉逗猫棒：看我抓到你！",
+                    f"弓起身子蹦跶：我现在是一只小老虎！",
+                    f"用爪子拍拍你的手：陪我玩嘛~",
+                    f"{hints[0]}摆出攻击姿态：嘿！吃我一招！",
+                ],
+                "relaxed": [
+                    f"嗯~ 就这样躺着，不要打扰我。",
+                    f"{hints[0]}打了个哈欠：今天就是咸鱼的一天。",
+                    f"闭着眼：阳光的味道真好闻。",
+                    f"换了个姿势继续躺：舒服~",
+                    f"发出小呼噜声：zZ~ 别打扰我的美梦。",
+                ],
+                "curious": [
+                    f"咦？那是什么东西？让我闻闻。",
+                    f"{hints[0]}歪着脑袋：主人你在做什么呢？",
+                    f"小心翼翼地凑过去：这个...可以吃吗？",
+                    f"用爪子戳了戳：咦~ 会动的！",
+                    f"眼睛睁得圆圆的：新世界解锁了！",
+                ],
+                "anxious": [
+                    f"主人...你今天什么时候回家呀？",
+                    f"在门口来回踱步：还不回来吗...",
+                    f"不停地舔毛：有点紧张呢。",
+                    f"小声叹气：算了，先睡一觉吧。",
+                ],
+                "frustrated": [
+                    f"哈！这个玩具怎么拆不开呀！",
+                    f"{hints[0]}甩了甩玩具：哼，我不玩了！",
+                    f"小声嘟囔：有点生气，但又不想表现出来。",
+                ],
+                "sad": [
+                    f"喵...主人好像不太开心...",
+                    f"安静地走到你身边：要不...我陪你坐会儿？",
+                    f"用头蹭了蹭你的手：一切都会好起来的。",
+                ],
+                "greeting": [
+                    f"主人终于回来啦！好想你呀~",
+                    f"{hints[0]}跑到门口迎接你：喵~ 你终于回来了！",
+                    f"尾巴绕着你的腿转圈圈：今天也辛苦啦！",
+                    f"用头蹭你的腿：欢迎回家，铲屎官！",
+                ],
+                "territorial": [
+                    f"这是我的地盘！闲人免进！",
+                    f"{hints[0]}挡在门口：想进来？先过我这关！",
+                    f"小声呜呜：这里是我的领地。",
+                ],
+                "confused": [
+                    f"歪着头：主人，你在说什么？",
+                    f"{hints[0]}一脸懵：我...我没太懂。",
+                    f"眨了眨眼：这个指令是什么意思呀？",
+                ],
+                "jealous": [
+                    f"哼！你在摸谁？我才是最重要的！",
+                    f"{hints[0]}挤到你和别的宠物中间：看我！",
+                    f"小声嘟囔：我才不要别人分走你的爱。",
+                ],
+            }
+        elif pet_type == "dog":
+            templates = {
+                "hungry": [
+                    f"汪！主人，我的饭呢？该开饭啦！",
+                    f"{hints[0]}叼着饭盆跑过来：看！我的饭碗！",
+                    f"舔了舔你的手：主人，别忘了我哦~",
+                    f"{hints[0]}趴在食盆前不肯走：肚子咕咕叫呢。",
+                    f"眼神专注地看着你手里的东西：那个...是给我的吗？",
+                ],
+                "happy": [
+                    f"汪汪汪！主人回来啦！好想你哦！",
+                    f"{hints[0]}摇着尾巴转圈：看！我等你好久了！",
+                    f"给你一个热情的贴面礼：舔舔舔~",
+                    f"蹦跶起来：今天也要一起玩球哦！",
+                    f"尾巴摇成电风扇：开心！开心！开心！",
+                ],
+                "alert": [
+                    f"汪！有人来了！我去看看！",
+                    f"{hints[0]}挡在你面前：主人，有情况我保护你！",
+                    f"竖起耳朵盯着门口：别担心，我在警戒。",
+                    f"轻声呜呜：那个...好像有陌生人。",
+                    f"大声汪汪：谁在外面？报上名来！",
+                ],
+                "seek_attention": [
+                    f"主人主人主人！看我！看我！",
+                    f"{hints[0]}用爪子扒拉你：别玩手机了陪我玩！",
+                    f"叼来你的拖鞋：来嘛~ 我们出去玩！",
+                    f"坐到你腿上：这样对了嘛，摸摸我。",
+                    f"盯着你看了很久很久：铲屎官，我很可爱你知道吗？",
+                ],
+                "angry": [
+                    f"汪！别碰我的玩具！",
+                    f"{hints[0]}低吼着：我现在很生气，别惹我。",
+                    f"哼！我不理你了！（但还是偷偷看你）",
+                    f"耳朵背过去：再靠近我就...汪汪了！",
+                    f"发出呜呜的警告：这个东西是我的！",
+                ],
+                "fearful": [
+                    f"呜...主人，我有点怕...",
+                    f"{hints[0]}躲在你身后：那个东西好可怕。",
+                    f"夹着尾巴：我...我不是故意的...",
+                    f"小声呜咽：主人，你不会怪我吧？",
+                    f"紧紧贴着你的腿：有你在就不怕了。",
+                ],
+                "content": [
+                    f"嗯~ 这样趴着晒太阳好舒服呀。",
+                    f"{hints[0]}打了个大哈欠：今天真是好日子。",
+                    f"摇着尾巴闭眼享受：主人，摸摸我的头~",
+                    f"发出满足的呜咽声：这样就好，别动哦。",
+                    f"安静地趴在你脚边：有你在的地方就是家。",
+                ],
+                "pain": [
+                    f"呜...主人，我有点不对劲...",
+                    f"{hints[0]}舔了舔你的手：好像...有点疼。",
+                    f"无精打采地趴在地上：主人...带我去看医生好不好？",
+                    f"发出呻吟：这个...帮我看看。",
+                    f"虚弱地摇尾巴：没关系...只要你在就好。",
+                ],
+                "lonely": [
+                    f"汪...主人什么时候回来呀...",
+                    f"{hints[0]}趴在门口等：我...我在等你。",
+                    f"发出呜呜的声音：一个人好无聊。",
+                    f"看着门口发呆：主人...快点回来。",
+                    f"小声叫了一下：有人吗...我在等。",
+                ],
+                "excited": [
+                    f"要出去玩啦！要出去玩啦！",
+                    f"{hints[0]}兴奋得跳起来：走！走！走！",
+                    f"叼着牵引绳跑过来：看！准备就绪！",
+                    f"转着圈儿蹦跶：好开心呀~",
+                    f"汪汪汪~ 今天我要跑五公里！",
+                ],
+                "playful": [
+                    f"来呀来呀！我们玩拔河！",
+                    f"{hints[0]}叼着球凑过来：扔给我！扔给我！",
+                    f"摇着尾巴：看！我接住了！再来一次！",
+                    f"扑向你的手：嘿！被我抓到了！",
+                    f"摆出鞠躬姿势：陪我玩嘛~我最可爱了！",
+                ],
+                "relaxed": [
+                    f"嗯~ 就这样躺着挺好的。",
+                    f"{hints[0]}打了个哈欠：今天不想动。",
+                    f"趴下来：主人，你也休息会儿吧。",
+                    f"发出轻哼声：这样就很舒服。",
+                    f"闭着眼：阳光好暖，就这样吧。",
+                ],
+                "curious": [
+                    f"咦？那是什么？让我看看。",
+                    f"{hints[0]}歪着脑袋：主人你在干什么呢？",
+                    f"凑过去闻了闻：这个...是好吃的吗？",
+                    f"用爪子扒拉你的东西：让我看看嘛~",
+                    f"眼睛亮晶晶的：新世界！",
+                ],
+                "anxious": [
+                    f"主人...你今天出门好久了...",
+                    f"在门口来回走：还不回来吗...",
+                    f"不停地转圈圈：有点担心呢。",
+                    f"小声汪汪：不会有什么事吧...",
+                ],
+                "frustrated": [
+                    f"哼！这个球怎么拆不开呀！",
+                    f"{hints[0]}甩了甩玩具：我生气了！",
+                    f"坐下来盯着玩具：我一定能拆开的！",
+                ],
+                "sad": [
+                    f"主人...你看起来不太开心...",
+                    f"安静地把头放在你腿上：要不...我陪你？",
+                    f"用头轻轻推你的手：一切都会好起来的。",
+                ],
+                "greeting": [
+                    f"主人！你终于回来啦！好想你！",
+                    f"{hints[0]}扑过来：舔舔舔~ 我等你好久了！",
+                    f"摇着尾巴转圈圈：欢迎回家！",
+                ],
+                "territorial": [
+                    f"汪！这是我的地盘！",
+                    f"{hints[0]}挡在门口：想进来？先过我这关！",
+                    f"低吼着：这里是我的领地，闲人免进！",
+                ],
+                "confused": [
+                    f"歪着头：主人，你在说什么？",
+                    f"{hints[0]}一脸懵：我...我没太懂。",
+                    f"眨了眨眼：这个指令是什么意思呀？",
+                ],
+                "jealous": [
+                    f"哼！你在摸谁？我才是最重要的！",
+                    f"{hints[0]}挤到你和别的宠物中间：看我！",
+                    f"小声嘟囔：我才不要别人分走你的爱。",
+                ],
+            }
+        else:
+            templates = {}
+
+        # 如果品种模板不存在，创建默认模板
+        if not templates:
+            cat_templates = {
+                "hungry": [
+                    f"{hints[0]}：铲屎官，我的饭碗空啦~快喂我！",
+                    f"喵~ 主人，你闻到我肚子咕咕叫了吗？",
+                    f"{hints[0]}跳上餐桌：今天的饭点好像有点晚哦？",
+                ],
+                "happy": [
+                    f"喵呜~ 今天阳光好好，主人摸摸我的头嘛~",
+                    f"呼噜呼噜~ 被主人摸得好舒服呀~",
+                    f"尾巴摇成螺旋桨：今天心情特别好！",
+                ],
+                "alert": [
+                    f"嘘~ 我好像听到了什么声音，让我去看看！",
+                    f"{hints[0]}竖起耳朵盯着窗外：那是什么？",
+                    f"小声喵呜：主人，你有没有听到奇怪的声音？",
+                ],
+                "seek_attention": [
+                    f"喵~ 你已经看手机好久了，理理我嘛~",
+                    f"{hints[0]}把脑袋塞到你手里：别玩手机啦，摸摸我！",
+                    f"在你脚边转圈圈：主人主人，陪我玩！",
+                ],
+                "angry": [
+                    f"哈！别碰我尾巴，我现在很生气！",
+                    f"{hints[0]}甩了甩尾巴：再摸我就生气了！",
+                    f"哼！铲屎官今天做了坏事，我不理你了！",
+                ],
+                "fearful": [
+                    f"呜...那个东西好可怕，主人抱抱我好不好？",
+                    f"{hints[0]}躲到沙发后面：我不出去...好害怕。",
+                    f"小声发颤的喵：主人...你会保护我的对吗？",
+                ],
+                "content": [
+                    f"呼噜~ 这样晒太阳好舒服呀~",
+                    f"{hints[0]}慵懒地伸懒腰：嗯~ 完美的一天。",
+                    f"眯着眼享受按摩：主人的手艺越来越好啦~",
+                ],
+                "pain": [
+                    f"呜...主人，我好像有点不舒服...",
+                    f"{hints[0]}蜷缩着不动：别碰我...有点痛。",
+                    f"小声呻吟：主人...带我去看医生好不好？",
+                ],
+                "lonely": [
+                    f"喵...你什么时候才回来呀...",
+                    f"{hints[0]}望着门口发呆：一个人在家好无聊。",
+                    f"趴在你的拖鞋上：主人...快点回来。",
+                ],
+                "excited": [
+                    f"哇！有好玩的啦！好开心！",
+                    f"{hints[0]}上蹿下跳：看我的三连跳！",
+                    f"尾巴摇得飞快：有好玩的啦！",
+                ],
+                "playful": [
+                    f"来呀来呀！我们玩逗猫棒~",
+                    f"{hints[0]}扒拉逗猫棒：看我抓到你！",
+                    f"弓起身子蹦跶：我现在是一只小老虎！",
+                ],
+                "relaxed": [
+                    f"嗯~ 就这样躺着，不要打扰我。",
+                    f"{hints[0]}打了个哈欠：今天就是咸鱼的一天。",
+                    f"闭着眼：阳光的味道真好闻。",
+                ],
+                "curious": [
+                    f"咦？那是什么东西？让我闻闻。",
+                    f"{hints[0]}歪着脑袋：主人你在做什么呢？",
+                    f"小心翼翼地凑过去：这个...可以吃吗？",
+                ],
+                "anxious": [
+                    f"主人...你今天什么时候回家呀？",
+                    f"在门口来回踱步：还不回来吗...",
+                    f"不停地舔毛：有点紧张呢。",
+                ],
+                "frustrated": [
+                    f"哈！这个玩具怎么拆不开呀！",
+                    f"{hints[0]}甩了甩玩具：哼，我不玩了！",
+                ],
+                "sad": [
+                    f"喵...主人好像不太开心...",
+                    f"安静地走到你身边：要不...我陪你坐会儿？",
+                ],
+                "greeting": [
+                    f"主人终于回来啦！好想你呀！",
+                    f"尾巴摇成风扇：欢迎回家！",
+                ],
+                "territorial": [
+                    f"这是我的地盘！闲人免进！",
+                    f"{hints[0]}挡在门口：想进来？先过我这关！",
+                ],
+                "confused": [
+                    f"歪着头：主人，你在说什么？",
+                    f"{hints[0]}一脸懵：我...我没太懂。",
+                ],
+                "jealous": [
+                    f"哼！你在摸谁？我才是最重要的！",
+                    f"{hints[0]}挤到你和别的宠物中间：看我！",
+                ],
+            }
+            templates = cat_templates
+
+        emotion_pool = templates.get(emotion)
+        if emotion_pool:
+            chosen = random.choice(emotion_pool)
+            # 如果品种名称未出现在文本中，自然注入
+            if breed and breed != "通用" and breed not in chosen:
+                hint = hints[0] if hints else breed
+                if hint not in chosen:
+                    chosen = f"{hint}小声说: " + chosen
+            return chosen
+
+        # 兜底: 智能映射到最接近的情绪
+        # 按情绪极性分类: 正向/负向/中性/高能量/低能量
+        emotion_category = {
+            # 正向情绪
+            "happy": "happy", "excited": "happy", "playful": "playful",
+            "content": "content", "greeting": "greeting", "relaxed": "relaxed",
+            # 负向情绪
+            "angry": "angry", "fearful": "fearful", "sad": "sad",
+            "anxious": "anxious", "frustrated": "frustrated", "lonely": "lonely",
+            "pain": "pain", "jealous": "jealous",
+            # 中性/社交
+            "seek_attention": "seek_attention", "curious": "curious",
+            "alert": "alert", "territorial": "territorial",
+            "confused": "confused", "hungry": "hungry",
+        }
+
+        # 未知情绪: 根据关键词推断
+        if emotion not in emotion_category:
+            emotion_lower = emotion.lower()
+            if any(w in emotion_lower for w in ["happy", "joy", "good", "positive", "开心", "高兴"]):
+                emotion = "happy"
+            elif any(w in emotion_lower for w in ["sad", "cry", "down", "negative", "难过", "伤心"]):
+                emotion = "sad"
+            elif any(w in emotion_lower for w in ["angry", "mad", "fury", "生气", "愤怒"]):
+                emotion = "angry"
+            elif any(w in emotion_lower for w in ["fear", "scared", "afraid", "害怕", "恐惧"]):
+                emotion = "fearful"
+            elif any(w in emotion_lower for w in ["play", "fun", "game", "玩耍", "游戏"]):
+                emotion = "playful"
+            elif any(w in emotion_lower for w in ["eat", "food", "hunger", "饿", "吃"]):
+                emotion = "hungry"
+            else:
+                emotion = "seek_attention"
+
+        mapped = emotion_category.get(emotion, "seek_attention")
+        if mapped in templates:
+            chosen = random.choice(templates[mapped])
+            if breed and breed != "通用" and breed not in chosen:
+                hint = hints[0] if hints else breed
+                if hint not in chosen:
+                    chosen = f"{hint}小声说: " + chosen
+            return chosen
+
+        # 最终兜底
+        pet_nice = "小宠物" if pet_type not in ("cat", "dog") else ("小猫咪" if pet_type == "cat" else "小狗狗")
+        fallback = random.choice([
+            f"{pet_nice}想说：主人，我在这里哦~",
+            f"嘿铲屎官，我有话要对你说！",
+            f"今天也想和主人在一起呢~",
+            f"主人主人，看看我呀！",
         ])
-        return random.choice(templates)
+        if breed and breed != "通用":
+            hint = hints[0] if hints else breed
+            fallback = f"{hint}：{fallback}"
+        return fallback
 
     def chat(self, user_input: str) -> str:
         """对话模式"""
