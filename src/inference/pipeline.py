@@ -1,7 +1,9 @@
 """
 推理 Pipeline: 完整的宠物声音翻译流水线
-宠物声音 → Whisper ASR → RAG 检索 → LLM 分析 → 生成回复
-人类语言 → LLM 意图分析 → 音频合成 → 宠物声音
+三层分类器架构:
+  Layer 1: LLMAcousticClassifier (LLM 声学特征分类, 首选)
+  Layer 2: PetSoundClassifier (声学特征 + 随机森林, 离线备选)
+  Layer 3: Whisper ASR (人类语音 fallback, 保底)
 """
 
 import os
@@ -15,7 +17,7 @@ from ..rag.retriever import PetRetriever
 from ..models.whisper_finetune import WhisperFineTuner, WhisperFineTuneConfig
 from ..models.llm_finetune import LLMFineTuner, LLMFineTuneConfig
 from ..models.audio_generation import AudioGenerator
-from ..models.pet_sound_classifier import PetSoundClassifier
+from ..models.pet_sound_classifier import PetSoundClassifier, LLMAcousticClassifier, FusionPetClassifier, detect_environment
 from ..agent.pet_agent import PetTranslationAgent
 from ..agent.tools import PetTools
 
@@ -44,7 +46,8 @@ class TranslationPipeline:
         self.llm = None
         self.rag_retriever = None
         self.audio_generator = None
-        self.pet_classifier = None
+        self.pet_classifier = None       # Layer 2: ML 分类器
+        self.llm_classifier = None       # Layer 1: LLM 声学分类器
         self.agent = None
         self._custom_embedding_model = embedding_model
 
@@ -128,13 +131,28 @@ class TranslationPipeline:
             print(f"  └─ ⚠️  音频生成器加载失败: {e}")
             self.audio_generator = None
 
-        # 4. 宠物声音分类器 (替代 Whisper 处理宠物声音)
-        print(f"  ┌─ 模块 4/4: 宠物声音分类器 (声学特征 + 随机森林)")
-        classifier_path = os.path.join(
-            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-            "checkpoints",
-            "pet_classifier",
-        )
+        # 4. 融合宠物声音分类器 (自动检测环境选择策略)
+        env_info = detect_environment()
+        strategy_desc = env_info["description"]
+        print(f"  ┌─ 模块 4/5: 融合宠物声音分类器")
+        print(f"  │  环境: {strategy_desc}")
+        try:
+            self.fusion_classifier = FusionPetClassifier(llm_model=self.llm)
+            self.llm_classifier = self.fusion_classifier  # 兼容旧代码引用
+            if self.llm_classifier.is_ready:
+                print(f"  └─ ✅ 融合分类器就绪 (策略: {env_info['strategy']})")
+            else:
+                print(f"  └─ ⚠️  融合分类器未就绪")
+        except Exception as e:
+            print(f"  └─ ⚠️  融合分类器初始化失败: {e}")
+            self.fusion_classifier = None
+            self.llm_classifier = None
+
+        # 5. Layer 2: 声学特征 + 随机森林分类器 (备选)
+        print(f"  ┌─ 模块 5/5: 声学特征 + 随机森林分类器 (Layer 2 - 备选)")
+        # pipeline.py 在 src/inference/ 下，需要往上 3 级到项目根目录
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        classifier_path = os.path.join(project_root, "checkpoints", "pet_classifier")
         if os.path.isdir(classifier_path):
             try:
                 self.pet_classifier = PetSoundClassifier(model_dir=classifier_path)
@@ -259,20 +277,43 @@ class TranslationPipeline:
         print(f"{'='*60}")
         print(f"  Step 1/3: 声音分析")
 
-        # 优先使用宠物声音分类器 (如果已就绪)
-        if self.pet_classifier and self.pet_classifier.is_ready:
-            print(f"    ↓ 使用: 宠物声音分类器 (声学特征 + 随机森林)")
+        # 融合分类器: FusionPetClassifier (自动选择策略)
+        if self.fusion_classifier and self.fusion_classifier.is_ready:
+            env_info = detect_environment()
+            strategy = env_info["strategy"]
+            print(f"    ↓ 使用: 融合分类器 (策略: {strategy})")
+            classification = self.fusion_classifier.classify(audio_path, pet_type)
+            emotion = classification["emotion"]
+            confidence = classification["confidence"]
+            description = classification["description"]
+            result["pet_classification"] = classification
+            result["whisper_transcription"] = description
+            result["emotion_confidence"] = confidence
+            method = classification.get("method", "fusion")
+            fusion_mode = classification.get("fusion_mode", "unknown")
+            reasoning = classification.get("llm_reasoning", "")
+            species_info = classification.get("species_detection", {})
+            print(f"    ↑ 情绪: {emotion} (置信度: {confidence:.2f}) [方法: {method}]")
+            if fusion_mode != "unknown":
+                print(f"    ↑ 融合模式: {fusion_mode}")
+            if species_info:
+                print(f"    ↑ 物种: {species_info.get('species', '?')} (置信度: {species_info.get('confidence', 0):.2f})")
+            if reasoning:
+                print(f"    ↑ 推理: {reasoning[:80]}")
+            print(f"    ↑ 描述: {description}")
+        elif self.pet_classifier and self.pet_classifier.is_ready:
+            print(f"    ↓ 使用: 声学特征 + 随机森林 (Layer 2 - 备选)")
             classification = self.pet_classifier.predict(audio_path)
             emotion = classification["emotion"]
             confidence = classification["confidence"]
             description = classification["description"]
             result["pet_classification"] = classification
-            result["whisper_transcription"] = description  # 用描述文本替代 Whisper 输出
+            result["whisper_transcription"] = description
             result["emotion_confidence"] = confidence
             print(f"    ↑ 情绪: {emotion} (置信度: {confidence:.2f})")
             print(f"    ↑ 描述: {description}")
         elif self.whisper:
-            print(f"    ↓ 使用: Whisper ASR (fallback)")
+            print(f"    ↓ 使用: Whisper ASR (Layer 3 - 保底)")
             whisper_result = self.whisper.inference(audio_path)
             result["whisper_transcription"] = whisper_result
             print(f"    ↑ Whisper 输出: '{whisper_result}'")
@@ -361,9 +402,30 @@ class TranslationPipeline:
         print(f"🕹️ 【LangChain Agent 编排层】执行: 宠物声音 → 人类声音 (声纹克隆)")
         print(f"{'='*60}")
 
-        # Step 1: 宠物声音 → 情绪分类
+        # Step 1: 宠物声音 → 情绪分类 (融合架构)
         print(f"  Step 1/3: 宠物声音情绪分类")
-        if self.pet_classifier and self.pet_classifier.is_ready:
+        if self.fusion_classifier and self.fusion_classifier.is_ready:
+            env_info = detect_environment()
+            print(f"    ↓ 使用: 融合分类器 (策略: {env_info['strategy']})")
+            classification = self.fusion_classifier.classify(audio_path, pet_type)
+            emotion = classification["emotion"]
+            confidence = classification["confidence"]
+            description = classification["description"]
+            result["emotion"] = emotion
+            result["emotion_confidence"] = confidence
+            result["description"] = description
+            result["pet_classification"] = classification
+            method = classification.get("method", "fusion")
+            fusion_mode = classification.get("fusion_mode", "unknown")
+            species_info = classification.get("species_detection", {})
+            print(f"    ↑ 情绪: {emotion} (置信度: {confidence:.2f}) [方法: {method}]")
+            if fusion_mode != "unknown":
+                print(f"    ↑ 融合模式: {fusion_mode}")
+            if species_info:
+                print(f"    ↑ 物种: {species_info.get('species', '?')} (置信度: {species_info.get('confidence', 0):.2f})")
+            print(f"    ↑ 中文描述: {description}")
+        elif self.pet_classifier and self.pet_classifier.is_ready:
+            print(f"    ↓ 使用: 声学特征 + 随机森林 (Layer 2)")
             classification = self.pet_classifier.predict(audio_path)
             emotion = classification["emotion"]
             confidence = classification["confidence"]
@@ -371,11 +433,10 @@ class TranslationPipeline:
             result["emotion"] = emotion
             result["emotion_confidence"] = confidence
             result["description"] = description
-            print(f"    ↓ 使用: 宠物声音分类器")
             print(f"    ↑ 情绪: {emotion} (置信度: {confidence:.2f})")
             print(f"    ↑ 中文描述: {description}")
         elif self.whisper:
-            print(f"    ↓ 使用: Whisper ASR (fallback)")
+            print(f"    ↓ 使用: Whisper ASR (Layer 3 - 保底)")
             whisper_text = self.whisper.inference(audio_path)
             result["whisper_text"] = whisper_text
             description = f"宠物发出了 '{whisper_text}' 的声音"
@@ -386,24 +447,42 @@ class TranslationPipeline:
             result["description"] = description
             print(f"    ↑ ⚠️  无可用模型")
 
-        # Step 2: LLM 生成拟人化描述 (更自然的人类语言)
+        # Step 2: LLM 生成拟人化描述 (可爱的人类语言)
         print(f"  Step 2/3: LLM 生成拟人化描述")
+        emotion = result.get('emotion', 'unknown')
+        description = result.get('description', '')
+        human_text = None
+
         if self.llm:
-            system_prompt = "你是一个宠物翻译专家。请将宠物的情绪/声音描述转化为自然、口语化的人类语言，让人能听懂宠物想表达什么。"
-            user_input = (
-                f"宠物类型: {pet_type}\n"
-                f"品种: {breed}\n"
-                f"情绪: {result.get('emotion', 'unknown')}\n"
-                f"描述: {result['description']}\n\n"
-                f"请将这句话转化为一句自然的人话，让人能听懂宠物的意思。"
+            try:
+                human_text = self.llm.generate_anthropomorphic(
+                    pet_type=pet_type,
+                    breed=breed,
+                    emotion=emotion,
+                    description=description,
+                )
+                if human_text:
+                    result["human_text"] = human_text
+                    print(f"    ↑ 拟人化文本: {human_text[:100]}")
+                else:
+                    print(f"    ⚠️  LLM 生成内容质量不佳，使用模板生成")
+            except Exception as e:
+                print(f"    ⚠️  LLM 生成失败: {e}")
+
+        # Fallback: 使用模板生成可爱的拟人化文本
+        if not human_text:
+            human_text = self._template_anthropomorphic(
+                pet_type=pet_type,
+                breed=breed,
+                emotion=emotion,
+                description=description,
             )
-            human_text = self.llm.inference(user_input, system_prompt)
             result["human_text"] = human_text
-            print(f"    ↑ 拟人化文本: {human_text[:100]}...")
-        else:
-            human_text = result["description"]
-            result["human_text"] = human_text
-            print(f"    ↑ LLM 未加载，使用原始描述")
+            print(f"    ↑ 模板生成: {human_text[:100]}")
+
+        # Log the actual pet_type being used
+        pet_names = {"cat": "猫咪", "dog": "狗狗", "bird": "鸟", "rabbit": "兔子"}
+        print(f"    ↑ 宠物类型: {pet_names.get(pet_type, pet_type)} | 品种: {breed} | 情绪: {emotion}")
 
         # Step 3: 文字 → 人类声音 (声纹克隆)
         print(f"  Step 3/3: 文字 → 人类声音 (目标声线: {target_voice})")
@@ -586,6 +665,93 @@ class TranslationPipeline:
 
         print(f"  {'─'*60}")
         return result
+
+    @staticmethod
+    def _template_anthropomorphic(
+        pet_type: str,
+        breed: str,
+        emotion: str,
+        description: str,
+    ) -> str:
+        """模板生成拟人化文本 (当 LLM 不可用或生成质量差时使用)"""
+
+        pet_cn = {"cat": "猫咪", "dog": "狗狗"}.get(pet_type, pet_type)
+
+        emotion_templates = {
+            "hungry": [
+                f"{breed}的{pet_cn}说：我肚子饿啦，快给我点吃的嘛~",
+                f"{pet_cn}拍拍你：铲屎官，我的小零食呢？",
+                f"{breed}的{pet_cn}用眼神杀告诉你：该投喂了！",
+            ],
+            "happy": [
+                f"{breed}的{pet_cn}开心得说：今天天气真好，一起玩嘛！",
+                f"{pet_cn}摇着尾巴：主人主人，我超级喜欢你！",
+                f"{breed}的{pet_cn}：喵~ 被你摸得好舒服呀~",
+            ],
+            "alert": [
+                f"{breed}的{pet_cn}警觉地说：那是什么声音？我去看看！",
+                f"{pet_cn}竖起耳朵：嘘~ 好像有情况！",
+                f"{breed}的{pet_cn}：我听到奇怪的声音，要保护你！",
+            ],
+            "seek_attention": [
+                f"{breed}的{pet_cn}蹭过来：别玩手机了，陪我玩嘛~",
+                f"{pet_cn}盯着你看了好久：铲屎官，快理我呀！",
+                f"{breed}的{pet_cn}：我在这儿呢，摸摸我！",
+            ],
+            "angry": [
+                f"{breed}的{pet_cn}生气了：哼！我不开心了！",
+                f"{pet_cn}低吼着：别碰我，我现在很生气！",
+                f"{breed}的{pet_cn}：再惹我就不理你了哦！",
+            ],
+            "fearful": [
+                f"{breed}的{pet_cn}害怕地躲起来：好可怕...保护我好不好？",
+                f"{pet_cn}颤抖着：我...我有点害怕，能抱抱我吗？",
+                f"{breed}的{pet_cn}：那个东西好吓人，我不要过去！",
+            ],
+            "content": [
+                f"{breed}的{pet_cn}满足地说：这样就好舒服呀~",
+                f"{pet_cn}发出呼噜声：嗯~ 这才是生活嘛。",
+                f"{breed}的{pet_cn}：我最喜欢这样安静的时光了。",
+            ],
+            "pain": [
+                f"{breed}的{pet_cn}痛苦地说：呜...我有点不舒服...",
+                f"{pet_cn}呻吟着：主人，我好像受伤了...",
+                f"{breed}的{pet_cn}：我好痛啊，带我去看医生好不好？",
+            ],
+            "lonely": [
+                f"{breed}的{pet_cn}孤独地说：你什么时候回来呀...",
+                f"{pet_cn}望着门口：一个人好无聊...",
+                f"{breed}的{pet_cn}：我在等你哦，不要离开我。",
+            ],
+            "excited": [
+                f"{breed}的{pet_cn}兴奋地跳起来：哇！有好玩的！",
+                f"{pet_cn}上蹿下跳：今天好开心呀！",
+                f"{breed}的{pet_cn}：主人主人，我们出去玩吧！",
+            ],
+            "playful": [
+                f"{breed}的{pet_cn}邀请你：来玩逗猫棒吧！",
+                f"{pet_cn}伸出爪子：陪我玩嘛~",
+                f"{breed}的{pet_cn}：猜猜看我能抓到逗猫棒吗？",
+            ],
+            "relaxed": [
+                f"{breed}的{pet_cn}慵懒地说：今天就想这样躺着~",
+                f"{pet_cn}眯着眼睛：阳光好舒服呀。",
+                f"{breed}的{pet_cn}：我觉得好安心，就这样吧。",
+            ],
+            "curious": [
+                f"{breed}的{pet_cn}好奇地看过去：那是什么？",
+                f"{pet_cn}歪着头：咦？这东西怎么玩？",
+                f"{breed}的{pet_cn}：我发现了新东西，来看看嘛！",
+            ],
+        }
+
+        import random
+        templates = emotion_templates.get(emotion, [
+            f"{breed}的{pet_cn}想说：主人，我在这里哦~",
+            f"{pet_cn}发出声音：嘿，铲屎官！",
+            f"{breed}的{pet_cn}：我有话要对你说呢。",
+        ])
+        return random.choice(templates)
 
     def chat(self, user_input: str) -> str:
         """对话模式"""
