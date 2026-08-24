@@ -11,7 +11,7 @@
 | 功能 | 方向 | 说明 |
 |------|------|------|
 | 宠物声音识别 | 宠物→人类 | Whisper 微调识别猫狗叫声，输出情绪标签+文字描述 |
-| 情绪意图解读 | 声音→语义 | LLM + RAG 分析宠物情绪(饥饿/开心/愤怒等 10 种) |
+| 情绪意图解读 | 声音→语义 | LLM + RAG 分析宠物情绪(饥饿/开心/愤怒等 20 种) |
 | 人类语言翻译 | 人类→宠物 | 将人类语句翻译为对应情绪的宠物叫声 |
 | 宠物行为咨询 | 问答 | 基于知识库回答宠物行为/声音相关问题 |
 | 对话模式 | 双向 | 多轮对话，支持上下文理解 |
@@ -705,12 +705,25 @@ checkpoints/llm_mps/
 
 推理时会自动查找 `./checkpoints/` 目录下最新的模型 (优先 `final/`，其次最新 `checkpoint-*/`)。
 
+**Embedding 模型自动选择**:
+- **Mac MPS / CPU**: 自动使用轻量模型 `BAAI/bge-small-zh-v1.5` (~23MB)
+- **GPU (CUDA)**: 自动使用高质量模型 `BAAI/bge-large-zh-v1.5` (~1.3GB)
+- 可通过 `--embedding-model` 自定义
+- 无需 Embedding 时使用 `--no-rag` 跳过 RAG
+
 ```bash
 # 查看可用模型
 python scripts/inference.py --list-models
 
 # 自动检测模型进行推理 (无需指定 --llm_adapter / --whisper_model)
 python scripts/inference.py --mode pet_to_text --audio ./data/raw/cat_sounds/test.wav
+
+# 跳过 RAG (无需 Embedding 模型，纯 LLM 分析)
+python scripts/inference.py --mode pet_to_text --audio ./data/raw/cat_sounds/test.wav --no-rag
+
+# 自定义 Embedding 模型
+python scripts/inference.py --mode pet_to_text --audio ./data/raw/cat_sounds/test.wav \
+    --embedding-model BAAI/bge-m3
 ```
 
 #### 宠物声音 → 人类语言
@@ -794,17 +807,99 @@ A: 按以下优先级解决：
    HF_ENDPOINT=https://hf-mirror.com huggingface-cli download openai/whisper-tiny
    ```
 
-**Q: 提示 "LLM 加载失败"？**
+**Q: 提示 "LLM 加载失败" 或 "加载基础模型失败"？**
 
-A: 类似处理：
-1. 连接网络后重试
-2. 使用已训练好的 adapter: `--llm_adapter ./checkpoints/llm_mps/final`
-3. 手动下载基础模型到本地缓存
+A: 现在会自动从 adapter 配置中读取基础模型名并尝试本地缓存。如果仍失败：
+1. **确认 adapter 目录存在**: `ls ./checkpoints/llm_mps/checkpoint-300/adapter_config.json`
+2. **手动下载基础模型到本地缓存** (adapter_config.json 中指定的模型):
+   ```bash
+   # 查看 adapter 使用的基础模型
+   cat ./checkpoints/llm_mps/checkpoint-300/adapter_config.json | grep base_model
+   
+   # 下载对应的基础模型 (例如 TinyLlama)
+   huggingface-cli download TinyLlama/TinyLlama-1.1B-Chat-v1.0
+   ```
+3. **使用已训练好的 adapter**: 自动检测已支持，或手动指定: `--llm_adapter ./checkpoints/llm_mps/final`
+
+**Q: 为什么推理时会尝试下载 Qwen 模型而不是训练时的 TinyLlama？**
+
+A: 之前的逻辑问题 — `LLMFineTuner` 在构造时先加载 `LLMFineTuneConfig` 中的基础模型 (默认 Qwen)，再加载 adapter。**已修复**: 现在有 adapter 时，构造函数直接从 `adapter_config.json` 读取实际使用的基础模型名 (如 `TinyLlama/TinyLlama-1.1B-Chat-v1.0`)，优先从本地缓存加载。
+
+**Q: 提示 "Embedding 模型加载失败" 或 "RAG 索引构建失败"？**
+
+A: Embedding 模型用于 RAG 知识库检索，加载失败时 RAG 会自动降级（不影响 LLM 推理）。解决方法:
+1. **下载轻量 Embedding 模型** (MPS/CPU 推荐，仅 23MB):
+   ```bash
+   huggingface-cli download BAAI/bge-small-zh-v1.5
+   ```
+2. **下载高质量 Embedding 模型** (GPU 推荐，1.3GB):
+   ```bash
+   huggingface-cli download BAAI/bge-large-zh-v1.5
+   ```
+3. **临时跳过 RAG**: 使用 `--no-rag` 参数:
+   ```bash
+   python scripts/inference.py --mode pet_to_text --audio ./data/raw/cat_sounds/test.wav --no-rag
+   ```
+4. **使用国内镜像加速下载**:
+   ```bash
+   HF_ENDPOINT=https://hf-mirror.com huggingface-cli download BAAI/bge-small-zh-v1.5
+   ```
 
 **Q: 如何查看当前可用的模型？**
 ```bash
 python scripts/inference.py --list-models
 ```
+
+**Q: 为什么 test.wav 会被 Whisper 识别成「嗚」？识别过程是怎样的？**
+
+A: 这是 Whisper 基础模型（`openai/whisper-tiny`，中文语音识别模型）对非人声信号的正常 fallback 行为。完整识别流程会打印 4 个步骤的详细日志：
+
+```
+🎙️  Whisper Step 1/4: 加载音频
+         文件: ./data/raw/cat_sounds/test.wav
+         重采样: 目标 16kHz, 单声道, 实际 16000Hz
+         样本数: 24000 个采样点
+         时长:   1.500 秒
+         峰值:   0.3931 (-8.1 dBFS)
+         RMS:    0.1222
+         过零率: 0.0637
+         主频率: 589.3 Hz (Top3: ['589', '572', '569'] Hz)
+         语音比例: 61.1% (RMS > 0.0393)
+
+🎛️  Whisper Step 2/4: Mel 特征提取 (WhisperProcessor)
+         特征形状: (1, 80, 3000) (Batch, 80 Mel 频段, 3000 帧)
+         特征范围: [-0.67, 1.33], μ=-0.650
+         输入设备: cpu → 模型设备: cpu
+
+🧩  Whisper Step 3/4: Token 生成 (generate)
+         语言: zh, 任务: transcribe
+         max_new_tokens: 200
+         生成 Token 数: 7 个
+         Token 序列前10: <|startoftranscript|> → <|zh|> → <|transcribe|> → <|notimestamps|> → åĹ → ļ → <|endoftext|>
+         平均置信度: 37.1% (min 9%, max 87%)
+
+📝  Whisper Step 4/4: Token → 文本 (batch_decode)
+         原始解码 (含特殊token): '<|startoftranscript|><|zh|><|transcribe|><|notimestamps|>嗚<|endoftext|>'
+         最终识别结果: '嗚'
+         (原因: 主频 589Hz 接近人类元音'ū/wū'基频; 非人声 → Whisper 匹配为最接近的中文发音 fallback)
+```
+
+**为什么是「嗚(wū)」而不是其他字？**
+
+| 因素 | 说明 |
+|------|------|
+| 音频主频 | 589Hz 正好落在人类元音「ū / wū (呜)」的第一共振峰区间 (500-700Hz) |
+| 时长 1.5s | Whisper 的中文 tokenizer 将这 1.5s 信号解码为**1个汉字**（而不是一串），因为信号的周期性比较规律，符合单一发音的特征 |
+| 低置信度 | 平均置信度仅 37.1%，最小甚至 9%，说明模型自己也不确定 — 它只是在所有候选中挑了一个「最不违和」的 |
+| Whisper 定位 | Whisper 是**人类语音识别**模型，没见过猫叫。当输入是「低频单音节非人声」时，会退化为选一个匹配基频的中文发音。「嗚 / 呜 / 呼」 是 500-600Hz 频段的常见候选 |
+
+**如何改进？**
+1. **用真实猫叫训练 Whisper**（`scripts/train_whisper.py`），微调后模型会把此类音频识别为「喵叫」「短促呼噜声」等类别描述，而不是乱猜中文。
+2. **采集真实宠物录音**替换 test.wav：
+   ```bash
+   # 用 ffmpeg 录制 5 秒真实猫叫
+   ffmpeg -f avfoundation -i ":0" -t 5 ./data/raw/cat_sounds/my_cat.wav -ar 16000 -ac 1
+   ```
 
 ---
 
@@ -845,14 +940,39 @@ python scripts/inference.py --list-models
 
 ### RAG 知识库构建
 
-**知识库内容**:
-- 10 种情绪 × 2 种宠物 = 20+ 条核心知识
+**知识库内容 (55 条内置知识)**:
+- 20 种情绪 × 2 种宠物 (猫 27 条 + 狗 28 条)
 - 声音描述、情绪含义、情境分析、建议措施
-- 品种特定知识(如英短叫声特征、哈士奇嚎叫)
+- 19 个品种特定知识 (英短、缅因、暹罗、孟加拉豹猫、哈士奇等)
+
+**情绪分布 (20 种)**:
+| 情绪 | 数量 | 说明 |
+|------|------|------|
+| alert | 10 | 警戒/发现猎物 |
+| seek_attention | 5 | 寻求关注 |
+| hungry | 4 | 饥饿 |
+| happy | 4 | 愉悦/满足 |
+| angry | 3 | 愤怒/威胁 |
+| content | 3 | 满足/舒适 |
+| fear | 2 | 恐惧/不安 |
+| pain | 2 | 疼痛/不适 |
+| curious | 2 | 好奇/探索 |
+| lonely | 2 | 孤独/寂寞 |
+| anxious | 2 | 焦虑/紧张 |
+| excited | 2 | 兴奋/期待 |
+| frustrated | 2 | 挫败/不满 |
+| relaxed | 2 | 放松/信赖 |
+| territorial | 2 | 领地/宣示 |
+| greeting | 2 | 问候/迎接 |
+| confused | 2 | 困惑/犹豫 |
+| jealous | 2 | 嫉妒/争宠 |
+| playful | 1 | 玩耍/邀请 |
+| sad | 1 | 悲伤/失落 |
 
 **检索方式**: 
-- Embedding: BAAI/bge-large-zh-v1.5
-- 向量库: ChromaDB
+- Embedding: BAAI/bge-small-zh-v1.5 (MPS/CPU) / BAAI/bge-large-zh-v1.5 (GPU)
+- 向量维度: 512 维
+- 向量库: ChromaDB (持久化存储)
 - 混合检索: 语义检索 + 元数据过滤
 
 ### 训练硬件要求

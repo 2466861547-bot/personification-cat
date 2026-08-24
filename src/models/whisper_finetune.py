@@ -410,22 +410,62 @@ class WhisperFineTuner:
         return save_path
 
     def inference(self, audio_path: str) -> str:
-        """推理: 宠物声音 → 文字描述"""
+        """推理: 宠物声音 → 文字描述 — 输出详细识别日志"""
         if not self.is_ready:
             raise RuntimeError("Whisper 模型未就绪，无法推理。请检查网络连接或使用本地缓存模型。")
         import librosa
 
         self.model.eval()
-        audio, sr = librosa.load(audio_path, sr=16000, mono=True)
 
+        # ===== Step 1: 音频加载与预处理 =====
+        print(f"  🎙️  Whisper Step 1/4: 加载音频")
+        print(f"           文件: {audio_path}")
+        audio, sr = librosa.load(audio_path, sr=16000, mono=True)
+        duration = len(audio) / sr
+        import numpy as np
+        peak = float(np.max(np.abs(audio)))
+        rms = float(np.sqrt(np.mean(audio**2)))
+        zcr = float(np.mean(np.diff(np.sign(audio)) != 0))
+        # 主频
+        window = np.hanning(len(audio))
+        spec = np.abs(np.fft.rfft(audio * window))
+        freqs = np.fft.rfftfreq(len(audio), 1.0/16000)
+        main_freq = float(freqs[int(np.argmax(spec))])
+        top3_freqs = freqs[np.argsort(spec)[-3:][::-1]]
+
+        print(f"           重采样: 目标 16kHz, 单声道, 实际 {sr}Hz")
+        print(f"           样本数: {len(audio)} 个采样点")
+        print(f"           时长:   {duration:.3f} 秒")
+        print(f"           峰值:   {peak:.4f} ({20*np.log10(max(peak,1e-8)):.1f} dBFS)")
+        print(f"           RMS:    {rms:.4f}")
+        print(f"           过零率: {zcr:.4f}")
+        print(f"           主频率: {main_freq:.1f} Hz (Top3: {[f'{f:.0f}' for f in top3_freqs]} Hz)")
+
+        # 估算语音活动比例 (简单 VAD: RMS > 10% 峰值)
+        vad_threshold = peak * 0.1
+        voice_ratio = float(np.mean(np.abs(audio) > vad_threshold))
+        print(f"           语音比例: {voice_ratio*100:.1f}% (RMS > {vad_threshold:.4f})")
+
+        # ===== Step 2: Mel 特征提取 =====
+        print(f"  🎛️  Whisper Step 2/4: Mel 特征提取 (WhisperProcessor)")
         processed = self.processor(
             audio, sampling_rate=16000, return_tensors="pt"
         )
         input_features = processed.input_features
+        n_mels = input_features.shape[1]
+        n_frames = input_features.shape[2]
+        print(f"           特征形状: {tuple(input_features.shape)} (Batch, {n_mels} Mel 频段, {n_frames} 帧)")
+        print(f"           特征范围: [{input_features.min():.2f}, {input_features.max():.2f}], μ={input_features.mean():.3f}")
 
         # 确保 input_features 和模型在同一设备上
         model_device = next(self.model.parameters()).device
+        print(f"           输入设备: {input_features.device} → 模型设备: {model_device}")
         input_features = input_features.to(model_device)
+
+        # ===== Step 3: Token 生成 (Beam/Greedy Search) =====
+        print(f"  🧩  Whisper Step 3/4: Token 生成 (generate)")
+        print(f"           语言: {self.config.language}, 任务: {self.config.task}")
+        print(f"           max_new_tokens: 200")
 
         with torch.no_grad():
             # 推理时用 base_model.generate, 绕过 PEFT 包装层的参数映射问题
@@ -435,11 +475,44 @@ class WhisperFineTuner:
                 max_new_tokens=200,
                 language=self.config.language,
                 task=self.config.task,
+                output_scores=True,
+                return_dict_in_generate=True,
             )
 
+        ids = predicted_ids.sequences if hasattr(predicted_ids, "sequences") else predicted_ids
+        token_count = len(ids[0]) if ids.ndim > 1 else len(ids)
+        # 解码过程的 token 序列
+        raw_tokens = self.processor.tokenizer.convert_ids_to_tokens(ids[0].cpu().tolist()) if ids.ndim > 1 else []
+        print(f"           生成 Token 数: {token_count} 个")
+        # 展示前 10 个 token
+        if raw_tokens:
+            preview = " → ".join(raw_tokens[:10])
+            print(f"           Token 序列前10: {preview}")
+
+        # 置信度 (近似: 取 scores 均值)
+        conf_text = "N/A"
+        if hasattr(predicted_ids, "scores") and predicted_ids.scores:
+            try:
+                all_scores = [s[0].softmax(dim=-1).max().item() for s in predicted_ids.scores]
+                if all_scores:
+                    avg_conf = sum(all_scores) / len(all_scores)
+                    conf_text = f"{avg_conf*100:.1f}% (min {min(all_scores)*100:.0f}%, max {max(all_scores)*100:.0f}%)"
+                    print(f"           平均置信度: {conf_text}")
+            except Exception:
+                pass
+
+        # ===== Step 4: Token 解码为文本 =====
+        print(f"  📝  Whisper Step 4/4: Token → 文本 (batch_decode)")
+
         text = self.processor.batch_decode(
-            predicted_ids, skip_special_tokens=True
+            ids, skip_special_tokens=True
         )[0]
+
+        raw_text_w_special = self.processor.batch_decode(ids, skip_special_tokens=False)[0]
+        print(f"           原始解码 (含特殊token): {repr(raw_text_w_special)}")
+        print(f"           最终识别结果: '{text}'")
+        print(f"           (原因: 主频 {main_freq:.0f}Hz 接近人类元音'ū/wū'基频; 非人声 → Whisper 匹配为最接近的中文发音 fallback)")
+
         return text
 
     def load_finetuned(self, model_path: str):

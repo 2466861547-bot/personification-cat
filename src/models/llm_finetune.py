@@ -403,12 +403,131 @@ class SFTDataset(torch.utils.data.Dataset):
 class LLMFineTuner:
     """LLM LoRA 微调器"""
 
-    def __init__(self, config: LLMFineTuneConfig):
+    def __init__(self, config: LLMFineTuneConfig, adapter_path: Optional[str] = None):
         self.config = config
         self.tokenizer = None
         self.model = None
         self.is_ready = False
-        self._load_model()
+        self.device = None
+        self._adapter_path = adapter_path
+
+        if adapter_path and os.path.exists(adapter_path):
+            self._load_from_adapter(adapter_path)
+        else:
+            self._load_model()
+
+    def _load_from_adapter(self, adapter_path: str):
+        """从已训练的 adapter 加载 - 优先使用本地缓存，不下载"""
+        device_info = detect_device()
+        self.device = device_info["device"]
+        from peft import PeftModel
+
+        # 读取 adapter_config.json 获取基础模型名称
+        adapter_config_path = os.path.join(adapter_path, "adapter_config.json")
+        base_model_name = self.config.base_model
+        if os.path.exists(adapter_config_path):
+            try:
+                with open(adapter_config_path) as f:
+                    adapter_cfg = json.load(f)
+                base_model_name = adapter_cfg.get("base_model_name_or_path", base_model_name)
+                print(f"📋 adapter 配置: base_model={base_model_name}, rank={adapter_cfg.get('r')}, lora_alpha={adapter_cfg.get('lora_alpha')}")
+            except Exception:
+                pass
+
+        print(f"📦 加载已训练 adapter: {adapter_path}")
+        print(f"   基础模型: {base_model_name}")
+        print(f"   设备: {self.device} ({device_info['device_name']})")
+
+        # 选择 dtype
+        if self.device == "cuda" and self.config.bf16:
+            torch_dtype = torch.bfloat16
+        elif self.device == "mps":
+            torch_dtype = torch.float16
+        else:
+            torch_dtype = torch.float32
+
+        # 尝试加载 tokenizer: 优先从 adapter 目录，其次从基础模型
+        tokenizer_path = adapter_path
+        if not os.path.exists(os.path.join(tokenizer_path, "tokenizer.json")):
+            tokenizer_path = base_model_name
+
+        # 尝试加载基础模型 (优先本地缓存)
+        model = None
+        last_error = None
+
+        # 策略 1: 尝试本地缓存 (离线模式)
+        print("   尝试从本地缓存加载基础模型...")
+        os.environ["HF_HUB_OFFLINE"] = "1"
+        os.environ["TRANSFORMERS_OFFLINE"] = "1"
+        try:
+            self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+            model = AutoModelForCausalLM.from_pretrained(
+                base_model_name, torch_dtype=torch_dtype, trust_remote_code=True
+            )
+            print(f"   ✅ 从本地缓存加载成功")
+        except Exception as e:
+            last_error = e
+            model = None
+
+        # 策略 2: 尝试从 adapter 目录直接加载 (如果是合并后的模型)
+        if model is None:
+            config_path = os.path.join(adapter_path, "config.json")
+            if os.path.exists(config_path):
+                try:
+                    print("   尝试从 adapter 目录直接加载模型 (可能是合并后的模型)...")
+                    self.tokenizer = AutoTokenizer.from_pretrained(adapter_path, trust_remote_code=True)
+                    model = AutoModelForCausalLM.from_pretrained(
+                        adapter_path, torch_dtype=torch_dtype, trust_remote_code=True
+                    )
+                    print(f"   ✅ 从 adapter 目录直接加载成功")
+                except Exception:
+                    pass
+
+        # 策略 3: 恢复在线模式，尝试下载
+        if model is None:
+            print("   ⚠️  本地缓存未找到，尝试在线下载基础模型...")
+            os.environ["HF_HUB_OFFLINE"] = "0"
+            os.environ["TRANSFORMERS_OFFLINE"] = "0"
+            try:
+                if self.tokenizer is None:
+                    self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+                model = AutoModelForCausalLM.from_pretrained(
+                    base_model_name, torch_dtype=torch_dtype, trust_remote_code=True
+                )
+                print(f"   ✅ 在线下载成功并加载")
+            except Exception as e:
+                raise RuntimeError(
+                    f"无法加载基础模型 {base_model_name}\n"
+                    f"   本地缓存未找到，在线下载也失败。\n"
+                    f"   解决方法:\n"
+                    f"   1. 连接网络后重试\n"
+                    f"   2. 手动下载基础模型到本地缓存: huggingface-cli download {base_model_name}\n"
+                    f"   3. 使用已合并的 adapter 目录 (包含 config.json 和 model.safetensors)"
+                )
+
+        if self.tokenizer is None:
+            self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_path, trust_remote_code=True)
+
+        # 加载 LoRA adapter
+        if model is not None and not os.path.exists(os.path.join(adapter_path, "config.json")):
+            # 如果不是合并后的模型，加载 LoRA adapter 并合并
+            try:
+                model = PeftModel.from_pretrained(model, adapter_path)
+                model = model.merge_and_unload()
+                print(f"   ✅ LoRA adapter 加载并合并完成")
+            except Exception:
+                pass
+
+        # 放到正确设备
+        if model is not None:
+            if self.device == "cuda":
+                model = model.cuda()
+            elif self.device == "mps":
+                model = model.to("mps")
+
+        self.model = model
+        self.is_ready = model is not None
+        print(f"✅ 已加载微调模型: {adapter_path}")
 
     def _load_model(self):
         """加载基础模型 - 自动适配设备 + 网络检测"""
