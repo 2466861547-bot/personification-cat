@@ -939,12 +939,16 @@ class LLMFineTuner:
             inputs = {k: v.to("mps") for k, v in inputs.items()}
 
         with torch.no_grad():
+            # 清除 generation_config 中的 max_length，避免与 max_new_tokens 冲突
+            if hasattr(self.model, "generation_config") and self.model.generation_config is not None:
+                self.model.generation_config.max_length = None
             output_ids = self.model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
                 temperature=0.3,
                 top_p=0.9,
                 do_sample=True,
+                pad_token_id=self.tokenizer.eos_token_id,
             )
 
         response = self.tokenizer.decode(

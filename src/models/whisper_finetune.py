@@ -468,8 +468,16 @@ class WhisperFineTuner:
         print(f"           max_new_tokens: 200")
 
         with torch.no_grad():
-            # 推理时用 base_model.generate, 绕过 PEFT 包装层的参数映射问题
-            gen_model = self.model.base_model
+            # 如果是 PEFT 包装过的模型: 必须用 base_model.generate
+            # 如果是直接加载的原始模型 (load_finetuned 时 from_pretrained WhisperForConditionalGeneration):
+            #   直接调用 self.model.generate，否则 "WhisperModel has no attr generate"
+            if hasattr(self.model, "base_model"):
+                gen_model = self.model.base_model
+            else:
+                gen_model = self.model
+            # 清除 generation_config 中的 max_length，避免与 max_new_tokens 冲突
+            if hasattr(gen_model, "generation_config") and gen_model.generation_config is not None:
+                gen_model.generation_config.max_length = None
             predicted_ids = gen_model.generate(
                 input_features=input_features,
                 max_new_tokens=200,
@@ -516,16 +524,55 @@ class WhisperFineTuner:
         return text
 
     def load_finetuned(self, model_path: str):
-        """加载已微调的模型"""
-        self.processor = WhisperProcessor.from_pretrained(model_path)
-        self.model = WhisperForConditionalGeneration.from_pretrained(
-            model_path,
-            torch_dtype=torch.float16 if self.config.fp16 else torch.float32,
-        )
-        # 确保模型在正确的设备上 (CPU 训练后的模型保持在 CPU)
-        if self.device == "cpu":
-            self.model = self.model.cpu()
-        elif torch.cuda.is_available():
-            self.model = self.model.cuda()
-        self.is_ready = True
-        print(f"✅ 已加载微调模型: {model_path}")
+        """加载已微调的模型 (优先使用 PeftModel.from_pretrained 加载 adapter)"""
+        adapter_cfg_p = os.path.join(model_path, "adapter_config.json")
+        # 优先尝试从本地目录加载 processor/tokenizer
+        if os.path.exists(os.path.join(model_path, "tokenizer.json")) or \
+           os.path.exists(os.path.join(model_path, "preprocessor_config.json")):
+            try:
+                self.processor = WhisperProcessor.from_pretrained(model_path)
+                print(f"   ✅ Processor 加载自微调目录")
+            except Exception:
+                self.processor = WhisperProcessor.from_pretrained(self.config.model_name)
+        else:
+            self.processor = WhisperProcessor.from_pretrained(self.config.model_name)
+
+        load_ok = False
+        # ---- 情况 1: model_path 含 adapter_config.json => 这是一个 LoRA adapter ----
+        if os.path.exists(adapter_cfg_p):
+            try:
+                from peft import PeftModel
+                # 先加载基础模型 (whisper-tiny，优先从本地缓存)
+                if self.model is None:
+                    self.model = WhisperForConditionalGeneration.from_pretrained(
+                        self.config.model_name,
+                        torch_dtype=torch.float32,
+                    )
+                # 套上 adapter
+                self.model = PeftModel.from_pretrained(self.model, model_path)
+                load_ok = True
+                print(f"✅ PeftModel 加载 adapter: {model_path}")
+            except Exception as e_peft:
+                print(f"   ⚠️  PeftModel 加载失败: {e_peft}")
+
+        # ---- 情况 2: model_path 里直接有 config.json (合并后的完整模型) ----
+        if not load_ok:
+            try:
+                dtype = torch.float16 if self.config.fp16 else torch.float32
+                self.model = WhisperForConditionalGeneration.from_pretrained(
+                    model_path, torch_dtype=dtype,
+                )
+                load_ok = True
+                print(f"✅ 从 {model_path} 直接加载完整 WhisperForConditionalGeneration")
+            except Exception as e_merge:
+                print(f"   ⚠️  完整模型加载失败: {e_merge}")
+
+        # 确保设备正确
+        if load_ok:
+            if getattr(self, "device", None) == "cpu":
+                self.model = self.model.cpu()
+            elif torch.cuda.is_available():
+                self.model = self.model.cuda()
+            self.is_ready = True
+        else:
+            print(f"   ❌ 无法加载微调模型 {model_path}")

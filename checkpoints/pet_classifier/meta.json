@@ -1,0 +1,27 @@
+{
+  "emotion_labels": [
+    "alert",
+    "seek_attention",
+    "hungry",
+    "happy",
+    "angry",
+    "fearful",
+    "content",
+    "pain",
+    "curious",
+    "lonely",
+    "anxious",
+    "excited",
+    "frustrated",
+    "relaxed",
+    "territorial",
+    "greeting",
+    "confused",
+    "jealous",
+    "sad",
+    "playful"
+  ],
+  "n_estimators": 200,
+  "n_samples": 25,
+  "feature_dim": 40
+}

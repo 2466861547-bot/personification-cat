@@ -1,9 +1,11 @@
 """
-推理脚本: 端到端宠物翻译
+推理脚本: 端到端宠物翻译 + 声纹克隆
 支持自动检测 LLM / Whisper 最新 checkpoint / final
 用法:
   python scripts/inference.py --mode pet_to_text --audio ./data/raw/cat_sounds/test.wav
   python scripts/inference.py --mode text_to_pet --text "过来吃饭" --pet cat
+  python scripts/inference.py --mode human_to_human --audio ./input/voice.wav --target-voice "林志玲"
+  python scripts/inference.py --mode human_to_pet --audio ./input/voice.wav --pet cat
   python scripts/inference.py --mode chat
 
 自动检测:
@@ -18,18 +20,25 @@ import argparse
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from src.inference.pipeline import TranslationPipeline
+from src.models.audio_generation import AudioGenerator, HUMAN_VOICE_PRESETS
+
+
+def list_available_voices():
+    """列出所有可用的人类声线预设"""
+    print("\n" + "=" * 50)
+    print("🎤 可用的人类声线预设")
+    print("=" * 50)
+    for name, preset in HUMAN_VOICE_PRESETS.items():
+        if name == "default":
+            print(f"  (默认) {name}: {preset}")
+        else:
+            print(f"  ✅ {name}: {preset}")
+    print("=" * 50)
+    print("提示: 你也可以传入自定义声纹文件 (.json/.npz) 作为 --target-voice 参数")
+    print("=" * 50 + "\n")
 
 
 def find_latest_adapter(checkpoints_dir: str, model_prefix: str) -> str:
-    """查找 checkpoints 目录下最新的 adapter (优先 final, 其次最新 checkpoint)
-
-    Args:
-        checkpoints_dir: checkpoints 根目录 (如 ./checkpoints)
-        model_prefix: 模型前缀 (如 'llm' 或 'whisper')
-
-    Returns:
-        最新 adapter 路径，未找到返回空字符串
-    """
     candidates = []
 
     # 遍历所有匹配的模型目录
@@ -80,14 +89,18 @@ def auto_detect_models():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="宠物翻译推理")
+    parser = argparse.ArgumentParser(description="宠物翻译推理 + 声纹克隆")
     parser.add_argument("--mode", required=False,
-                        choices=["pet_to_text", "text_to_pet", "chat"],
+                        choices=["pet_to_text", "text_to_pet", "human_to_human", "human_to_pet", "pet_to_human_voice", "chat"],
                         help="运行模式")
-    parser.add_argument("--audio", default="", help="宠物声音文件路径")
+    parser.add_argument("--audio", default="", help="音频文件路径 (宠物或人类声音)")
     parser.add_argument("--text", default="", help="人类语言文本")
     parser.add_argument("--pet", default="cat", choices=["cat", "dog"], help="宠物类型")
     parser.add_argument("--breed", default="通用", help="品种")
+    parser.add_argument("--target-voice", default="default",
+                        help="目标人类声线 (如 '林志玲', '檀健次', '温柔女声', '磁性男声') 或自定义声纹文件 (.json/.npz)")
+    parser.add_argument("--list-voices", action="store_true",
+                        help="列出所有可用的人类声线预设")
     parser.add_argument("--output", default="", help="输出音频路径")
     parser.add_argument("--whisper_model", default="", help="Whisper 微调模型路径 (不指定则自动检测)")
     parser.add_argument("--llm_adapter", default="", help="LLM LoRA adapter 路径 (不指定则自动检测)")
@@ -116,13 +129,20 @@ def main():
         print("=" * 50 + "\n")
         return
 
+    if args.list_voices:
+        list_available_voices()
+        return
+
     if not args.mode:
-        parser.error("--mode is required (choices: pet_to_text, text_to_pet, chat) or use --list-models")
+        parser.error("--mode is required (choices: pet_to_text, text_to_pet, human_to_human, human_to_pet, pet_to_human_voice, chat) or use --list-models / --list-voices")
 
     # ============ 用户交互层开始 ============
     mode_names = {
         "pet_to_text": "宠物声音 → 人类语言 (声音输入)",
         "text_to_pet": "人类语言 → 宠物声音 (文字输入)",
+        "human_to_human": "人类声音 → 定制人类声音 (声纹克隆)",
+        "human_to_pet": "人类声音 → 宠物声音 (声音输入)",
+        "pet_to_human_voice": "宠物声音 → 人类声音 (声纹克隆)",
         "chat": "宠物翻译对话 (对话模式)",
     }
     print("\n" + "=" * 60)
@@ -138,6 +158,22 @@ def main():
         print(f"  📥 文字输入模式")
         print(f"     输入文本: '{args.text}'")
         print(f"     目标宠物: {args.pet}")
+        print(f"     输出路径: {args.output or './output/'}")
+    elif args.mode == "human_to_human":
+        print(f"  📥 人类声音输入 → 声纹克隆输出")
+        print(f"     输入音频: {args.audio}")
+        print(f"     目标声线: {args.target_voice}")
+        print(f"     输出路径: {args.output or './output/'}")
+    elif args.mode == "human_to_pet":
+        print(f"  📥 人类声音输入 → 宠物声音输出")
+        print(f"     输入音频: {args.audio}")
+        print(f"     目标宠物: {args.pet}")
+        print(f"     输出路径: {args.output or './output/'}")
+    elif args.mode == "pet_to_human_voice":
+        print(f"  📥 宠物声音输入 → 人类声音 (声纹克隆) 输出")
+        print(f"     输入音频: {args.audio}")
+        print(f"     宠物类型: {args.pet}")
+        print(f"     目标声线: {args.target_voice}")
         print(f"     输出路径: {args.output or './output/'}")
     elif args.mode == "chat":
         print(f"  💬 对话模式")
@@ -220,6 +256,72 @@ def main():
         print(f"状态: {result.get('status')}")
         if result.get("output_path"):
             print(f"输出音频: {result.get('output_path')}")
+
+    elif args.mode == "human_to_human":
+        # 人类声音 → 人类声音 (声纹克隆)
+        result = pipeline.human_sound_to_human_sound(
+            audio_path=args.audio,
+            target_voice=args.target_voice,
+            output_path=args.output,
+        )
+        print("\n" + "=" * 50)
+        print("声纹克隆结果")
+        print("=" * 50)
+        print(f"输入音频: {result.get('input_audio')}")
+        print(f"识别文本: {result.get('recognized_text')}")
+        if result.get("llm_analysis"):
+            print(f"LLM 分析: {result.get('llm_analysis')[:150]}...")
+        print(f"目标声线: {result.get('target_voice')}")
+        print(f"状态: {result.get('status')}")
+        if result.get("output_path"):
+            print(f"输出音频: {result.get('output_path')}")
+        if result.get("note"):
+            print(f"说明: {result.get('note')}")
+
+    elif args.mode == "human_to_pet":
+        # 人类声音 → 宠物声音
+        result = pipeline.human_sound_to_pet_sound(
+            audio_path=args.audio,
+            target_pet=args.pet,
+            output_path=args.output,
+        )
+        print("\n" + "=" * 50)
+        print("人类声音 → 宠物声音转换结果")
+        print("=" * 50)
+        print(f"输入音频: {result.get('input_audio')}")
+        print(f"识别文本: {result.get('recognized_text')}")
+        print(f"目标宠物: {result.get('target_pet')}")
+        print(f"状态: {result.get('status')}")
+        if result.get("output_path"):
+            print(f"输出音频: {result.get('output_path')}")
+        if result.get("note"):
+            print(f"说明: {result.get('note')}")
+
+    elif args.mode == "pet_to_human_voice":
+        # 宠物声音 → 人类声音 (声纹克隆)
+        result = pipeline.pet_sound_to_human_sound(
+            audio_path=args.audio,
+            target_voice=args.target_voice,
+            pet_type=args.pet,
+            breed=args.breed,
+            output_path=args.output,
+        )
+        print("\n" + "=" * 50)
+        print("宠物声音 → 人类声音 (声纹克隆) 结果")
+        print("=" * 50)
+        print(f"输入音频: {result.get('input_audio')}")
+        if result.get("emotion"):
+            print(f"情绪识别: {result.get('emotion')} (置信度: {result.get('emotion_confidence', 0):.2f})")
+        if result.get("description"):
+            print(f"情绪描述: {result.get('description')}")
+        if result.get("human_text"):
+            print(f"拟人化文本: {result.get('human_text')[:150]}...")
+        print(f"目标声线: {result.get('target_voice')}")
+        print(f"状态: {result.get('status')}")
+        if result.get("output_path"):
+            print(f"输出音频: {result.get('output_path')}")
+        if result.get("note"):
+            print(f"说明: {result.get('note')}")
 
     elif args.mode == "chat":
         # 对话模式

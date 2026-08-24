@@ -1,0 +1,1724 @@
+{
+  "timestamp": "2026-08-24 14:33:59",
+  "discovered_models": {
+    "llm": [
+      {
+        "path": "/Users/apple/Downloads/ai/personification-cat/checkpoints/llm_mps/checkpoint-300",
+        "base": "tinyllama/tinyllama-1.1b-chat-v1.0",
+        "name": "llm_mps/checkpoint-300"
+      },
+      {
+        "path": "/Users/apple/Downloads/ai/personification-cat/checkpoints/llm_mps/checkpoint-250",
+        "base": "tinyllama/tinyllama-1.1b-chat-v1.0",
+        "name": "llm_mps/checkpoint-250"
+      },
+      {
+        "path": "/Users/apple/Downloads/ai/personification-cat/checkpoints/llm_mps/checkpoint-200",
+        "base": "tinyllama/tinyllama-1.1b-chat-v1.0",
+        "name": "llm_mps/checkpoint-200"
+      }
+    ],
+    "whisper": [
+      {
+        "path": "/Users/apple/Downloads/ai/personification-cat/checkpoints/whisper/final",
+        "base": "openai/whisper-tiny",
+        "name": "final"
+      },
+      {
+        "path": "/Users/apple/Downloads/ai/personification-cat/checkpoints/whisper/checkpoint-315",
+        "base": "openai/whisper-tiny",
+        "name": "checkpoint-315"
+      }
+    ]
+  },
+  "whisper_eval": {
+    "model_path": "/Users/apple/Downloads/ai/personification-cat/checkpoints/whisper/final",
+    "base_model": "openai/whisper-tiny",
+    "training_state": null,
+    "total_samples": 22,
+    "unique_texts": 16,
+    "top_texts": [
+      [
+        "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        3
+      ],
+      [
+        "你",
+        3
+      ],
+      [
+        "啊",
+        2
+      ],
+      [
+        "嗚嗚嗚嗚",
+        2
+      ],
+      [
+        "咱们快快快",
+        1
+      ],
+      [
+        "小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伴伴们的小伴伴伴们的小伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴�",
+        1
+      ],
+      [
+        "走走走",
+        1
+      ],
+      [
+        "FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        1
+      ]
+    ],
+    "empty_outputs": 0,
+    "fallback_outputs": 3,
+    "top1_hit": 2,
+    "top3_hit": 6,
+    "per_emotion": {
+      "alert": {
+        "n": 2,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "angry": {
+        "n": 2,
+        "top1": 0,
+        "top3": 2,
+        "top1_acc": 0.0,
+        "top3_acc": 1.0
+      },
+      "anxious": {
+        "n": 2,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "content": {
+        "n": 1,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "excited": {
+        "n": 2,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "fear": {
+        "n": 2,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "frustrated": {
+        "n": 1,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "happy": {
+        "n": 2,
+        "top1": 0,
+        "top3": 2,
+        "top1_acc": 0.0,
+        "top3_acc": 1.0
+      },
+      "hungry": {
+        "n": 2,
+        "top1": 2,
+        "top3": 2,
+        "top1_acc": 1.0,
+        "top3_acc": 1.0
+      },
+      "lonely": {
+        "n": 1,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "pain": {
+        "n": 2,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "greeting": {
+        "n": 1,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "playful": {
+        "n": 1,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      },
+      "territorial": {
+        "n": 1,
+        "top1": 0,
+        "top3": 0,
+        "top1_acc": 0.0,
+        "top3_acc": 0.0
+      }
+    },
+    "samples": [
+      {
+        "idx": 1,
+        "pet": "cat",
+        "scene": "alert bird watching",
+        "emotion": "alert(警惕)",
+        "whisper_text": "咱们快快快",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 2,
+        "pet": "cat",
+        "scene": "angry hissing",
+        "emotion": "angry(愤怒)",
+        "whisper_text": "啊",
+        "is_empty": false,
+        "is_fallback": true,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": true
+      },
+      {
+        "idx": 3,
+        "pet": "cat",
+        "scene": "anxious vet visit",
+        "emotion": "anxious(焦虑)",
+        "whisper_text": "嗚嗚嗚嗚",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 4,
+        "pet": "cat",
+        "scene": "content blanket",
+        "emotion": "content(满足)",
+        "whisper_text": "小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伴伴们的小伴伴伴们的小伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴�",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 5,
+        "pet": "cat",
+        "scene": "excited treat time",
+        "emotion": "excited(兴奋)",
+        "whisper_text": "走走走",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 6,
+        "pet": "cat",
+        "scene": "fear shaky",
+        "emotion": "fear(恐惧)",
+        "whisper_text": "FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 7,
+        "pet": "cat",
+        "scene": "frustrated door closed",
+        "emotion": "frustrated(挫败)",
+        "whisper_text": "嗯",
+        "is_empty": false,
+        "is_fallback": true,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 8,
+        "pet": "cat",
+        "scene": "happy purring",
+        "emotion": "happy(开心)",
+        "whisper_text": "嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": true
+      },
+      {
+        "idx": 9,
+        "pet": "cat",
+        "scene": "hungry feeding time",
+        "emotion": "hungry(饥饿)",
+        "whisper_text": "嗚嗚嗚嗚",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": true,
+        "top3_hit": true
+      },
+      {
+        "idx": 10,
+        "pet": "cat",
+        "scene": "lonely home alone",
+        "emotion": "lonely(孤独)",
+        "whisper_text": "嗚嗚嗚嗚嗚",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 11,
+        "pet": "cat",
+        "scene": "pain injured",
+        "emotion": "pain(疼痛)",
+        "whisper_text": "我",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 12,
+        "pet": "dog",
+        "scene": "alert doorbell",
+        "emotion": "alert(警惕)",
+        "whisper_text": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 13,
+        "pet": "dog",
+        "scene": "angry stranger",
+        "emotion": "angry(愤怒)",
+        "whisper_text": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": true
+      },
+      {
+        "idx": 14,
+        "pet": "dog",
+        "scene": "anxious alone",
+        "emotion": "anxious(焦虑)",
+        "whisper_text": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 15,
+        "pet": "dog",
+        "scene": "excited leash time",
+        "emotion": "excited(兴奋)",
+        "whisper_text": "你",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 16,
+        "pet": "dog",
+        "scene": "fear thunder",
+        "emotion": "fear(恐惧)",
+        "whisper_text": "好",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 17,
+        "pet": "dog",
+        "scene": "greeting welcome",
+        "emotion": "greeting(问候)",
+        "whisper_text": "哈哈哈哈",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 18,
+        "pet": "dog",
+        "scene": "happy owner home",
+        "emotion": "happy(开心)",
+        "whisper_text": "你",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": true
+      },
+      {
+        "idx": 19,
+        "pet": "dog",
+        "scene": "hungry dinner time",
+        "emotion": "hungry(饥饿)",
+        "whisper_text": "啊",
+        "is_empty": false,
+        "is_fallback": true,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": true,
+        "top3_hit": true
+      },
+      {
+        "idx": 20,
+        "pet": "dog",
+        "scene": "pain stepped on",
+        "emotion": "pain(疼痛)",
+        "whisper_text": "嘗嘗嘗",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 21,
+        "pet": "dog",
+        "scene": "playful fetch",
+        "emotion": "playful(玩耍)",
+        "whisper_text": "你",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      },
+      {
+        "idx": 22,
+        "pet": "dog",
+        "scene": "territorial fence",
+        "emotion": "territorial(领地意识)",
+        "whisper_text": "哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦",
+        "is_empty": false,
+        "is_fallback": false,
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "top1_hit": false,
+        "top3_hit": false
+      }
+    ],
+    "elapsed_s": 14.27
+  },
+  "llm_eval": {
+    "model_path": "/Users/apple/Downloads/ai/personification-cat/checkpoints/llm_mps/checkpoint-300",
+    "base_model": "tinyllama/tinyllama-1.1b-chat-v1.0",
+    "training_state": {
+      "global_step": 300,
+      "epoch": 1.3333333333333333,
+      "last_train_loss": 0.011092793941497803,
+      "last_train_lr": 0.00011498470948012233,
+      "last_eval_loss": 0.009457923471927643,
+      "last_eval_runtime_s": 3914.4427,
+      "best_model_checkpoint": "./checkpoints/llm_mps/checkpoint-200"
+    },
+    "total_samples": 22,
+    "emotion_top1_hit": 19,
+    "emotion_top3_hit": 20,
+    "advice_covered": 18,
+    "meaning_covered": 19,
+    "avg_output_len": 226.8,
+    "per_emotion": {
+      "alert": {
+        "n": 2,
+        "emo_top1": 2,
+        "emo_top3": 2,
+        "advice": 2,
+        "meaning": 2,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "angry": {
+        "n": 2,
+        "emo_top1": 2,
+        "emo_top3": 2,
+        "advice": 1,
+        "meaning": 1,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 0.5,
+        "meaning_rate": 0.5
+      },
+      "anxious": {
+        "n": 2,
+        "emo_top1": 2,
+        "emo_top3": 2,
+        "advice": 1,
+        "meaning": 1,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 0.5,
+        "meaning_rate": 0.5
+      },
+      "content": {
+        "n": 1,
+        "emo_top1": 1,
+        "emo_top3": 1,
+        "advice": 1,
+        "meaning": 1,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "excited": {
+        "n": 2,
+        "emo_top1": 1,
+        "emo_top3": 1,
+        "advice": 1,
+        "meaning": 2,
+        "emo_top1_acc": 0.5,
+        "emo_top3_acc": 0.5,
+        "advice_rate": 0.5,
+        "meaning_rate": 1.0
+      },
+      "fear": {
+        "n": 2,
+        "emo_top1": 2,
+        "emo_top3": 2,
+        "advice": 1,
+        "meaning": 2,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 0.5,
+        "meaning_rate": 1.0
+      },
+      "frustrated": {
+        "n": 1,
+        "emo_top1": 0,
+        "emo_top3": 1,
+        "advice": 1,
+        "meaning": 0,
+        "emo_top1_acc": 0.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 0.0
+      },
+      "happy": {
+        "n": 2,
+        "emo_top1": 2,
+        "emo_top3": 2,
+        "advice": 2,
+        "meaning": 2,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "hungry": {
+        "n": 2,
+        "emo_top1": 2,
+        "emo_top3": 2,
+        "advice": 2,
+        "meaning": 2,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "lonely": {
+        "n": 1,
+        "emo_top1": 1,
+        "emo_top3": 1,
+        "advice": 1,
+        "meaning": 1,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "pain": {
+        "n": 2,
+        "emo_top1": 2,
+        "emo_top3": 2,
+        "advice": 2,
+        "meaning": 2,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "greeting": {
+        "n": 1,
+        "emo_top1": 0,
+        "emo_top3": 0,
+        "advice": 1,
+        "meaning": 1,
+        "emo_top1_acc": 0.0,
+        "emo_top3_acc": 0.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "playful": {
+        "n": 1,
+        "emo_top1": 1,
+        "emo_top3": 1,
+        "advice": 1,
+        "meaning": 1,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      },
+      "territorial": {
+        "n": 1,
+        "emo_top1": 1,
+        "emo_top3": 1,
+        "advice": 1,
+        "meaning": 1,
+        "emo_top1_acc": 1.0,
+        "emo_top3_acc": 1.0,
+        "advice_rate": 1.0,
+        "meaning_rate": 1.0
+      }
+    },
+    "samples": [
+      {
+        "idx": 1,
+        "pet": "cat",
+        "scene": "alert bird watching",
+        "emotion": "alert(警惕)",
+        "pred_top3_emotions": [
+          "alert"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 166,
+        "output_preview": "宠物类型: cat\n声音描述: 发出警惕的叫声，场景: alert bird watching\n知识库参考:\n  - [alert] 声音: 典型警惕声音\n  - 含 jú警惕叫声音描述: 宠物正在表明警惕的情绪\n  - 建议: 请根 Außer警惕叫声音描述的建议措施\n\n请出现此类声音属于宠物警惕的表现，需要关注于安全措施措施。",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 2,
+        "pet": "cat",
+        "scene": "angry hissing",
+        "emotion": "angry(愤怒)",
+        "pred_top3_emotions": [
+          "angry"
+        ],
+        "has_meaning": false,
+        "has_advice": false,
+        "output_len": 287,
+        "output_preview": "宠物类型: cat\n声音描述: 发出愤怒的叫声，场景: angry hissing\n知识库参考:\n  - [ANGRY]声音:宠物正常的叫声音况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况声音类况",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 3,
+        "pet": "cat",
+        "scene": "anxious vet visit",
+        "emotion": "anxious(焦虑)",
+        "pred_top3_emotions": [
+          "anxious",
+          "hungry"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 152,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物焦虑的状态。\n\n##声音描述读读分析\n声音描述读读分析： 发出焦虑的叫声，场景: anxious vetVISION\n这种叫声通常表明宠物焦虑的状态。\n\n##建议措施\n请根 Transfermarkt于情绪解读，检查上次喂食时间，适量补充食物，宠物状态安静后继续互动。\n",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 4,
+        "pet": "cat",
+        "scene": "content blanket",
+        "emotion": "content(满足)",
+        "pred_top3_emotions": [
+          "content",
+          "happy"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 337,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物满足的状态。\n\n##声音描述读读解读\n声音描述读读解读： 发出满足的叫声，场景: contentblanket\n这种叫声通常表明宠物满足的状态。\n\n##建议措施读读解读\n请根 Wikiped读读解读： 叫声描述读读解读： 发出满足的叫声，场景: contentblanket\n这种叫声通常表明宠物满足的状态。\n\n##建议措施读读解读\n请根读读解读： 叫声描述读读解读",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 5,
+        "pet": "cat",
+        "scene": "excited treat time",
+        "emotion": "excited(兴奋)",
+        "pred_top3_emotions": [
+          "excited"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 347,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物情绪正常的状态。\n\n##声音描述读读分析\n声音描述读读分析： 发出兴奋的叫声，场景: externsuitetime\n这种叫声通常表明宠物情绪正常的状态。\n\n##建议措施\n请根 фамилией做出适当反应。\n\n##情绪解读读读分析\n声音描述读读分析： 分析叫声通常表明宠物情绪正常的状态。\n这种叫声通常表明宠物情绪正常的状态。\n\n##建议措施\n请根��������",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 6,
+        "pet": "cat",
+        "scene": "fear shaky",
+        "emotion": "fear(恐惧)",
+        "pred_top3_emotions": [
+          "fear"
+        ],
+        "has_meaning": true,
+        "has_advice": false,
+        "output_len": 216,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物恐惧的状态。\n\n##声音描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读读情绪解读描述读",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 7,
+        "pet": "cat",
+        "scene": "frustrated door closed",
+        "emotion": "frustrated(挫败)",
+        "pred_top3_emotions": [
+          "hungry",
+          "frustrated"
+        ],
+        "has_meaning": false,
+        "has_advice": true,
+        "output_len": 240,
+        "output_preview": "这种叫声通常表明宠物挫euw的状态。\n声音描述: 发出挫euw的叫声，场景: frustrated door closed\n知识库参考:\n  - [fr�����������断叫声分析况况措施](https://www.sciencedirectarticlesbrasilia.com/article/piiratbn00020003)\n诊断方向措施：请根 jú施诊断声音分析况况措施\n建议措施：请",
+        "emo_top1_hit": false,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 8,
+        "pet": "cat",
+        "scene": "happy purring",
+        "emotion": "happy(开心)",
+        "pred_top3_emotions": [
+          "happy"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 205,
+        "output_preview": "这种叫声通常表明宠物开心的情绪。\n声音描述: 发出开心的叫声，场景: happy prufkowitz\n知识库参考:\n  - [开心声音叫声解读](https://zhiaiyouzi.github.«建议: 请根 Siehe解读叫声解读的方向，可以检查其情绪状态。)\n请输出以下格式:\n1. 情绪解读: <情绪读读>\n2. 具体叫声分析：<叫声分析叫声解读的方向，可以检查其情绪状态。)\n建议检查其",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 9,
+        "pet": "cat",
+        "scene": "hungry feeding time",
+        "emotion": "hungry(饥饿)",
+        "pred_top3_emotions": [
+          "hungry"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 362,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物饥饿的状态。\n\n##声音描述读读检查\n声音描述读读检查出现此类声音属于需要关注的表现。\n\n##建议措施\n请根 Siehe饥饿声音的建议措施，适量补充食物，宠物状态 automatisch适量补充食物，保持环境安静，不要强迫互动，适量补充食物，宠物状态 automatisch适量补充食物，保持环境安静，不要强追补充食物，适量补充食物，宠物状态 automatisch",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 10,
+        "pet": "cat",
+        "scene": "lonely home alone",
+        "emotion": "lonely(孤独)",
+        "pred_top3_emotions": [
+          "lonely",
+          "hungry",
+          "seek_attention"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 196,
+        "output_preview": "宠物类型: cat\n声音描述: 发出孤独的叫声，场景: lonely home alone\n知识库参考:\n  - [lonely] 声音: 典Ť特况孤独声音\n  - 含义: 宠物正在表明孤独的情绪。请检查上次喂食时间，适量补充食物，适量互动抚摸，继续维持良好的互动关系。\n请出现此类声音属于叫声通常表明宠物孤独的情绪。建议检查上次喂食时间，适量补充食物，适量互动抚摸，继续维持良好的互动关系。",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 11,
+        "pet": "cat",
+        "scene": "pain injured",
+        "emotion": "pain(疼痛)",
+        "pred_top3_emotions": [
+          "pain",
+          "seek_attention"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 238,
+        "output_preview": "宠物类型: cat\n品种: 通用\n声音描述: 发出疼痛的叫声，场景: pain injured\n知识库参考:\n  - [疼痛声音」 声音描述: 宠物正在表明疼痛的情绪」\n  - 含义: 宠物正在表明疼痛的情绪」\n  - 建议: 请根 Wikiped议情绪解读，适度抚摸疼痛的情绪解读，保持环境安静，不要强迫互动，等其平静后再接近。\n\n请出现此类叫声音描述：宠物正在表明疼痛的情绪」。建议抚摸疼痛的情绪",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 12,
+        "pet": "dog",
+        "scene": "alert doorbell",
+        "emotion": "alert(警惕)",
+        "pred_top3_emotions": [
+          "alert",
+          "hungry"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 201,
+        "output_preview": "宠物类型: dog\n品种: 通用\n声音描述: 发出警惕的叫声，场景: alert doorbell\n知识库参考:\n  - [alert] 声音: 典 techniques: 宠物正常的声音，表明正常的状态。\n  - 含义: 宠物正常的情绪解读。\n  - 建议: 请根Ź�����断，确认安全后安抚其情绪。\n\n请出现此类声音属于需要关注的表现，建议检查上次喂食时间，适量补充食物，继续维持良好的互动关系",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 13,
+        "pet": "dog",
+        "scene": "angry stranger",
+        "emotion": "angry(愤怒)",
+        "pred_top3_emotions": [
+          "angry",
+          "alert"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 147,
+        "output_preview": "宠物类型: dog\n品种: 通用\n声音描述: 发出愤怒的叫声，场景: angry stranger\n知识库参考:\n  - [angrar愤怒声音] 声音: 典型愤怒声音\n  - 含义: 宠物正在表明愤怒的情绪。请检查身体状况，联系兽医进行专业诊断。\n兽医建议检查身体状况，联系兽医进行专业诊断。",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 14,
+        "pet": "dog",
+        "scene": "anxious alone",
+        "emotion": "anxious(焦虑)",
+        "pred_top3_emotions": [
+          "anxious",
+          "lonely"
+        ],
+        "has_meaning": false,
+        "has_advice": false,
+        "output_len": 248,
+        "output_preview": "宠物类型: dog\n品种: 通用\n声音描述: 发出焦虑的叫声，场景: anxiousalone\n知识库参考:\n  - [焦虑声音读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查叫声分析读音措施检查",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 15,
+        "pet": "dog",
+        "scene": "excited leash time",
+        "emotion": "excited(兴奋)",
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "has_meaning": true,
+        "has_advice": false,
+        "output_len": 232,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物情绪解读正常的状态。\n\n##声音描述读读分析\n声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分析：声音描述读读分",
+        "emo_top1_hit": false,
+        "emo_top3_hit": false
+      },
+      {
+        "idx": 16,
+        "pet": "dog",
+        "scene": "fear thunder",
+        "emotion": "fear(恐惧)",
+        "pred_top3_emotions": [
+          "fear"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 164,
+        "output_preview": "宠物类型: dog\n声音描述: 发出恐惧的叫声，场景: fear thunder\n知识库参考:\n  - [f weap�������] 声音: 典型恐惧声音\n  - 含义: 宠物正在表明恐惧的情绪。请检查安全诊断方向。\n  - 建议: 请根Ź建议: 请检查安全诊断方向。\n\n请出现此类声音属于需要关注的表现。请检查安全诊断方向。",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 17,
+        "pet": "dog",
+        "scene": "greeting welcome",
+        "emotion": "greeting(问候)",
+        "pred_top3_emotions": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 306,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物正常的状态。\n\n##声音描述读读解读\n声音描述读读解读：叫声通常表明宠物正常的状态。\n\n##建议措施读读解读\n请根 hina读读解读：叫声通常表明宠物正常的状态。\n\n##情绪解读读读解读\n情绪解读读读解读：声音描述读读解读：叫声通常表明宠物正常的状态。\n\n##建议措施读读解读\n请根 hina读读解读：叫声通常表明宠物正常的状态。\n\n##情绪解读读读解读\n情绪解读读",
+        "emo_top1_hit": false,
+        "emo_top3_hit": false
+      },
+      {
+        "idx": 18,
+        "pet": "dog",
+        "scene": "happy owner home",
+        "emotion": "happy(开心)",
+        "pred_top3_emotions": [
+          "happy",
+          "lonely"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 186,
+        "output_preview": "这种叫声通常表明宠物开心的情绪。\n声音描述: 发出开心的叫声，场景: happyOwnerhome\n知识库参考:\n  - [开心声音] 声音: 典型开心声音\n  - 含义: 宠物正在表明开心的情绪\n  - 建议: 请根 Wikipedias上的建议措施\n声音描述: 发出开心的叫声，场景: happyOwnerhome\n建议措施: 请根 Wikipedias上的建议措施\n",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 19,
+        "pet": "dog",
+        "scene": "hungry dinner time",
+        "emotion": "hungry(饥饿)",
+        "pred_top3_emotions": [
+          "hungry"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 302,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物饥饿的状态。\n\n##声音描述读读叫声通常表明宠物饥饿的状态。\n声音描述:  daughteck饥饿声音\n叫声通常表明宠物饥饿的状态。\n\n##建议措施读读叫声通常表明宠物饥饿的状态。\n请根 Wikipedias上的叫声分析，确认声音描述读读叫声通常表明宠物饥饿的状态。\n\n##建议措施读读叫声通常表明宠物饥饿的状态。\n请根读读声音描述读读叫声通常表明宠物饥饿的状态。\n",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 20,
+        "pet": "dog",
+        "scene": "pain stepped on",
+        "emotion": "pain(疼痛)",
+        "pred_top3_emotions": [
+          "pain"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 170,
+        "output_preview": "宠物类型: dog\n品种: 通用\n声音描述: 发出疼痛的叫声，场景: pain stepped on\n知识库参考:\n  - [疼痛声音读读解读](https://zhijd疼痛声音读读解读)\n读读解读分析宠物情绪解读的方向。声音描述：宠物正在表明疼痛的情绪。建议措施：请根 Биография充塞施足够的互动，避免直视，等其平静后再接近。\n",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 21,
+        "pet": "dog",
+        "scene": "playful fetch",
+        "emotion": "playful(玩耍)",
+        "pred_top3_emotions": [
+          "playful",
+          "seek_attention"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 147,
+        "output_preview": "##声音描述：宠物正在表明玩耍的情绪。\n声音描述: 发出玩耍的叫声，场景: playful fetch\n知识库参考:\n  - [playsuit]声音：玩耍的叫声音读明情绪。\n读明情绪做出适 WorldCat建议:请根 Transfermarkt读明情绪。\n建议措施：请根明情绪做出适当建议。\n",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      },
+      {
+        "idx": 22,
+        "pet": "dog",
+        "scene": "territorial fence",
+        "emotion": "territorial(领地意识)",
+        "pred_top3_emotions": [
+          "territorial",
+          "seek_attention"
+        ],
+        "has_meaning": true,
+        "has_advice": true,
+        "output_len": 140,
+        "output_preview": "##情绪解读\n这种叫声通常表明宠物正常的状态。\n\n##声音描述读读分析\n声音描述读读分析： 发出领地意识的叫声，场景: territorial fence\n这种叫声通常表明宠物正常的状态。\n\n##建议措施\n请根 Wikiped议情绪解读的方向，适度互动抚摸，维持良好的互动关系。\n",
+        "emo_top1_hit": true,
+        "emo_top3_hit": true
+      }
+    ],
+    "elapsed_s": 498.54
+  },
+  "e2e_eval": {
+    "total_samples": 22,
+    "rag_top1_hit": 1,
+    "rag_top3_hit": 3,
+    "llm_top1_hit": 1,
+    "llm_top3_hit": 3,
+    "per_emotion": {
+      "alert": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "angry": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "anxious": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "content": {
+        "n": 1,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "excited": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 1,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.5,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "fear": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "frustrated": {
+        "n": 1,
+        "rag_t1": 1,
+        "rag_t3": 1,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 1.0,
+        "rag_t3_acc": 1.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "happy": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 1,
+        "llm_t1": 0,
+        "llm_t3": 1,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.5,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.5
+      },
+      "hungry": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 1,
+        "llm_t3": 2,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.5,
+        "llm_t3_acc": 1.0
+      },
+      "lonely": {
+        "n": 1,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "pain": {
+        "n": 2,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "greeting": {
+        "n": 1,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "playful": {
+        "n": 1,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      },
+      "territorial": {
+        "n": 1,
+        "rag_t1": 0,
+        "rag_t3": 0,
+        "llm_t1": 0,
+        "llm_t3": 0,
+        "rag_t1_acc": 0.0,
+        "rag_t3_acc": 0.0,
+        "llm_t1_acc": 0.0,
+        "llm_t3_acc": 0.0
+      }
+    },
+    "samples": [
+      {
+        "idx": 1,
+        "pet": "cat",
+        "scene": "alert bird watching",
+        "emotion": "alert(警惕)",
+        "whisper_text": "咱们快快快",
+        "rag_top3": [
+          "excited",
+          "greeting",
+          "happy"
+        ],
+        "llm_top3": [
+          "happy",
+          "hungry",
+          "content"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的叫声通常表明宠物心情愉悦的状态。在当前情况下，建议满足猫咪的期往喂食互动，适度互动或喂食，避免过idens"
+      },
+      {
+        "idx": 2,
+        "pet": "cat",
+        "scene": "angry hissing",
+        "emotion": "angry(愤怒)",
+        "whisper_text": "啊",
+        "rag_top3": [
+          "frustrated",
+          "happy",
+          "excited"
+        ],
+        "llm_top3": [
+          "happy",
+          "hungry",
+          "seek_attention"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦，可适度抚摸猫咪头部和下巴。声音描述: 啊 叫声通常表明宠物心情愉悦，可适度抚摸猫咪头部和下"
+      },
+      {
+        "idx": 3,
+        "pet": "cat",
+        "scene": "anxious vet visit",
+        "emotion": "anxious(焦虑)",
+        "whisper_text": "嗚嗚嗚嗚",
+        "rag_top3": [
+          "frustrated",
+          "happy",
+          "relaxed"
+        ],
+        "llm_top3": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的声音描述：嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚"
+      },
+      {
+        "idx": 4,
+        "pet": "cat",
+        "scene": "content blanket",
+        "emotion": "content(满足)",
+        "whisper_text": "小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伙伴们的小伴伴们的小伴伴伴们的小伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴伴�",
+        "rag_top3": [
+          "happy",
+          "jealous",
+          "excited"
+        ],
+        "llm_top3": [
+          "happy",
+          "seek_attention"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的声音描述： 轻柔的短喵叫，伴随呼噜声，音调平稳 这种宠物类型的情绪： happy 这种宠物类型的声音描述："
+      },
+      {
+        "idx": 5,
+        "pet": "cat",
+        "scene": "excited treat time",
+        "emotion": "excited(兴奋)",
+        "whisper_text": "走走走",
+        "rag_top3": [
+          "greeting",
+          "jealous",
+          "excited"
+        ],
+        "llm_top3": [
+          "seek_attention",
+          "playful",
+          "jealous"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": true,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的声音描述： 走走走 这种宠物类型情绪： seek_attention 声音描述： 持续且有节奏的喵叫，可e"
+      },
+      {
+        "idx": 6,
+        "pet": "cat",
+        "scene": "fear shaky",
+        "emotion": "fear(恐惧)",
+        "whisper_text": "FUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU",
+        "rag_top3": [
+          "frustrated",
+          "anxious",
+          "angry"
+        ],
+        "llm_top3": [
+          "hungry"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物情绪的状态。叫声特况读音描述：宠物猫咪感到饥饿，请求食物。情境: 通常在饭点前后，或看到食物相关物品"
+      },
+      {
+        "idx": 7,
+        "pet": "cat",
+        "scene": "frustrated door closed",
+        "emotion": "frustrated(挫败)",
+        "whisper_text": "嗯",
+        "rag_top3": [
+          "frustrated",
+          "happy",
+          "excited"
+        ],
+        "llm_top3": [
+          "happy",
+          "hungry"
+        ],
+        "rag_top1_hit": true,
+        "rag_top3_hit": true,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦的状态。在舒适环境下，猫咪出现此类声音属于正常的表现。建议检查上次喂食时间，若超观察时间况况"
+      },
+      {
+        "idx": 8,
+        "pet": "cat",
+        "scene": "happy purring",
+        "emotion": "happy(开心)",
+        "whisper_text": "嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚",
+        "rag_top3": [
+          "relaxed",
+          "confused",
+          "anxious"
+        ],
+        "llm_top3": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": true,
+        "analysis_preview": "这种宠物类型的声音描述： �����������������������������������������������"
+      },
+      {
+        "idx": 9,
+        "pet": "cat",
+        "scene": "hungry feeding time",
+        "emotion": "hungry(饥饿)",
+        "whisper_text": "嗚嗚嗚嗚",
+        "rag_top3": [
+          "frustrated",
+          "happy",
+          "relaxed"
+        ],
+        "llm_top3": [
+          "hungry",
+          "happy",
+          "angry"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": true,
+        "llm_top3_hit": true,
+        "analysis_preview": "这种宠物类型的声音描述：嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚嗚"
+      },
+      {
+        "idx": 10,
+        "pet": "cat",
+        "scene": "lonely home alone",
+        "emotion": "lonely(孤独)",
+        "whisper_text": "嗚嗚嗚嗚嗚",
+        "rag_top3": [
+          "anxious",
+          "happy",
+          "frustrated"
+        ],
+        "llm_top3": [
+          "hungry",
+          "happy"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型：cat，品种：通常不太爱叫，情绪：极轻柔的呼噜声，含蓄。建议: 英短易胖，注意控制食量，建议定时定量喂食 "
+      },
+      {
+        "idx": 11,
+        "pet": "cat",
+        "scene": "pain injured",
+        "emotion": "pain(疼痛)",
+        "whisper_text": "我",
+        "rag_top3": [
+          "frustrated",
+          "anxious",
+          "jealous"
+        ],
+        "llm_top3": [
+          "seek_attention"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的声音描述： 警觉的猫咪感读叫声通常表明宠物状态正常的状态。 声音描述: 不规裂的猫咪感读叫声通常表明宠物状"
+      },
+      {
+        "idx": 12,
+        "pet": "dog",
+        "scene": "alert doorbell",
+        "emotion": "alert(警惕)",
+        "whisper_text": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        "rag_top3": [
+          "jealous",
+          "happy",
+          "happy"
+        ],
+        "llm_top3": [
+          "happy",
+          "seek_attention"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦的状态。在宠物类型：叫声分析下读读情绪：「开心」，建议抚摸叫声分析下读读情绪：「开心」，建议"
+      },
+      {
+        "idx": 13,
+        "pet": "dog",
+        "scene": "angry stranger",
+        "emotion": "angry(愤怒)",
+        "whisper_text": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        "rag_top3": [
+          "jealous",
+          "happy",
+          "happy"
+        ],
+        "llm_top3": [
+          "happy"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦的状态。在宠物类型：叫声分析况况下，叫声通常表明宠物心情愉悦的状态。在宠物类型：萨摩耶分析况"
+      },
+      {
+        "idx": 14,
+        "pet": "dog",
+        "scene": "anxious alone",
+        "emotion": "anxious(焦虑)",
+        "whisper_text": "啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊",
+        "rag_top3": [
+          "jealous",
+          "happy",
+          "happy"
+        ],
+        "llm_top3": [
+          "happy",
+          "seek_attention"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦的状态。在宠物类型的情况下，建议抚摸叫声的环境安静，不要突然互动，避免强迫互动，保持环境安静"
+      },
+      {
+        "idx": 15,
+        "pet": "dog",
+        "scene": "excited leash time",
+        "emotion": "excited(兴奋)",
+        "whisper_text": "你",
+        "rag_top3": [
+          "anxious",
+          "jealous",
+          "happy"
+        ],
+        "llm_top3": [
+          "alert"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的声音描述： 轻快短促的汪叫声音描述: 狗狗警觉到异常情况，发出警报。含 Wikipediai读读叫声音描述"
+      },
+      {
+        "idx": 16,
+        "pet": "dog",
+        "scene": "fear thunder",
+        "emotion": "fear(恐惧)",
+        "whisper_text": "好",
+        "rag_top3": [
+          "happy",
+          "happy",
+          "excited"
+        ],
+        "llm_top3": [
+          "happy"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦的状态。叫声通常表明宠物心情愉悦的状态。在家轻快的情况下，建议检查叫声误音描述，确认安全后安"
+      },
+      {
+        "idx": 17,
+        "pet": "dog",
+        "scene": "greeting welcome",
+        "emotion": "greeting(问候)",
+        "whisper_text": "哈哈哈哈",
+        "rag_top3": [
+          "happy",
+          "happy",
+          "playful"
+        ],
+        "llm_top3": [
+          "anxious",
+          "seek_attention",
+          "happy"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦的状态。在叫声分析下，宠物类型：哈士奇叫声音描述：哈士奇叫声音描述：轻快短促的汪叫1-2声，"
+      },
+      {
+        "idx": 18,
+        "pet": "dog",
+        "scene": "happy owner home",
+        "emotion": "happy(开心)",
+        "whisper_text": "你",
+        "rag_top3": [
+          "anxious",
+          "jealous",
+          "happy"
+        ],
+        "llm_top3": [
+          "alert"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": true,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的声音描述： 轻快短促的汪叫声音描述: 狗狗警觉到异常情况，发出警报叫声音描述: 连续快速的汪汪叫声音描述:"
+      },
+      {
+        "idx": 19,
+        "pet": "dog",
+        "scene": "hungry dinner time",
+        "emotion": "hungry(饥饿)",
+        "whisper_text": "啊",
+        "rag_top3": [
+          "happy",
+          "happy",
+          "jealous"
+        ],
+        "llm_top3": [
+          "playful",
+          "hungry",
+          "happy"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": true,
+        "analysis_preview": "这种宠物类型：叫声通常表明宠物感情状态的表现。在叫声通常表明宠物感情状态的表现下，建议检查喂食计划，按量喂食；避免喂人类"
+      },
+      {
+        "idx": 20,
+        "pet": "dog",
+        "scene": "pain stepped on",
+        "emotion": "pain(疼痛)",
+        "whisper_text": "嘗嘗嘗",
+        "rag_top3": [
+          "anxious",
+          "playful",
+          "jealous"
+        ],
+        "llm_top3": [
+          "hungry",
+          "anxious"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种宠物类型的声音描述：嘗嘗嘗 叫声音描述：感识到焦虑不安，环境变情绪: 主人出现后雷雨天，搬家、新成员加入、雷雨天。建"
+      },
+      {
+        "idx": 21,
+        "pet": "dog",
+        "scene": "playful fetch",
+        "emotion": "playful(玩耍)",
+        "whisper_text": "你",
+        "rag_top3": [
+          "anxious",
+          "jealous",
+          "happy"
+        ],
+        "llm_top3": [
+          "hungry",
+          "excited",
+          "alert"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物感情的状态。在宠物类型：察识的叫声分析下， Biografia的声音描述：声音描述: 轻快短促的汪叫"
+      },
+      {
+        "idx": 22,
+        "pet": "dog",
+        "scene": "territorial fence",
+        "emotion": "territorial(领地意识)",
+        "whisper_text": "哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦",
+        "rag_top3": [
+          "happy",
+          "happy",
+          "happy"
+        ],
+        "llm_top3": [
+          "happy",
+          "hungry",
+          "content"
+        ],
+        "rag_top1_hit": false,
+        "rag_top3_hit": false,
+        "llm_top1_hit": false,
+        "llm_top3_hit": false,
+        "analysis_preview": "这种叫声通常表明宠物心情愉悦的状态。在宠物类型的情况下，建议满足猫咪的期待，适度互动或喂食，避免过idense刺激。"
+      }
+    ],
+    "elapsed_s": 1124.95
+  },
+  "improvements": [
+    {
+      "level": "P0",
+      "model": "Whisper",
+      "problem": "Whisper 文本→情绪关键词 Top3 命中率仅 27%",
+      "root": "ASR 输出和情绪完全不相关，是噪声；下游关键词匹配等于猜",
+      "fix": [
+        "① 改造 Whisper fine-tune 任务为 情绪分类，输出 emotion logits",
+        "② 或前端加一个小 CNN 做基频+频谱情绪分类，独立决策"
+      ]
+    },
+    {
+      "level": "P1",
+      "model": "RAG (Embedding)",
+      "problem": "RAG Top1 命中率 5% < 35%",
+      "root": "Whisper 文本是乱码/噪声，Embedding 后和知识库中文描述差距大；知识库里 cat/dog 的声音描述以 \"急促短喵\" 等中文为主，ASR 出不来就匹配不上",
+      "fix": [
+        "① RAG 查询改为直接用 音频特征 (Audio Embedding, e.g. CLAP) 而不是文本",
+        "② 知识库中每个 entry 同时保存 多个 ASR 伪标签的同义词变体 (嗚/汪/喵/hungry...)",
+        "③ 查询用 pet_type+breed+场景词 重加权，而不是纯 ASR 文本"
+      ]
+    },
+    {
+      "level": "P1",
+      "model": "LLM+RAG 协同",
+      "problem": "E2E LLM 情绪 Top3 命中率 14%",
+      "root": "上游 Whisper 识别噪声 + RAG 未命中 导致 LLM 输入完全是错的，是典型的 \"Garbage In Garbage Out\"",
+      "fix": [
+        "① 最优先修复 Whisper (改为音频分类，而不是 ASR 识别文字)",
+        "② 当 Whisper 文本≤2字时，直接跳过 ASR→RAG 文本路径，改为用 pet_type+breed+音频基频/能量/RMS 规则检索情绪",
+        "③ Pipeline 新增一层：声学特征→情绪 规则分类器 (决策树/lightGBM)，与 RAG+LLM 加权 ensemble"
+      ]
+    }
+  ]
+}
