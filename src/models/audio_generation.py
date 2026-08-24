@@ -87,23 +87,59 @@ class AudioGenerator:
         self.model = None
         self.processor = None
         self.is_ready = False
+        self._generation_config_fixed = False  # 只修一次
         self._load_model()
 
     def _load_model(self):
-        """加载 Bark 模型 - 三级降级: HF缓存 → HF镜像 → ModelScope国内镜像 → 模拟音频"""
+        """加载 Bark 模型 - 三级降级: 本地缓存 → HF → ModelScope → 模拟音频"""
         try:
             from transformers import BarkModel, BarkProcessor
 
             print(f"加载 Bark 模型: {self.model_name}")
 
-            # ===== 第一级: 检查 HF 本地缓存 =====
-            cache_dir = os.path.expanduser(
+            # ===== 检查所有可能的本地缓存位置 =====
+            hf_cache_dir = os.path.expanduser(
                 f"~/.cache/huggingface/hub/models--{self.model_name.replace('/', '--')}"
             )
-            if os.path.exists(cache_dir):
-                print(f"  ✅ 检测到本地缓存, 直接加载")
-            else:
-                print(f"  ⚠️  本地无缓存, 尝试在线下载...")
+            ms_cache_dir = os.path.expanduser(
+                "~/.cache/modelscope/models/mapjack--bark"
+            )
+            
+            # ModelScope 缓存 (优先级最高，因为国内下载最快)
+            if os.path.isdir(ms_cache_dir):
+                snapshots_dir = os.path.join(ms_cache_dir, "snapshots")
+                if os.path.isdir(snapshots_dir):
+                    snapshots = os.listdir(snapshots_dir)
+                    if snapshots:
+                        ms_model_path = os.path.join(snapshots_dir, snapshots[0])
+                        print(f"  ✅ 检测到 ModelScope 本地缓存: {ms_model_path}")
+                        self.processor = BarkProcessor.from_pretrained(ms_model_path)
+                        self.model = BarkModel.from_pretrained(
+                            ms_model_path,
+                            torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+                        )
+                        if torch.cuda.is_available():
+                            self.model = self.model.to("cuda")
+                        self.is_ready = True
+                        print(f"  ✅ Bark 模型加载成功 (来源: ModelScope 本地缓存)")
+                        return
+
+            # HuggingFace 缓存
+            if os.path.isdir(hf_cache_dir):
+                print(f"  ✅ 检测到 HuggingFace 本地缓存, 直接加载")
+                self.processor = BarkProcessor.from_pretrained(self.model_name)
+                self.model = BarkModel.from_pretrained(
+                    self.model_name,
+                    torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32,
+                )
+                if torch.cuda.is_available():
+                    self.model = self.model.to("cuda")
+                self.is_ready = True
+                print(f"  ✅ Bark 模型加载成功 (来源: HuggingFace 本地缓存)")
+                return
+
+            # 没有任何缓存，需要下载
+            print(f"  ⚠️  本地无缓存, 尝试在线下载...")
 
             # ===== 第二级: HF 镜像 (hf-mirror.com) =====
             os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
@@ -230,8 +266,23 @@ class AudioGenerator:
                 if torch.cuda.is_available():
                     inputs = {k: v.to("cuda") for k, v in inputs.items()}
 
+                # 只在首次生成前修复 generation_config，避免重复警告
+                if not self._generation_config_fixed and hasattr(self.model, "generation_config"):
+                    cfg = self.model.generation_config
+                    cfg.max_length = None
+                    cfg.max_new_tokens = 768
+                    cfg.do_sample = False
+                    self._generation_config_fixed = True
+
+                # 根据文本长度自适应调整生成 token 数
+                input_len = inputs["input_ids"].shape[1] if "input_ids" in inputs else 10
+                max_new_tokens = min(768, max(256, input_len * 8))
+
                 with torch.no_grad():
-                    audio_array = self.model.generate(**inputs)
+                    audio_array = self.model.generate(
+                        **inputs,
+                        max_new_tokens=max_new_tokens,
+                    )
                     audio = audio_array.cpu().numpy().squeeze()
                     sample_rate = self.model.generation_config.sample_rate
                 print(f"  🗣️  人类声音合成完成 (声线: {target_voice} / preset: {voice_preset})")
@@ -281,8 +332,23 @@ class AudioGenerator:
                 if torch.cuda.is_available():
                     inputs = {k: v.to("cuda") for k, v in inputs.items()}
 
+                # 只在首次生成前修复 generation_config
+                if not self._generation_config_fixed and hasattr(self.model, "generation_config"):
+                    cfg = self.model.generation_config
+                    cfg.max_length = None
+                    cfg.max_new_tokens = 768
+                    cfg.do_sample = False
+                    self._generation_config_fixed = True
+
+                # 自适应 max_new_tokens
+                input_len = inputs["input_ids"].shape[1] if "input_ids" in inputs else 10
+                max_new_tokens = min(768, max(256, input_len * 8))
+
                 with torch.no_grad():
-                    audio_array = self.model.generate(**inputs)
+                    audio_array = self.model.generate(
+                        **inputs,
+                        max_new_tokens=max_new_tokens,
+                    )
                     audio = audio_array.cpu().numpy().squeeze()
                     sample_rate = self.model.generation_config.sample_rate
             except Exception as e:

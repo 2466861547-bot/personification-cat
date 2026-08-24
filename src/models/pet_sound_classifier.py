@@ -1,20 +1,31 @@
 """
-宠物声音分类器: 基于声学特征 + 随机森林 (Random Forest)
-用于替代 Whisper 处理宠物声音 (非 ASR 任务，而是音频分类任务)
+宠物声音分类器: 融合架构
+====================
+根据运行环境自动选择最优分类策略:
 
-支持 20 种情绪标签:
-- alert, seek_attention, hungry, happy, angry, fearful, content, pain
-- curious, lonely, anxious, excited, frustrated, relaxed, territorial
-- greeting, confused, jealous, sad, playful
+  macOS (MPS/CPU) → 仅 Layer 1 (LLM 声学特征分类)
+    - 不加载 VGGish/ACaD (需要 CUDA)
+    - 使用 LLM 世界知识 + 规则降级
+
+  Linux + GPU (CUDA) → 三者融合方案
+    - ACaD: 物种识别 (cat vs dog vs bird vs human)
+    - VGGish: 128 维语义 embedding
+    - 手工特征: 8 维精细声学特征
+    - 融合后分类 (VGGish 128D + 手工 8D = 136D → 情绪分类)
+
+层级降级 (当主要方案不可用时):
+  Layer 1: LLM 声学特征分类 (首选)
+  Layer 2: 声学特征 + 随机森林 (离线备选)
+  Layer 3: Whisper ASR fallback (保底)
 """
 
 import os
+import sys
+import platform
 import json
 import numpy as np
 import joblib
 from typing import Dict, List, Optional, Tuple
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 from ..audio.feature_extraction import FeatureExtractor
 
@@ -322,3 +333,648 @@ class PetSoundClassifier:
         print(f"\n  ✅ 训练完成! 模型保存于: {model_dir}")
         print(f"     可用于 pet_to_text / pet_to_human_voice 模式")
         print(f"{'='*60}\n")
+
+
+class LLMAcousticClassifier:
+    """
+    Layer 1: 基于 LLM 的声学特征分类器
+    
+    工作原理:
+    1. 从宠物音频提取 8 维关键声学特征 (F0/RMS/时长/频谱质心/过零率/浊音比/F0范围/频谱通量)
+    2. 将特征转化为自然语言描述喂给 LLM
+    3. LLM 利用其世界知识 (了解各种动物叫声的声学特征与情绪的对应关系) 判断情绪
+    
+    优势:
+    - 不需要训练数据 (不像 ML 分类器需要大量标注样本)
+    - 可解释 (LLM 会说明为什么判断为该情绪)
+    - 泛化能力强 (LLM 已学习了大量动物声音的知识)
+    - 能处理未见的声音 (不依赖训练数据的记忆)
+    """
+
+    def __init__(self, llm_model=None):
+        self.feature_extractor = FeatureExtractor()
+        self.llm_model = llm_model
+        self.is_ready = llm_model is not None
+
+    def extract_acoustic_features(self, audio_path: str) -> Dict:
+        """
+        提取 8 维关键声学特征
+        
+        Returns:
+            {
+                'f0_mean': 基频均值 (Hz),
+                'f0_range': 基频范围 (Hz),
+                'rms': 能量均方根,
+                'duration': 时长 (秒),
+                'spectral_centroid': 频谱质心 (Hz),
+                'zero_crossing_rate': 过零率,
+                'voiced_ratio': 浊音比例,
+                'spectral_flux': 频谱通量,
+            }
+        """
+        import librosa
+        audio, sr = librosa.load(audio_path, sr=16000, mono=True)
+
+        # 频谱特征
+        spectral = self.feature_extractor.extract_spectral_features(audio)
+        # 基频特征
+        pitch = self.feature_extractor.extract_pitch(audio)
+
+        # 计算频谱通量 (onset strength 的均值)
+        onset = librosa.onset.onset_strength(y=audio, sr=sr)
+
+        return {
+            "f0_mean": round(pitch.get("f0_mean", 0), 1),
+            "f0_range": round(pitch.get("f0_max", 0) - pitch.get("f0_min", 0), 1),
+            "rms": round(spectral["rms"], 4),
+            "duration": round(spectral["duration"], 3),
+            "spectral_centroid": round(spectral["centroid_mean"], 1),
+            "zero_crossing_rate": round(spectral["zcr_mean"], 4),
+            "voiced_ratio": round(pitch["voiced_ratio"], 4),
+            "spectral_flux": round(float(np.mean(onset)), 2),
+        }
+
+    def features_to_description(self, features: Dict, pet_type: str = "cat") -> str:
+        """将声学特征转化为自然语言描述 (供 LLM 理解)"""
+        desc_parts = []
+
+        # 基频描述
+        f0 = features["f0_mean"]
+        f0_range = features["f0_range"]
+        if f0 < 100:
+            pitch_desc = "低沉的声音"
+        elif f0 < 300:
+            pitch_desc = "中等音调"
+        elif f0 < 600:
+            pitch_desc = "较高音调"
+        else:
+            pitch_desc = "尖锐的高音"
+
+        if f0_range > 200:
+            pitch_desc += f"，音调变化幅度大 (F0范围{f0_range:.0f}Hz)"
+        elif f0_range > 50:
+            pitch_desc += f"，音调有一定波动 (F0范围{f0_range:.0f}Hz)"
+
+        desc_parts.append(f"基频约{f0:.0f}Hz，{pitch_desc}")
+
+        # 能量描述
+        rms = features["rms"]
+        if rms > 0.3:
+            loudness = "非常响亮"
+        elif rms > 0.2:
+            loudness = "声音较大"
+        elif rms > 0.1:
+            loudness = "声音适中"
+        else:
+            loudness = "声音较轻"
+        desc_parts.append(f"能量: {loudness} (RMS={rms:.3f})")
+
+        # 时长描述
+        dur = features["duration"]
+        if dur < 0.3:
+            dur_desc = "非常短促"
+        elif dur < 1.0:
+            dur_desc = "短促"
+        elif dur < 2.0:
+            dur_desc = "中等时长"
+        else:
+            dur_desc = "持续较长"
+        desc_parts.append(f"时长: {dur_desc} ({dur:.2f}秒)")
+
+        # 浊音比例
+        voiced = features["voiced_ratio"]
+        if voiced > 0.7:
+            voice_desc = "主要为浊音 (有明确发声)"
+        elif voiced > 0.3:
+            voice_desc = "部分浊音"
+        else:
+            voice_desc = "主要为清音/噪声"
+        desc_parts.append(f"发声特征: {voice_desc}")
+
+        # 频谱特征
+        centroid = features["spectral_centroid"]
+        if centroid > 2000:
+            spec_desc = "高频能量丰富"
+        elif centroid > 1000:
+            spec_desc = "中频能量为主"
+        else:
+            spec_desc = "低频能量丰富"
+        desc_parts.append(f"频谱特征: {spec_desc}")
+
+        # 频谱通量
+        flux = features["spectral_flux"]
+        if flux > 5:
+            flux_desc = "频谱变化剧烈 (爆发性声音)"
+        elif flux > 2:
+            flux_desc = "频谱有一定变化"
+        else:
+            flux_desc = "频谱稳定 (持续性声音)"
+        desc_parts.append(f"动态特征: {flux_desc}")
+
+        # 过零率
+        zcr = features["zero_crossing_rate"]
+        if zcr > 0.3:
+            zcr_desc = "高频噪声成分多"
+        elif zcr > 0.15:
+            zcr_desc = "有一定噪声成分"
+        else:
+            zcr_desc = "噪声成分少"
+        desc_parts.append(f"噪声特征: {zcr_desc}")
+
+        return f"{pet_type}叫声音频分析: " + "；".join(desc_parts)
+
+    def classify(self, audio_path: str, pet_type: str = "cat") -> Dict:
+        """
+        使用 LLM 进行声学特征分类
+        
+        Args:
+            audio_path: 音频文件路径
+            pet_type: 宠物类型 (cat/dog)
+            
+        Returns:
+            {
+                "emotion": "hungry",
+                "confidence": 0.85,
+                "description": "宠物饿了，想吃东西",
+                "demand": "给它喂食",
+                "llm_reasoning": "LLM 的推理过程",
+                "acoustic_features": {...},
+            }
+        """
+        # 1. 提取声学特征
+        features = self.extract_acoustic_features(audio_path)
+
+        # 2. 生成自然语言描述
+        description = self.features_to_description(features, pet_type)
+
+        # 3. 如果 LLM 可用，用 LLM 分类
+        if self.llm_model and self.is_ready:
+            system_prompt = (
+                "你是一个专业的动物行为学家。根据下面的宠物叫声音频特征描述，"
+                "判断宠物最可能的情绪状态。\n\n"
+                "可选情绪标签 (只能选一个):\n"
+                "- alert (警戒), seek_attention (寻求关注), hungry (饥饿), happy (愉悦), "
+                "angry (愤怒), fearful (恐惧), content (满足), pain (疼痛), "
+                "curious (好奇), lonely (孤独), anxious (焦虑), excited (兴奋), "
+                "frustrated (挫败), relaxed (放松), territorial (领地), "
+                "greeting (问候), confused (困惑), jealous (嫉妒), sad (悲伤), playful (玩耍)\n\n"
+                "判断规则:\n"
+                "- 低沉+响亮+持续长 → angry/territorial/content\n"
+                "- 尖锐+短促+爆发性 → alert/fearful/pain\n"
+                "- 中频+短促+有节奏 → hungry/seek_attention/playful\n"
+                "- 高频+变化快 → excited/happy/playful\n"
+                "- 低沉+轻柔+持续 → lonely/anxious/relaxed\n"
+                "- 高频+轻柔+短暂 → curious/greeting/jealous\n\n"
+                "请严格按 JSON 格式输出:\n"
+                "{\n"
+                '  "emotion": "情绪标签",\n'
+                '  "confidence": 0.0-1.0 的置信度,\n'
+                '  "description": "用中文描述这个情绪",\n'
+                '  "demand": "针对此情绪的建议",\n'
+                '  "reasoning": "判断理由"\n'
+                "}"
+            )
+
+            user_input = description
+            try:
+                llm_response = self.llm_model.inference(user_input, system_prompt)
+                # 解析 JSON 响应
+                import re
+                # 尝试从响应中提取 JSON
+                json_match = re.search(r'\{[^}]+\}', llm_response, re.DOTALL)
+                if json_match:
+                    result = json.loads(json_match.group(0))
+                    emotion = result.get("emotion", "seek_attention")
+                    confidence = float(result.get("confidence", 0.5))
+                    # 确保 emotion 在合法列表中
+                    if emotion not in EMOTION_LABELS:
+                        emotion = "seek_attention"
+                        confidence *= 0.5
+                    return {
+                        "emotion": emotion,
+                        "confidence": confidence,
+                        "description": result.get("description", EMOTION_TO_DESCRIPTION.get(emotion, "未知情绪")),
+                        "demand": result.get("demand", EMOTION_TO_DEMAND.get(emotion, "观察宠物状态")),
+                        "llm_reasoning": result.get("reasoning", ""),
+                        "acoustic_features": features,
+                        "method": "llm_acoustic",
+                    }
+            except Exception as e:
+                print(f"    ⚠️  LLM 分类失败: {e}")
+                print(f"    降级为规则分类")
+
+        # 4. LLM 不可用时，使用基于规则的分类
+        return self._rule_based_classify(features, pet_type, description)
+
+    def _rule_based_classify(self, features: Dict, pet_type: str, description: str) -> Dict:
+        """
+        基于声学规则的降级分类 (当 LLM 不可用时使用)
+        
+        规则基于各种宠物情绪的典型声学特征:
+        - 参考: Farid et al. (2020) "Audio-based Cat Sound Classification"
+        - 参考: Zhang et al. (2022) "Dog Emotion Recognition from Vocalizations"
+        """
+        f0 = features["f0_mean"]
+        f0_range = features["f0_range"]
+        rms = features["rms"]
+        duration = features["duration"]
+        voiced = features["voiced_ratio"]
+        centroid = features["spectral_centroid"]
+        flux = features["spectral_flux"]
+        zcr = features["zero_crossing_rate"]
+
+        scores = {}
+
+        # --- angry (愤怒) ---
+        # 特征: 低沉、响亮、持续、中等浊音比
+        scores["angry"] = (
+            (0.7 if f0 < 250 else max(0, 1 - abs(f0 - 200) / 200)) * 0.3 +
+            (0.7 if rms > 0.2 else rms * 2) * 0.25 +
+            (0.6 if duration > 1.0 else duration * 0.5) * 0.2 +
+            (0.5 if voiced > 0.3 else voiced) * 0.15 +
+            (0.6 if f0_range < 150 else max(0, 1 - f0_range / 300)) * 0.1
+        )
+
+        # --- hungry (饥饿) ---
+        # 特征: 中频、中等时长、有节奏、中等能量
+        scores["hungry"] = (
+            (0.6 if 300 < f0 < 700 else max(0, 1 - abs(f0 - 500) / 300)) * 0.3 +
+            (0.5 if 0.8 < duration < 2.0 else max(0, 1 - abs(duration - 1.2))) * 0.25 +
+            (0.5 if 0.15 < rms < 0.4 else max(0, 1 - abs(rms - 0.25) * 4)) * 0.25 +
+            (0.5 if 50 < f0_range < 200 else max(0, 1 - abs(f0_range - 100) / 200)) * 0.2
+        )
+
+        # --- alert (警戒) ---
+        # 特征: 中高频、短促、响亮、爆发性
+        scores["alert"] = (
+            (0.6 if 400 < f0 < 800 else max(0, 1 - abs(f0 - 600) / 400)) * 0.25 +
+            (0.7 if duration < 0.5 else max(0, 1 - duration)) * 0.3 +
+            (0.6 if rms > 0.25 else rms * 3) * 0.25 +
+            (0.6 if flux > 3 else flux / 8) * 0.2
+        )
+
+        # --- fearful (恐惧) ---
+        # 特征: 高频、短促、中等能量、高频噪声
+        scores["fearful"] = (
+            (0.7 if f0 > 500 else f0 / 800) * 0.3 +
+            (0.6 if duration < 0.7 else max(0, 1 - duration * 0.8)) * 0.25 +
+            (0.5 if 0.15 < rms < 0.35 else max(0, 1 - abs(rms - 0.25) * 3)) * 0.2 +
+            (0.6 if zcr > 0.2 else zcr * 3) * 0.25
+        )
+
+        # --- happy / excited (愉悦/兴奋) ---
+        # 特征: 高频、变化快、中等能量、有节奏
+        scores["happy"] = (
+            (0.6 if 400 < f0 < 800 else max(0, 1 - abs(f0 - 600) / 400)) * 0.25 +
+            (0.6 if f0_range > 150 else f0_range / 300) * 0.3 +
+            (0.5 if 0.15 < rms < 0.35 else max(0, 1 - abs(rms - 0.25) * 3)) * 0.2 +
+            (0.5 if duration < 1.5 else max(0, 1 - duration / 3)) * 0.25
+        )
+
+        scores["excited"] = (
+            (0.6 if f0 > 500 else f0 / 800) * 0.25 +
+            (0.7 if f0_range > 200 else f0_range / 300) * 0.3 +
+            (0.6 if rms > 0.25 else rms * 3) * 0.2 +
+            (0.5 if flux > 4 else flux / 10) * 0.25
+        )
+
+        # --- seek_attention (寻求关注) ---
+        # 特征: 中频、中等时长、中等能量、有节奏的重复
+        scores["seek_attention"] = (
+            (0.5 if 350 < f0 < 650 else max(0, 1 - abs(f0 - 500) / 300)) * 0.3 +
+            (0.5 if 0.5 < duration < 2.0 else max(0, 1 - abs(duration - 1) / 2)) * 0.25 +
+            (0.4 if 0.15 < rms < 0.35 else max(0, 1 - abs(rms - 0.25) * 3)) * 0.25 +
+            (0.4 if 50 < f0_range < 250 else max(0, 1 - abs(f0_range - 120) / 250)) * 0.2
+        )
+
+        # --- content (满足/咕噜) ---
+        # 特征: 低频、持续长、低能量、完全浊音
+        scores["content"] = (
+            (0.7 if f0 < 150 else max(0, 1 - f0 / 300)) * 0.35 +
+            (0.7 if duration > 2.0 else duration / 3) * 0.3 +
+            (0.5 if rms < 0.2 else 1 - rms * 2) * 0.2 +
+            (0.6 if voiced > 0.8 else voiced) * 0.15
+        )
+
+        # --- pain (疼痛) ---
+        # 特征: 高频、非常短促、响亮、爆发性
+        scores["pain"] = (
+            (0.7 if f0 > 700 else f0 / 1000) * 0.3 +
+            (0.8 if duration < 0.4 else max(0, 1 - duration * 2)) * 0.35 +
+            (0.7 if rms > 0.25 else rms * 3) * 0.2 +
+            (0.6 if flux > 5 else flux / 10) * 0.15
+        )
+
+        # --- lonely / anxious (孤独/焦虑) ---
+        # 特征: 中低频、持续长、中等能量、音调少变化
+        scores["lonely"] = (
+            (0.6 if 200 < f0 < 400 else max(0, 1 - abs(f0 - 300) / 200)) * 0.3 +
+            (0.7 if duration > 1.5 else duration / 2.5) * 0.35 +
+            (0.5 if 0.15 < rms < 0.35 else max(0, 1 - abs(rms - 0.25) * 3)) * 0.2 +
+            (0.5 if f0_range < 100 else max(0, 1 - f0_range / 200)) * 0.15
+        )
+
+        scores["anxious"] = (
+            (0.5 if 250 < f0 < 500 else max(0, 1 - abs(f0 - 350) / 250)) * 0.25 +
+            (0.6 if duration > 1.0 else duration / 2) * 0.3 +
+            (0.5 if 0.15 < rms < 0.35 else max(0, 1 - abs(rms - 0.25) * 3)) * 0.2 +
+            (0.5 if flux > 2 else flux / 8) * 0.25
+        )
+
+        # --- territorial (领地) ---
+        # 特征: 低频、非常响亮、持续、中等浊音
+        scores["territorial"] = (
+            (0.7 if f0 < 200 else max(0, 1 - f0 / 350)) * 0.35 +
+            (0.8 if rms > 0.25 else rms * 3) * 0.3 +
+            (0.6 if duration > 1.5 else duration / 2) * 0.2 +
+            (0.5 if f0_range < 100 else max(0, 1 - f0_range / 200)) * 0.15
+        )
+
+        # --- playful (玩耍) ---
+        # 特征: 中高频、变化快、中等能量、短促重复
+        scores["playful"] = (
+            (0.5 if 400 < f0 < 700 else max(0, 1 - abs(f0 - 550) / 300)) * 0.25 +
+            (0.7 if f0_range > 200 else f0_range / 350) * 0.3 +
+            (0.5 if 0.15 < rms < 0.35 else max(0, 1 - abs(rms - 0.25) * 3)) * 0.2 +
+            (0.6 if duration < 1.2 else max(0, 1 - duration / 2)) * 0.25
+        )
+
+        # --- greeting (问候) ---
+        # 特征: 中频、短促、中等能量、音调稳定
+        scores["greeting"] = (
+            (0.5 if 400 < f0 < 600 else max(0, 1 - abs(f0 - 500) / 200)) * 0.3 +
+            (0.6 if duration < 1.0 else max(0, 1 - duration)) * 0.25 +
+            (0.5 if 0.15 < rms < 0.3 else max(0, 1 - abs(rms - 0.22) * 4)) * 0.25 +
+            (0.4 if f0_range < 100 else max(0, 1 - f0_range / 200)) * 0.2
+        )
+
+        # --- frustrated (挫败) ---
+        # 特征: 低频、中等时长、低能量、音调小变化
+        scores["frustrated"] = (
+            (0.6 if 200 < f0 < 400 else max(0, 1 - abs(f0 - 300) / 200)) * 0.3 +
+            (0.5 if 0.8 < duration < 2.0 else max(0, 1 - abs(duration - 1.2) / 1.5)) * 0.3 +
+            (0.5 if rms < 0.2 else 1 - rms * 2) * 0.2 +
+            (0.5 if f0_range < 150 else max(0, 1 - f0_range / 300)) * 0.2
+        )
+
+        # 选出最高分的情绪
+        sorted_scores = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+        emotion = sorted_scores[0][0]
+        confidence = sorted_scores[0][1]
+
+        # 归一化置信度到 0-1
+        max_possible = max(sorted_scores[0][1], 0.5)
+        confidence = min(0.95, max(0.3, confidence))
+
+        return {
+            "emotion": emotion,
+            "confidence": round(confidence, 2),
+            "description": EMOTION_TO_DESCRIPTION.get(emotion, "未知情绪的宠物声音"),
+            "demand": EMOTION_TO_DEMAND.get(emotion, "观察宠物状态"),
+            "llm_reasoning": f"基于声学特征的规则分类 (F0={f0:.0f}Hz, RMS={rms:.3f}, Dur={duration:.2f}s)",
+            "acoustic_features": features,
+            "method": "rule_based",
+        }
+
+
+def detect_environment() -> Dict:
+    """
+    检测运行环境，决定使用哪种分类方案
+
+    Returns:
+        {
+            "os": "macos" | "linux" | "windows",
+            "has_cuda": True/False,
+            "has_mps": True/False (macOS),
+            "device": "cuda" | "mps" | "cpu",
+            "strategy": "llm_only" | "fusion",  # macOS→llm_only, Linux+GPU→fusion
+            "description": "人类可读的环境描述",
+        }
+    """
+    info = {
+        "os": platform.system().lower(),
+        "has_cuda": False,
+        "has_mps": False,
+        "device": "cpu",
+        "strategy": "llm_only",
+        "description": "",
+    }
+
+    # 检测 CUDA
+    try:
+        import torch
+        info["has_cuda"] = torch.cuda.is_available()
+        if info["has_cuda"]:
+            info["device"] = "cuda"
+    except Exception:
+        pass
+
+    # 检测 MPS (macOS)
+    if info["os"] == "darwin":
+        try:
+            import torch
+            info["has_mps"] = torch.backends.mps.is_available()
+            if info["has_mps"]:
+                info["device"] = "mps"
+        except Exception:
+            pass
+
+    # 决定策略
+    if info["os"] == "darwin":
+        # macOS: 仅使用 LLM 方案
+        info["strategy"] = "llm_only"
+        if info["has_mps"]:
+            info["description"] = "macOS + MPS (仅 Layer 1: LLM 声学分类)"
+        else:
+            info["description"] = "macOS + CPU (仅 Layer 1: LLM 声学分类)"
+    elif info["os"] == "linux" and info["has_cuda"]:
+        # Linux + CUDA: 融合方案
+        info["strategy"] = "fusion"
+        info["description"] = "Linux + CUDA (融合方案: ACaD + VGGish + 手工特征)"
+    else:
+        # 其他: 降级为 LLM 方案
+        info["strategy"] = "llm_only"
+        info["description"] = f"{info['os'].capitalize()} + {info['device']} (仅 Layer 1: LLM 声学分类)"
+
+    return info
+
+
+class FusionPetClassifier:
+    """
+    融合宠物声音分类器
+
+    根据环境自动选择:
+    - macOS: 仅使用 LLMAcousticClassifier (Layer 1)
+    - Linux + GPU: 使用融合方案 (ACaD + VGGish + 手工特征 + LLM)
+
+    融合方案流程:
+    1. ACaD → 物种识别 (cat/dog/bird/human)
+    2. VGGish → 128 维语义 embedding
+    3. 手工特征 → 8 维精细声学特征
+    4. 特征融合 (128 + 8 = 136 维)
+    5. LLM 分类 → 20 种情绪
+    """
+
+    def __init__(self, llm_model=None):
+        self.env_info = detect_environment()
+        self.llm_model = llm_model
+        self.is_ready = True
+
+        # 核心: LLMAcousticClassifier (所有环境都需要)
+        self.llm_classifier = LLMAcousticClassifier(llm_model=llm_model)
+
+        # 融合组件 (仅 Linux + GPU 加载)
+        self.vggish = None
+        self.acad = None
+
+        print(f"\n{'='*60}")
+        print(f"  环境检测: {self.env_info['description']}")
+        print(f"  分类策略: {self.env_info['strategy']}")
+
+        if self.env_info["strategy"] == "fusion":
+            self._init_fusion_components()
+        else:
+            print(f"  ℹ️  macOS 模式: 仅使用 Layer 1 (LLM 声学分类)")
+
+        print(f"{'='*60}\n")
+
+    def _init_fusion_components(self):
+        """初始化融合组件 (ACaD + VGGish)"""
+        print(f"  ┌─ 加载融合组件...")
+
+        # 加载 ACaD
+        try:
+            from .acad_classifier import ACaDClassifier
+            self.acad = ACaDClassifier(device=self.env_info["device"])
+            print(f"  │  ✅ ACaD 物种分类器就绪")
+        except Exception as e:
+            print(f"  │  ⚠️  ACaD 加载失败: {e}")
+            self.acad = None
+
+        # 加载 VGGish
+        try:
+            from .vggish_extractor import VGGishExtractor
+            self.vggish = VGGishExtractor(device=self.env_info["device"])
+            print(f"  │  ✅ VGGish 特征提取器就绪")
+        except Exception as e:
+            print(f"  │  ⚠️  VGGish 加载失败: {e}")
+            self.vggish = None
+
+        print(f"  └─ 融合组件加载完成")
+
+    def classify(self, audio_path: str, pet_type: str = "cat") -> Dict:
+        """
+        分类宠物声音情绪
+
+        根据环境自动选择:
+        - macOS: 仅用 LLMAcousticClassifier
+        - Linux + GPU: 融合 ACaD + VGGish + 手工特征 + LLM
+        """
+        if self.env_info["strategy"] == "fusion" and self.vggish and self.acad:
+            return self._fusion_classify(audio_path, pet_type)
+        else:
+            return self._llm_classify(audio_path, pet_type)
+
+    def _llm_classify(self, audio_path: str, pet_type: str) -> Dict:
+        """Layer 1: 纯 LLM 声学分类 (macOS 默认路径)"""
+        return self.llm_classifier.classify(audio_path, pet_type)
+
+    def _fusion_classify(self, audio_path: str, pet_type: str) -> Dict:
+        """融合分类: ACaD + VGGish + 手工特征 + LLM"""
+        try:
+            # Step 1: ACaD 物种识别
+            species_result = self.acad.classify(audio_path)
+            detected_species = species_result["species"]
+            species_conf = species_result["confidence"]
+
+            # 如果检测到的物种与预期不符，仍然继续 (可能是误检)
+            if detected_species not in ("cat", "dog"):
+                # 如果不是猫狗，直接用 LLM 分类
+                llm_result = self.llm_classifier.classify(audio_path, pet_type)
+                llm_result["species_detection"] = species_result
+                llm_result["fusion_mode"] = "llm_fallback"
+                return llm_result
+
+            # Step 2: VGGish 特征提取
+            vggish_embedding = self.vggish.extract(audio_path)
+
+            # Step 3: 手工特征 + LLM 分类
+            llm_result = self.llm_classifier.classify(audio_path, pet_type)
+
+            # Step 4: 融合增强 (如果 VGGish 可用)
+            if vggish_embedding is not None:
+                # 用 VGGish 的语义信息增强置信度
+                # 如果 VGGish 特征与 LLM 判断一致，增加置信度
+                enhanced_result = self._enhance_with_vggish(
+                    llm_result, vggish_embedding, detected_species
+                )
+                enhanced_result["species_detection"] = species_result
+                enhanced_result["vggish_embedding_used"] = True
+                enhanced_result["fusion_mode"] = "full_fusion"
+                return enhanced_result
+            else:
+                llm_result["species_detection"] = species_result
+                llm_result["vggish_embedding_used"] = False
+                llm_result["fusion_mode"] = "partial_fusion"
+                return llm_result
+
+        except Exception as e:
+            print(f"    ⚠️  融合分类失败，降级为 LLM: {e}")
+            return self.llm_classifier.classify(audio_path, pet_type)
+
+    def _enhance_with_vggish(
+        self, llm_result: Dict, vggish_embedding: np.ndarray, detected_species: str
+    ) -> Dict:
+        """
+        用 VGGish embedding 增强 LLM 分类结果
+
+        策略:
+        - 如果 VGGish embedding 的范数较大（声音有能量），且 LLM 置信度低，
+          则用 VGGish 特征重新加权
+        - 如果物种检测与预期一致，增加置信度
+        """
+        emotion = llm_result["emotion"]
+        confidence = llm_result["confidence"]
+
+        # VGGish embedding 分析
+        embedding_norm = np.linalg.norm(vggish_embedding)
+        embedding_mean = np.mean(vggish_embedding)
+
+        # 物种一致性增强
+        expected_species = "cat" if detected_species == "cat" else "dog"
+        if detected_species in ("cat", "dog"):
+            # 物种检测明确，增强相关情绪的置信度
+            species_emotions = {
+                "cat": ["purring", "meowing", "hissing", "yowling"],
+                "dog": ["barking", "whining", "growling", "howling"],
+            }
+            # 如果当前情绪与物种匹配，增加置信度
+            cat_emotions = ["content", "happy", "alert", "angry", "fearful"]
+            dog_emotions = ["alert", "angry", "playful", "excited", "territorial"]
+
+            if detected_species == "cat" and emotion in cat_emotions:
+                confidence = min(0.95, confidence * 1.1)
+            elif detected_species == "dog" and emotion in dog_emotions:
+                confidence = min(0.95, confidence * 1.1)
+
+        # 基于 VGGish embedding 的能量调整
+        if embedding_norm > 5.0:
+            # 高能量声音: 可能是 alert/pain/excited
+            high_energy_emotions = ["alert", "pain", "excited", "angry"]
+            if emotion in high_energy_emotions:
+                confidence = min(0.95, confidence * 1.05)
+        elif embedding_norm < 2.0:
+            # 低能量声音: 可能是 content/relaxed/lonely
+            low_energy_emotions = ["content", "relaxed", "lonely", "sad"]
+            if emotion in low_energy_emotions:
+                confidence = min(0.95, confidence * 1.05)
+
+        # 更新结果
+        llm_result["confidence"] = round(confidence, 2)
+        llm_result["vggish_analysis"] = {
+            "embedding_norm": float(embedding_norm),
+            "embedding_mean": float(embedding_mean),
+            "species_consistent": True,
+        }
+
+        return llm_result

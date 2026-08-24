@@ -9,6 +9,7 @@ LLM LoRA 微调模块: 微调大语言模型实现宠物声音理解 + 人宠翻
 """
 
 import os
+import re
 import glob
 import signal
 import time
@@ -914,9 +915,19 @@ class LLMFineTuner:
         self,
         user_input: str,
         system_prompt: str = "你是一个宠物语言翻译专家。",
-        max_new_tokens: int = 512,
+        max_new_tokens: int = 256,
+        temperature: float = 0.7,
+        repetition_penalty: float = 1.15,
     ) -> str:
-        """推理 - 自动适配设备"""
+        """推理 - 自动适配设备
+
+        Args:
+            user_input: 用户输入文本
+            system_prompt: 系统提示
+            max_new_tokens: 最大生成 token 数 (默认 256, 避免过长导致重复)
+            temperature: 采样温度 (0.7=有创造性, 0.3=更确定)
+            repetition_penalty: 重复惩罚 (>1.0 防止重复生成)
+        """
         self.model.eval()
 
         messages = [
@@ -939,15 +950,16 @@ class LLMFineTuner:
             inputs = {k: v.to("mps") for k, v in inputs.items()}
 
         with torch.no_grad():
-            # 清除 generation_config 中的 max_length，避免与 max_new_tokens 冲突
             if hasattr(self.model, "generation_config") and self.model.generation_config is not None:
                 self.model.generation_config.max_length = None
             output_ids = self.model.generate(
                 **inputs,
                 max_new_tokens=max_new_tokens,
-                temperature=0.3,
+                temperature=temperature,
                 top_p=0.9,
                 do_sample=True,
+                repetition_penalty=repetition_penalty,
+                no_repeat_ngram_size=3,
                 pad_token_id=self.tokenizer.eos_token_id,
             )
 
@@ -955,7 +967,127 @@ class LLMFineTuner:
             output_ids[0][inputs["input_ids"].shape[1]:],
             skip_special_tokens=True,
         )
-        return response
+        return self._clean_generated_text(response)
+
+    def generate_anthropomorphic(
+        self,
+        pet_type: str,
+        breed: str,
+        emotion: str,
+        description: str,
+        context: str = "",
+    ) -> str:
+        """生成拟人化文本 — 专用接口，匹配训练数据格式
+
+        将情绪分析结果转化为可爱、口语化的人类语言，
+        模拟宠物"说人话"的效果。
+        """
+        system_prompt = (
+            "你是一个宠物语言翻译专家。请将宠物的情绪转化为一句可爱、口语化的人类语言，"
+            "让人能听懂宠物想表达什么。输出必须是一句简短的人话，不要加任何解释或前缀。"
+        )
+
+        pet_type_names = {"cat": "猫咪", "dog": "狗狗", "bird": "鸟", "rabbit": "兔子"}
+        pet_cn = pet_type_names.get(pet_type, pet_type)
+
+        emotion_to_chinese = {
+            "alert": "警觉", "seek_attention": "求关注", "hungry": "饿了",
+            "happy": "开心", "angry": "生气", "fearful": "害怕",
+            "content": "满足", "pain": "疼痛", "curious": "好奇",
+            "lonely": "孤独", "anxious": "焦虑", "excited": "兴奋",
+            "frustrated": "沮丧", "relaxed": "放松", "territorial": "护领地",
+            "greeting": "打招呼", "confused": "困惑", "jealous": "嫉妒",
+            "sad": "难过", "playful": "想玩耍"
+        }
+        emotion_cn = emotion_to_chinese.get(emotion, emotion)
+
+        user_input = (
+            f"宠物类型: {pet_type}({pet_cn})\n"
+            f"品种: {breed}\n"
+            f"情绪: {emotion}({emotion_cn})\n"
+            f"声音描述: {description}\n"
+            f"情境: {context}\n"
+            f"请将{pet_cn}的情绪转化为一句可爱自然的人话，比如:{pet_cn}想对你说的话。"
+        )
+
+        raw = self.inference(
+            user_input, system_prompt,
+            max_new_tokens=40,
+            temperature=0.8,
+            repetition_penalty=1.2,
+        )
+        return self._clean_anthropomorphic_output(raw, pet_type, breed)
+
+    @staticmethod
+    def _clean_generated_text(text: str) -> str:
+        """清理生成文本：去除重复、空白、特殊字符"""
+        if not text:
+            return ""
+        text = text.strip()
+        text = text.replace("  ", " ")
+        text = text.replace("\u3000", " ")
+        lines = [l.strip() for l in text.split("\n") if l.strip()]
+        text = " ".join(lines)
+        return text
+
+    @staticmethod
+    def _clean_anthropomorphic_output(text: str, pet_type: str, breed: str) -> str:
+        """清理拟人化输出：去除重复模式、提取有效内容"""
+        if not text:
+            return ""
+
+        text = text.strip()
+
+        # 去除重复字符模式 (如 "XXX XXX XXX" 或 "棒棒喂食棒棒喂食")
+        for n in [4, 3, 2]:
+            pattern = re.compile(r'(.{' + str(n) + r',})\1{2,}')
+            text = pattern.sub(r'\1', text)
+
+        # 去除开头的 "宠物类型:" "品种:" 等元信息行
+        lines = text.split('\n')
+        cleaned_lines = []
+        for line in lines:
+            stripped = line.strip()
+            if re.match(r'^(宠物类型|品种|情绪|描述|情境|声音描述)\s*[::]', stripped):
+                continue
+            cleaned_lines.append(stripped)
+        text = ' '.join(cleaned_lines)
+
+        # 去除 markdown 标记
+        text = re.sub(r'#+ ', '', text)
+        text = re.sub(r'\*+', '', text)
+
+        # 去除多余空白
+        text = re.sub(r' {2,}', ' ', text)
+        text = text.strip()
+
+        # 移除开头的解释性文字
+        prefix_patterns = [
+            r'^(这句话|这段话|这个声音|这段声音|宠物|它|这只)'
+            r'(想|可能|应该|大概|似乎|)'
+            r'(对你说|表达|说|告诉|传达|想说|的意思是|想说的是|)',
+            r'^(翻译|解读|意思|人话|翻译后|转化后)',
+            r'^(宠物类型|品种|情绪|描述|情境)\s*[:：]',
+            r'^[（(].*?[)）]\s*',
+            r'^以下.*?[：:]\s*',
+            r'^根据.*?[，,]\s*',
+            r'^分析.*?[：:]\s*',
+        ]
+        for pat in prefix_patterns:
+            text = re.sub(pat, '', text)
+        text = text.strip('：:。!！,. ')
+
+        # 检测仍然是元信息而非自然语言
+        if text.startswith('宠物类型') or text.startswith('品种'):
+            return ""
+
+        # 如果清理后太短或太长，返回空让上层使用 fallback
+        if len(text) < 3:
+            return ""
+        if len(text) > 200:
+            text = text[:200] + "..."
+
+        return text
 
     def load_finetuned(self, adapter_path: str):
         """加载已微调的 LoRA adapter - 自动适配设备"""

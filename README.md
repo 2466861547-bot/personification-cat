@@ -1579,3 +1579,112 @@ Whisper 推理阶段打印的关键日志：
 **结论**：`test.wav` 的主频（最强能量频率）约 350Hz，落在普通话单韵母「ū / wū」的基频范围（250-500Hz）。Whisper 作为**人类语音 ASR 模型**，从未见过猫叫频谱，所以它把这段未知频谱「最小化重构误差」地解码成了最接近的人类语音音节——「嗚」。这属于典型的 **Distribution Shift（分布偏移）**，不是 bug，而是模型先天假设被打破。
 
 > 对应改进即上面 **P0-1 用声学特征替代 Whisper 做情绪信号源**。
+
+---
+
+## 宠物声音分类器：融合架构设计
+
+### 为什么 Whisper 不适合宠物声音？
+
+Whisper 是为 **人类语音 → 文字** 设计的 ASR 模型，其 decoder 的词表中没有"喵叫""低吼"等 token。当输入宠物叫声时，它只能输出「嗚/啊/哦」等最接近的中文音节 fallback（Top1 命中率仅 9.1%）。
+
+### 自动环境检测策略
+
+系统会自动检测运行环境，选择最优分类方案：
+
+| 环境 | 检测结果 | 分类策略 | 加载的组件 |
+|------|---------|---------|-----------|
+| **macOS + MPS/CPU** | `strategy: llm_only` | 仅 Layer 1 | LLMAcousticClassifier |
+| **Linux + GPU (CUDA)** | `strategy: fusion` | 三者融合 | ACaD + VGGish + LLMAcousticClassifier |
+| 其他 | `strategy: llm_only` | 降级 Layer 1 | LLMAcousticClassifier |
+
+检测逻辑（`detect_environment()` 函数）：
+```python
+from src.models.pet_sound_classifier import detect_environment
+env = detect_environment()
+# macOS:  {"os": "darwin", "has_mps": True, "strategy": "llm_only"}
+# Linux:  {"os": "linux", "has_cuda": True, "strategy": "fusion"}
+```
+
+### 融合架构详解
+
+#### macOS 模式（Layer 1 only）
+
+```
+宠物声音 → 8维声学特征 → 自然语言描述 → LLM推理 → 20种情绪
+```
+
+- **LLMAcousticClassifier**: 利用 LLM 世界知识判断情绪，无需训练数据
+- **Rule-based 降级**: 当 LLM 不可用时，使用声学规则评分系统
+
+#### Linux + GPU 模式（三者融合）
+
+```
+宠物声音
+    │
+    ├─ ACaD 物种识别 → cat/dog/bird/human
+    │   └── (确定使用哪个情绪分类器)
+    │
+    ├─ VGGish 特征提取 → 128维语义embedding
+    │   └── (捕捉音频语义信息)
+    │
+    ├─ 手工特征提取 → 8维精细声学特征
+    │   └── (F0/RMS/时长/频谱质心/过零率/浊音比/频谱通量/F0范围)
+    │
+    └─ 特征融合 + LLM分类 → 20种情绪
+        └── VGGish embedding 增强置信度
+```
+
+| 组件 | 功能 | 输出 | 文件 |
+|------|------|------|------|
+| **ACaDClassifier** | 物种识别 | cat/dog/bird/human | [acad_classifier.py](file:///Users/apple/Downloads/ai/personification-cat/src/models/acad_classifier.py) |
+| **VGGishExtractor** | 语义特征提取 | 128维embedding | [vggish_extractor.py](file:///Users/apple/Downloads/ai/personification-cat/src/models/vggish_extractor.py) |
+| **LLMAcousticClassifier** | 情绪分类 | 20种情绪+置信度 | [pet_sound_classifier.py](file:///Users/apple/Downloads/ai/personification-cat/src/models/pet_sound_classifier.py) |
+| **FusionPetClassifier** | 融合调度 | 最终分类结果 | [pet_sound_classifier.py](file:///Users/apple/Downloads/ai/personification-cat/src/models/pet_sound_classifier.py) |
+
+### 三层降级机制
+
+```
+Layer 1: LLMAcousticClassifier (首选, 融合模式)
+    ↓ 不可用
+Layer 2: PetSoundClassifier (随机森林, 备选)
+    ↓ 不可用
+Layer 3: Whisper ASR (保底, 仅人类语音)
+```
+
+### 两条流程的正确分工
+
+| 流程 | 模型选择 | 原因 |
+|------|---------|------|
+| **宠物声音 → 人类声音** | Layer 1 (LLM 声学) | 宠物叫声不是人类语音，用声学特征分类 |
+| **人类声音 → 宠物声音** | Whisper ASR | 人类语音转文字是 Whisper 的正确场景 |
+
+### LLMAcousticClassifier 声学特征说明
+
+| 特征 | 含义 | 典型情绪对应 |
+|------|------|-------------|
+| F0 均值 | 基频高低 | 低沉→angry/content；尖锐→pain/fearful |
+| F0 范围 | 音调变化幅度 | 大范围→excited/happy；稳定→content/territorial |
+| RMS | 能量大小 | 响亮→alert/pain；轻柔→content/lonely |
+| 时长 | 持续时间 | 短促→alert/pain；持续→content/lonely |
+| 频谱质心 | 音色明亮度 | 高频→playful/excited；低频→content/territorial |
+| 过零率 | 噪声成分 | 高→fearful/alert；低→content/happy |
+| 浊音比 | 发声质量 | 浊音→content/hungry；清音→angry/fearful |
+| 频谱通量 | 动态变化 | 高→pain/excited；低→content/relaxed |
+
+### 使用示例
+
+```bash
+# 宠物声音 → 人类声音 (自动使用 Layer 1 LLM 声学分类器)
+python scripts/inference.py \
+  --mode pet_to_human_voice \
+  --audio ./data/raw/cat_sounds/test.wav \
+  --pet cat \
+  --target-voice 林志玲
+
+# 人类声音 → 宠物声音 (使用 Whisper ASR 处理人类语音)
+python scripts/inference.py \
+  --mode human_to_pet \
+  --audio ./input/voice.wav \
+  --pet cat
+```
