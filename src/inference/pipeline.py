@@ -15,6 +15,7 @@ from ..rag.retriever import PetRetriever
 from ..models.whisper_finetune import WhisperFineTuner, WhisperFineTuneConfig
 from ..models.llm_finetune import LLMFineTuner, LLMFineTuneConfig
 from ..models.audio_generation import AudioGenerator
+from ..models.pet_sound_classifier import PetSoundClassifier
 from ..agent.pet_agent import PetTranslationAgent
 from ..agent.tools import PetTools
 
@@ -43,6 +44,7 @@ class TranslationPipeline:
         self.llm = None
         self.rag_retriever = None
         self.audio_generator = None
+        self.pet_classifier = None
         self.agent = None
         self._custom_embedding_model = embedding_model
 
@@ -115,7 +117,7 @@ class TranslationPipeline:
                 self.llm = None
 
         # 3. Bark 音频生成
-        print(f"  ┌─ 模块 3/3: Bark 音频生成 (宠物声音合成)")
+        print(f"  ┌─ 模块 3/4: Bark 音频生成 (宠物声音合成 + 人类声纹克隆)")
         try:
             self.audio_generator = AudioGenerator()
             if self.audio_generator.is_ready:
@@ -125,6 +127,30 @@ class TranslationPipeline:
         except Exception as e:
             print(f"  └─ ⚠️  音频生成器加载失败: {e}")
             self.audio_generator = None
+
+        # 4. 宠物声音分类器 (替代 Whisper 处理宠物声音)
+        print(f"  ┌─ 模块 4/4: 宠物声音分类器 (声学特征 + 随机森林)")
+        classifier_path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+            "checkpoints",
+            "pet_classifier",
+        )
+        if os.path.isdir(classifier_path):
+            try:
+                self.pet_classifier = PetSoundClassifier(model_dir=classifier_path)
+                if self.pet_classifier.is_ready:
+                    print(f"  └─ ✅ 宠物声音分类器加载成功")
+                else:
+                    print(f"  └─ ⚠️  分类器目录存在但加载失败，将仅使用 Whisper")
+                    self.pet_classifier = None
+            except Exception as e:
+                print(f"  └─ ⚠️  宠物声音分类器加载失败: {e}")
+                self.pet_classifier = None
+        else:
+            print(f"  └─ ℹ️  未训练宠物声音分类器")
+            print(f"     训练命令: python scripts/train_pet_classifier.py")
+            print(f"     未训练时将使用 Whisper (效果有限)")
+            self.pet_classifier = None
 
         print(f"  {'─'*60}")
         # ============ 模型服务层结束 ============
@@ -207,6 +233,7 @@ class TranslationPipeline:
             ("LLM 情绪解读", "✅" if self.llm else "❌"),
             ("RAG 知识检索", "✅" if self.rag_retriever and self.rag_retriever.is_ready else "❌"),
             ("Audio 声音生成", "✅" if self.audio_generator else "❌"),
+            ("宠物声音分类器", "✅" if self.pet_classifier else "⏭️"),
             ("Agent 编排", "✅" if self.agent else "⏭️"),
         ]
         for name, status in components:
@@ -219,7 +246,7 @@ class TranslationPipeline:
         pet_type: str = "cat",
         breed: str = "通用",
     ) -> Dict:
-        """宠物声音 → 人类语言 — 按业务架构分步打印"""
+        """宠物声音 → 人类语言 — 使用分类器 (优先) 或 Whisper (fallback)"""
         result = {
             "input_audio": audio_path,
             "pet_type": pet_type,
@@ -230,26 +257,38 @@ class TranslationPipeline:
         print(f"\n{'='*60}")
         print(f"🕹️ 【LangChain Agent 编排层】执行: 宠物声音 → 人类语言")
         print(f"{'='*60}")
-        print(f"  Step 1/3: 声音分析 Tool")
-        print(f"    ↓ 输入: 音频文件 → Whisper ASR (模型服务层)")
+        print(f"  Step 1/3: 声音分析")
 
-        # 1. Whisper ASR (模型服务层)
-        if self.whisper:
+        # 优先使用宠物声音分类器 (如果已就绪)
+        if self.pet_classifier and self.pet_classifier.is_ready:
+            print(f"    ↓ 使用: 宠物声音分类器 (声学特征 + 随机森林)")
+            classification = self.pet_classifier.predict(audio_path)
+            emotion = classification["emotion"]
+            confidence = classification["confidence"]
+            description = classification["description"]
+            result["pet_classification"] = classification
+            result["whisper_transcription"] = description  # 用描述文本替代 Whisper 输出
+            result["emotion_confidence"] = confidence
+            print(f"    ↑ 情绪: {emotion} (置信度: {confidence:.2f})")
+            print(f"    ↑ 描述: {description}")
+        elif self.whisper:
+            print(f"    ↓ 使用: Whisper ASR (fallback)")
             whisper_result = self.whisper.inference(audio_path)
             result["whisper_transcription"] = whisper_result
+            print(f"    ↑ Whisper 输出: '{whisper_result}'")
         else:
-            whisper_result = "无法识别(Whisper 未加载)"
-            result["whisper_transcription"] = whisper_result
-        print(f"    ↑ 输出: '{whisper_result}'")
+            result["whisper_transcription"] = "无法识别(无可用模型)"
+            print(f"    ↑ ⚠️  无可用模型")
 
         # ============ LangChain Agent 编排层 Step 2: 知识检索 ============
-        print(f"  Step 2/3: 知识检索 Tool")
-        print(f"    ↓ 输入: '{whisper_result}' → Embedding + ChromaDB (RAG 知识检索层)")
+        print(f"  Step 2/3: 知识检索")
+        search_query = result["whisper_transcription"]
+        print(f"    ↓ 输入: '{search_query}' → Embedding + ChromaDB (RAG 知识检索层)")
 
         # 2. RAG 检索 (RAG 知识检索层)
         if self.rag_retriever and self.rag_retriever.is_ready:
             search_detail = self.rag_retriever.search_with_details(
-                f"{pet_type} {whisper_result} 情绪 含义 建议"
+                f"{pet_type} {search_query} 情绪 含义 建议"
             )
             rag_results = search_detail.get("results", [])
             result["rag_details"] = rag_results
@@ -266,13 +305,13 @@ class TranslationPipeline:
             rag_results = []
 
         # ============ LangChain Agent 编排层 Step 3: 情绪解读 ============
-        print(f"  Step 3/3: 情绪解读 Tool")
-        print(f"    ↓ 输入: Whisper输出 + RAG上下文 → LLM LoRA (模型服务层)")
+        print(f"  Step 3/3: 情绪解读")
+        print(f"    ↓ 输入: 声音分析结果 + RAG上下文 → LLM LoRA (模型服务层)")
 
         # 3. LLM 分析
         if self.agent:
             analysis = self.agent.analyze_sound(
-                sound_description=whisper_result,
+                sound_description=search_query,
                 pet_type=pet_type,
                 breed=breed,
             )
@@ -281,13 +320,13 @@ class TranslationPipeline:
             rag_context = ""
             if self.rag_retriever and self.rag_retriever.is_ready:
                 rag_context = self.rag_retriever.get_context_for_llm(
-                    f"{pet_type} {whisper_result}"
+                    f"{pet_type} {search_query}"
                 )
 
             system_prompt = "你是一个宠物行为学专家。"
             user_input = (
                 f"宠物类型: {pet_type}, 品种: {breed}\n"
-                f"声音描述: {whisper_result}\n\n"
+                f"声音描述: {search_query}\n\n"
             )
             if rag_context:
                 user_input += f"知识库参考:\n{rag_context}\n\n"
@@ -301,6 +340,92 @@ class TranslationPipeline:
         print(f"    ↑ 输出: 情绪解读完成 ({output_len} 字)")
         print(f"  {'─'*60}")
 
+        return result
+
+    def pet_sound_to_human_sound(
+        self,
+        audio_path: str,
+        target_voice: str = "default",
+        pet_type: str = "cat",
+        breed: str = "通用",
+        output_path: str = "",
+    ) -> Dict:
+        """宠物声音 → 人类语言 → 人类声音 (声纹克隆)"""
+        result = {
+            "input_audio": audio_path,
+            "target_voice": target_voice,
+            "pet_type": pet_type,
+        }
+
+        print(f"\n{'='*60}")
+        print(f"🕹️ 【LangChain Agent 编排层】执行: 宠物声音 → 人类声音 (声纹克隆)")
+        print(f"{'='*60}")
+
+        # Step 1: 宠物声音 → 情绪分类
+        print(f"  Step 1/3: 宠物声音情绪分类")
+        if self.pet_classifier and self.pet_classifier.is_ready:
+            classification = self.pet_classifier.predict(audio_path)
+            emotion = classification["emotion"]
+            confidence = classification["confidence"]
+            description = classification["description"]
+            result["emotion"] = emotion
+            result["emotion_confidence"] = confidence
+            result["description"] = description
+            print(f"    ↓ 使用: 宠物声音分类器")
+            print(f"    ↑ 情绪: {emotion} (置信度: {confidence:.2f})")
+            print(f"    ↑ 中文描述: {description}")
+        elif self.whisper:
+            print(f"    ↓ 使用: Whisper ASR (fallback)")
+            whisper_text = self.whisper.inference(audio_path)
+            result["whisper_text"] = whisper_text
+            description = f"宠物发出了 '{whisper_text}' 的声音"
+            result["description"] = description
+            print(f"    ↑ Whisper: '{whisper_text}'")
+        else:
+            description = "无法识别宠物声音"
+            result["description"] = description
+            print(f"    ↑ ⚠️  无可用模型")
+
+        # Step 2: LLM 生成拟人化描述 (更自然的人类语言)
+        print(f"  Step 2/3: LLM 生成拟人化描述")
+        if self.llm:
+            system_prompt = "你是一个宠物翻译专家。请将宠物的情绪/声音描述转化为自然、口语化的人类语言，让人能听懂宠物想表达什么。"
+            user_input = (
+                f"宠物类型: {pet_type}\n"
+                f"品种: {breed}\n"
+                f"情绪: {result.get('emotion', 'unknown')}\n"
+                f"描述: {result['description']}\n\n"
+                f"请将这句话转化为一句自然的人话，让人能听懂宠物的意思。"
+            )
+            human_text = self.llm.inference(user_input, system_prompt)
+            result["human_text"] = human_text
+            print(f"    ↑ 拟人化文本: {human_text[:100]}...")
+        else:
+            human_text = result["description"]
+            result["human_text"] = human_text
+            print(f"    ↑ LLM 未加载，使用原始描述")
+
+        # Step 3: 文字 → 人类声音 (声纹克隆)
+        print(f"  Step 3/3: 文字 → 人类声音 (目标声线: {target_voice})")
+        if self.audio_generator:
+            if not output_path:
+                os.makedirs("./output", exist_ok=True)
+                output_path = "./output/pet_to_human_cloned.wav"
+
+            audio = self.audio_generator.text_to_human_sound(
+                text=human_text,
+                target_voice=target_voice,
+                output_path=output_path,
+            )
+            result["status"] = "success"
+            result["output_path"] = output_path
+            if not self.audio_generator.is_ready:
+                result["note"] = "使用模拟音频生成 (Bark 模型不可用)"
+        else:
+            result["status"] = "no_audio_generator"
+            result["note"] = "音频生成器不可用"
+
+        print(f"  {'─'*60}")
         return result
 
     def human_text_to_pet_sound(
@@ -341,6 +466,125 @@ class TranslationPipeline:
             result["status"] = "no_audio_generator"
             result["note"] = "音频生成器不可用"
 
+        return result
+
+    def human_sound_to_human_sound(
+        self,
+        audio_path: str,
+        target_voice: str = "default",
+        output_path: str = "",
+    ) -> Dict:
+        """人类声音 → 人类语言 → 人类声音 (声纹克隆)"""
+        result = {
+            "input_audio": audio_path,
+            "target_voice": target_voice,
+        }
+
+        print(f"\n{'='*60}")
+        print(f"🕹️ 【LangChain Agent 编排层】执行: 人类声音 → 人类声音 (声纹克隆)")
+        print(f"{'='*60}")
+        print(f"  Step 1/3: 人类声音 → 文字 (Whisper ASR)")
+        if self.whisper:
+            text_result = self.whisper.inference(audio_path)
+            result["recognized_text"] = text_result
+            print(f"    ↑ 识别结果: '{text_result}'")
+        else:
+            text_result = "无法识别(Whisper 未加载)"
+            result["recognized_text"] = text_result
+            print(f"    ↑ ⚠️  Whisper 未加载，跳过 ASR")
+
+        print(f"  Step 2/3: LLM 意图分析 (可选)")
+        if self.llm and text_result and "无法识别" not in text_result:
+            system_prompt = "你是一个语音助手。请简要分析用户这句话的意图和情绪，然后原样返回用户的核心文本用于语音合成。格式: [意图:xxx] [情绪:xxx] [文本:xxx]"
+            analysis = self.llm.inference(text_result, system_prompt)
+            result["llm_analysis"] = analysis
+            print(f"    ↑ LLM 分析: {analysis[:100]}...")
+            # 尝试提取核心文本用于 TTS
+            import re
+            text_match = re.search(r'文本[：:](.*)', analysis)
+            if text_match:
+                text_for_tts = text_match.group(1).strip()
+            else:
+                text_for_tts = text_result
+        else:
+            text_for_tts = text_result
+            print(f"    ↑ ⚠️  LLM 未加载，直接使用识别文本")
+
+        print(f"  Step 3/3: 文字 → 人类声音 (目标声线: {target_voice})")
+        if self.audio_generator and text_for_tts:
+            if not output_path:
+                os.makedirs("./output", exist_ok=True)
+                output_path = "./output/human_cloned.wav"
+
+            audio = self.audio_generator.text_to_human_sound(
+                text=text_for_tts,
+                target_voice=target_voice,
+                output_path=output_path,
+            )
+            result["status"] = "success"
+            result["output_path"] = output_path
+            if not self.audio_generator.is_ready:
+                result["note"] = "使用模拟音频生成 (Bark 模型不可用，降级模式)"
+        else:
+            result["status"] = "no_audio_generator"
+            result["note"] = "音频生成器不可用"
+
+        print(f"  {'─'*60}")
+        return result
+
+    def human_sound_to_pet_sound(
+        self,
+        audio_path: str,
+        target_pet: str = "cat",
+        output_path: str = "",
+    ) -> Dict:
+        """人类声音 → 人类语言 → 宠物声音"""
+        result = {
+            "input_audio": audio_path,
+            "target_pet": target_pet,
+        }
+
+        print(f"\n{'='*60}")
+        print(f"🕹️ 【LangChain Agent 编排层】执行: 人类声音 → 宠物声音")
+        print(f"{'='*60}")
+        print(f"  Step 1/3: 人类声音 → 文字 (Whisper ASR)")
+        if self.whisper:
+            text_result = self.whisper.inference(audio_path)
+            result["recognized_text"] = text_result
+            print(f"    ↑ 识别结果: '{text_result}'")
+        else:
+            text_result = "无法识别(Whisper 未加载)"
+            result["recognized_text"] = text_result
+            print(f"    ↑ ⚠️  Whisper 未加载")
+
+        print(f"  Step 2/3: LLM 意图分析 → 映射宠物情绪")
+        if self.llm and text_result and "无法识别" not in text_result:
+            # 复用文本转宠物声音的逻辑
+            human_result = self.human_text_to_pet_sound(
+                text=text_result,
+                target_pet=target_pet,
+                output_path=output_path,
+            )
+            result.update(human_result)
+            print(f"    ↑ 分析完成，目标宠物: {target_pet}")
+        elif self.audio_generator:
+            # 降级: 用简单意图分析
+            if not output_path:
+                os.makedirs("./output", exist_ok=True)
+                output_path = f"./output/{target_pet}_from_human.wav"
+
+            audio = self.audio_generator.human_speech_to_pet_sound(
+                speech_text=text_result,
+                target_pet=target_pet,
+                output_path=output_path,
+            )
+            result["status"] = "success"
+            result["output_path"] = output_path
+        else:
+            result["status"] = "no_audio_generator"
+            result["note"] = "音频生成器不可用"
+
+        print(f"  {'─'*60}")
         return result
 
     def chat(self, user_input: str) -> str:

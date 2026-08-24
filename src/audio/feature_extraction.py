@@ -46,17 +46,27 @@ class FeatureExtractor:
 
     def extract_mfcc(self, audio: np.ndarray, n_mfcc: int = 40) -> np.ndarray:
         """提取 MFCC 特征"""
-        mfcc = librosa.feature.mfcc(
-            y=audio,
-            sr=self.sample_rate,
-            n_mfcc=n_mfcc,
-            n_fft=self.n_fft,
-            hop_length=self.hop_length,
-        )
-        # delta 和 delta-delta
-        delta = librosa.feature.delta(mfcc)
-        delta2 = librosa.feature.delta(mfcc, order=2)
-        return np.concatenate([mfcc, delta, delta2], axis=0)
+        try:
+            mfcc = librosa.feature.mfcc(
+                y=audio,
+                sr=self.sample_rate,
+                n_mfcc=n_mfcc,
+                n_fft=self.n_fft,
+                hop_length=self.hop_length,
+            )
+            # delta 和 delta-delta (对短音频可能失败)
+            try:
+                delta = librosa.feature.delta(mfcc)
+            except Exception:
+                delta = np.zeros_like(mfcc)
+            try:
+                delta2 = librosa.feature.delta(mfcc, order=2)
+            except Exception:
+                delta2 = np.zeros_like(mfcc)
+            return np.concatenate([mfcc, delta, delta2], axis=0)
+        except Exception:
+            # 极短音频返回全零特征
+            return np.zeros((n_mfcc * 3, 1), dtype=np.float32)
 
     def extract_spectral_features(self, audio: np.ndarray) -> Dict[str, float]:
         """提取频谱统计特征 (用于声音分类)"""
@@ -90,12 +100,19 @@ class FeatureExtractor:
 
     def extract_pitch(self, audio: np.ndarray) -> Dict[str, float]:
         """提取基频(F0)特征"""
-        f0, voiced_flag, voiced_probs = librosa.pyin(
-            audio,
-            fmin=librosa.note_to_hz("C2"),
-            fmax=librosa.note_to_hz("C7"),
-            sr=self.sample_rate,
-        )
+        try:
+            f0, voiced_flag, voiced_probs = librosa.pyin(
+                audio,
+                fmin=librosa.note_to_hz("C2"),
+                fmax=librosa.note_to_hz("C7"),
+                sr=self.sample_rate,
+            )
+        except Exception:
+            # pyin 对极短音频可能报错，返回零特征
+            return {
+                "f0_mean": 0.0, "f0_std": 0.0, "f0_min": 0.0,
+                "f0_max": 0.0, "voiced_ratio": 0.0,
+            }
         f0_clean = f0[~np.isnan(f0)] if f0 is not None else np.array([])
 
         return {

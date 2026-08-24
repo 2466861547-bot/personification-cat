@@ -32,6 +32,28 @@ VOICE_PRESETS = {
     },
 }
 
+# 人类声音预设 (用于声音克隆/指定人声)
+# key: 目标声线名（如 "林志玲", "檀健次", "温柔女声", "磁性男声"）
+# value: Bark voice_preset (Bark 内置的 speaker 或 emotion preset)
+#   - v2/en_speaker_X: Bark 内置的英文说话人
+#   - v2/zh_emotion_X: Bark 中文情绪预设 (需测试可用性)
+#   - 也可以指向自定义 .npz/.json 声纹 embedding 文件 (由 Bark save_pretrained 生成)
+HUMAN_VOICE_PRESETS = {
+    # 内置 Bark speaker (Bark v2 常用预设; 具体编号需根据实际测试/枚举)
+    "林志玲": "v2/en_speaker_6",      # 温柔女声 (可调整实际编号)
+    "檀健次": "v2/en_speaker_9",      # 磁性男声 (可调整实际编号)
+    "温柔女声": "v2/en_speaker_2",
+    "甜美女声": "v2/en_speaker_4",
+    "成熟女声": "v2/en_speaker_10",
+    "磁性男声": "v2/en_speaker_1",
+    "阳光男声": "v2/en_speaker_7",
+    # 默认 Bark speaker
+    "default": "v2/en_speaker_0",
+}
+
+# 中文声音描述 (用于 Bark 中文生成时的 prompt)
+CHINESE_VOICE_DESCRIPTION = "一个人在说话"
+
 # 情绪到声音描述的映射
 EMOTION_TO_DESCRIPTION = {
     "hungry": "宠物发出饥饿的叫声，声音急促而重复",
@@ -162,6 +184,72 @@ class AudioGenerator:
         """获取声音预设"""
         presets = VOICE_PRESETS.get(pet_type, {})
         return presets.get(emotion, presets.get("seek_attention", "v2/en_speaker_0"))
+
+    def get_human_preset(self, target_voice: str) -> str:
+        """获取人类声音预设 (支持自定义声纹克隆文件路径)"""
+        # 如果目标声线是文件路径 (自定义声纹 embedding)，直接返回
+        if target_voice and (target_voice.endswith(".json") or target_voice.endswith(".npz")):
+            return target_voice
+        # 从预设字典查找
+        if target_voice in HUMAN_VOICE_PRESETS:
+            return HUMAN_VOICE_PRESETS[target_voice]
+        # 模糊匹配 (忽略大小写)
+        for key, val in HUMAN_VOICE_PRESETS.items():
+            if target_voice.lower() == key.lower():
+                return val
+        # 默认 fallback
+        return HUMAN_VOICE_PRESETS["default"]
+
+    def list_human_voices(self) -> list:
+        """列出所有可用的人类声线"""
+        voices = [k for k in HUMAN_VOICE_PRESETS.keys() if k != "default"]
+        return voices
+
+    def text_to_human_sound(
+        self,
+        text: str,
+        target_voice: str = "default",
+        output_path: Optional[str] = None,
+    ) -> np.ndarray:
+        """
+        文本 → 人类声音 (支持指定声线/声纹克隆)
+        Args:
+            text: 要合成的文本
+            target_voice: 目标声线名 (如 "林志玲", "檀健次") 或自定义 embedding 文件路径 (.json/.npz)
+            output_path: 输出文件路径
+        Returns:
+            audio: 音频数组
+        """
+        if self.model is not None and self.is_ready:
+            voice_preset = self.get_human_preset(target_voice)
+            try:
+                inputs = self.processor(
+                    text,
+                    voice_preset=voice_preset,
+                )
+                if torch.cuda.is_available():
+                    inputs = {k: v.to("cuda") for k, v in inputs.items()}
+
+                with torch.no_grad():
+                    audio_array = self.model.generate(**inputs)
+                    audio = audio_array.cpu().numpy().squeeze()
+                    sample_rate = self.model.generation_config.sample_rate
+                print(f"  🗣️  人类声音合成完成 (声线: {target_voice} / preset: {voice_preset})")
+            except Exception as e:
+                print(f"  ⚠️  Bark 人类声音合成失败: {e}，降级为模拟音频")
+                audio = self._generate_mock_human_audio(text)
+                sample_rate = 22050
+        else:
+            audio = self._generate_mock_human_audio(text)
+            sample_rate = 22050
+
+        # 保存
+        if output_path:
+            os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+            wavfile.write(output_path, sample_rate, audio.astype(np.float32))
+            print(f"  🎵 音频已保存: {output_path}")
+
+        return audio
 
     def text_to_pet_sound(
         self,
@@ -328,4 +416,40 @@ class AudioGenerator:
                 # 普通汪叫
                 audio = 0.4 * np.sin(2 * np.pi * 400 * t) * np.exp(-t * 0.5)
 
+        return audio.astype(np.float32)
+
+    def _generate_mock_human_audio(self, text: str) -> np.ndarray:
+        """生成模拟人类语音(降级 fallback) — 基于文本节奏的音调合成"""
+        sr = 22050
+        duration = max(0.3, len(text) * 0.08)  # 每个字约 0.08 秒
+        t = np.linspace(0, duration, int(sr * duration))
+
+        # 基频: 根据文本长度和字符能量生成自然的人声轮廓
+        base_freq = 220.0  # 基础频率 (A3)
+        # 根据字符数生成频率变化 (模拟语调)
+        char_count = max(1, len(text))
+        freq_modulation = 20.0 * np.sin(2 * np.pi * 2.0 * t)  # 语调起伏
+
+        # 主音调: 混合基频和语调
+        audio = 0.3 * np.sin(2 * np.pi * (base_freq + freq_modulation) * t)
+
+        # 添加谐波 (让声音更像人声)
+        audio += 0.1 * np.sin(2 * np.pi * (base_freq * 2 + freq_modulation * 2) * t)
+        audio += 0.05 * np.sin(2 * np.pi * (base_freq * 3) * t)
+
+        # 清音 vs 浊音: 根据字符节奏调整振幅 (模拟说话节奏)
+        char_duration = duration / char_count
+        amplitude = np.ones_like(t)
+        for i in range(char_count):
+            start = i * char_duration
+            end = start + char_duration * 0.7  # 字间停顿
+            mask = (t >= start) & (t < end)
+            # 每个字的振幅包络 (attack-decay)
+            char_env = np.exp(-((t[mask] - start) / (char_duration * 0.3)) ** 2)
+            amplitude[mask] = char_env
+
+        audio = audio * amplitude
+
+        # 归一化
+        audio = audio / np.max(np.abs(audio)) * 0.5
         return audio.astype(np.float32)

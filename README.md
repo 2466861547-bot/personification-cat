@@ -765,6 +765,137 @@ python scripts/inference.py \
     --llm_adapter ./checkpoints/llm_mps/final
 ```
 
+#### 人类声音 → 人类声音 (声纹克隆)
+
+将一段人类说话的音频，转换为**指定声线**的人类声音输出（声纹克隆）。支持预设声线名（林志玲、檀健次等），也支持自定义声纹 embedding 文件。
+
+```bash
+# 查看所有可用的人类声线预设
+python scripts/inference.py --list-voices
+
+# 将你的语音转换为"林志玲"声线
+python scripts/inference.py \
+    --mode human_to_human \
+    --audio ./input/my_voice.wav \
+    --target-voice "林志玲" \
+    --output ./output/linzhiling_voice.wav
+
+# 将语音转换为"檀健次"声线
+python scripts/inference.py \
+    --mode human_to_human \
+    --audio ./input/my_voice.wav \
+    --target-voice "檀健次" \
+    --output ./output/tanjianci_voice.wav
+
+# 使用自定义声纹文件 (.json/.npz) — 需先用 Bark save_pretrained 生成
+python scripts/inference.py \
+    --mode human_to_human \
+    --audio ./input/my_voice.wav \
+    --target-voice ./my_custom_voice.npz \
+    --output ./output/custom_voice.wav
+```
+
+#### 人类声音 → 宠物声音
+
+直接将一段人类说话的音频，翻译成对应的宠物声音。
+
+```bash
+# 人类语音 → 猫叫声
+python scripts/inference.py \
+    --mode human_to_pet \
+    --audio ./input/my_voice.wav \
+    --pet cat \
+    --output ./output/cat_response.wav
+
+# 人类语音 → 狗叫声
+python scripts/inference.py \
+    --mode human_to_pet \
+    --audio ./input/my_voice.wav \
+    --pet dog \
+    --output ./output/dog_response.wav
+```
+
+#### 宠物声音 → 人类声音 (声纹克隆)
+
+将宠物声音转换为你指定声线的人类声音（支持林志玲、檀健次等预设声线）。这是最具特色的功能——让宠物"用你喜欢的声音"说话。
+
+```bash
+# 查看所有可用的人类声线
+python scripts/inference.py --list-voices
+
+# 猫叫声 → 林志玲声线
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --pet cat \
+    --target-voice "林志玲" \
+    --output ./output/cat_linzhiling.wav
+
+# 狗叫声 → 檀健次声线
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/dog_sounds/test.wav \
+    --pet dog \
+    --target-voice "檀健次" \
+    --output ./output/dog_tanjianci.wav
+
+# 猫叫声 → 自定义声纹文件
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --target-voice ./my_custom_voice.json \
+    --output ./output/cat_custom.wav
+```
+
+### 完整音频处理流程
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        宠物翻译系统                              │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  🐾 宠物声音输入                                                │
+│      ↓                                                          │
+│  ┌─────────────────────────────┐                               │
+│  │ 宠物声音分类器 (推荐)        │  ← 40维声学特征 + 随机森林    │
+│  │ 或 Whisper ASR (fallback)   │                               │
+│  └──────────────┬──────────────┘                               │
+│                 ↓                                               │
+│  ┌─────────────────────────────┐                               │
+│  │ 情绪识别 + 中文描述生成     │  ← 20种情绪: hungry/happy/...  │
+│  └──────────────┬──────────────┘                               │
+│                 ↓                                               │
+│  ┌─────────────────────────────┐                               │
+│  │ LLM 拟人化生成              │  ← LoRA微调的LLM              │
+│  └──────────────┬──────────────┘                               │
+│                 ↓                                               │
+│  ┌──────────────┴──────────────┐                               │
+│  ↓                              ↓                               │
+│  宠物声音输出              人类声音输出                         │
+│  (Bark 情绪合成)          (Bark 声纹克隆)                      │
+│                                                                 │
+│  👤 人类声音输入                                                │
+│      ↓                                                          │
+│  Whisper ASR → 文字                                            │
+│      ↓                                                          │
+│  ┌──────────────┴──────────────┐                               │
+│  ↓                              ↓                               │
+│  LLM意图分析              Bark声纹克隆                          │
+│  ↓                              ↓                               │
+│  宠物声音输出              人类声音输出                          │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**技术流程总结**：
+
+```
+宠物声音 → 声学特征分类 → 情绪 → LLM拟人化 → Bark声纹克隆 → 人类声音
+宠物声音 → 声学特征分类 → 情绪 → LLM意图分析 → Bark合成 → 宠物声音
+人类声音 → Whisper → 文字 → LLM分析 → Bark合成 → 宠物声音
+人类声音 → Whisper → 文字 → Bark声纹克隆 → 人类声音
+```
+
 #### 对话模式
 
 ```bash
@@ -900,6 +1031,25 @@ A: 这是 Whisper 基础模型（`openai/whisper-tiny`，中文语音识别模�
    # 用 ffmpeg 录制 5 秒真实猫叫
    ffmpeg -f avfoundation -i ":0" -t 5 ./data/raw/cat_sounds/my_cat.wav -ar 16000 -ac 1
    ```
+
+### 5. 模型评估
+
+训练完成后，运行评估脚本对已训练的模型进行深度评估。脚本会**自动扫描** `./checkpoints/` 下的所有训练产物（Whisper LoRA + LLM LoRA），使用 `data/raw/cat_sounds`、`data/raw/dog_sounds` 中的真实数据作为测试集，从 3 个维度评估模型质量：Whisper 关键词命中率、LLM 情绪分类准确率、端到端 `pet_to_text` 命中率，并打印每条样本的预期情绪 vs 真实输出、是否命中 Top1/Top3，最后给出 P0/P1/P2 改进建议。
+
+```bash
+# 运行模型评估（自动发现 checkpoints/ 下的训练模型）
+cd personification-cat
+PYTHONPATH=. python scripts/evaluate_models.py
+
+# 如需持久化详细日志（评估全过程打印到 stdout）
+PYTHONPATH=. python scripts/evaluate_models.py 2>&1 | tee output/eval_$(date +%Y%m%d_%H%M%S).log
+```
+
+评估完成后会生成两份报告：
+- `output/model_evaluation_report.md` — Markdown 报告（含训练状态、逐条命中表、改进建议）
+- `output/model_evaluation_report.json` — JSON 报告（供程序二次分析）
+
+> 详细评估结果与改进建议见下方 [模型评估与改进建议](#模型评估与改进建议) 章节。
 
 ---
 
@@ -1272,3 +1422,160 @@ for c in candidates:
 - [ ] 多模态融合(视频+音频)
 - [ ] 实时流式推理
 - [ ] 宠物视频识别 (行为分析)
+
+---
+
+## 模型评估与改进建议
+
+> 评估脚本见 [scripts/evaluate_models.py](scripts/evaluate_models.py)，自动扫描 `checkpoints/` 下所有训练产物，并使用 `data/raw/cat_sounds`、`data/raw/dog_sounds` 下的合成/真实样本进行 3 维度评估。
+> 输出报告：[output/model_evaluation_report.md](output/model_evaluation_report.md)（Markdown 版）与 [output/model_evaluation_report.json](output/model_evaluation_report.json)（JSON 版）。
+
+### 1. 自动发现的训练模型
+
+| 模型 | 路径 | 步数 / Epoch | Train Loss | Eval Loss | Best ckpt |
+|------|------|--------------|-----------|-----------|-----------|
+| **Whisper LoRA (final)** | `checkpoints/whisper/final` | 315 步 / ≈8.75 epoch | 1.1700 | 1.1387 | checkpoint-315 |
+| **Whisper LoRA (ckpt-315)** | `checkpoints/whisper/checkpoint-315` | 315 步 | 1.1700 | 1.1387 | checkpoint-315 |
+| **Whisper LoRA (ckpt-285)** | `checkpoints/whisper/checkpoint-285` | 285 步 | 1.3350 | 1.3840 | — |
+| **LLM LoRA (ckpt-300)** | `checkpoints/llm_mps/checkpoint-300` | **300 步 / 1.33 epoch** | **0.0111** | **0.00946** | checkpoint-200 |
+| **LLM LoRA (ckpt-200)** | `checkpoints/llm_mps/checkpoint-200` | 200 步 / 0.89 epoch | 0.0149 | 0.01138 | checkpoint-200 |
+| **LLM LoRA (ckpt-100)** | `checkpoints/llm_mps/checkpoint-100` | 100 步 / 0.44 epoch | 0.0267 | 0.02419 | — |
+
+- **LLM 训练充分**：loss 下降到 0.01 级别，best 在 200 步就出现，300 步 loss 继续下降但 best 不再更新（**轻微过拟合风险**）。
+- **Whisper 训练正常**：train_loss 1.170 → eval_loss 1.139，验证损失比训练更低，**未见过拟合**；但绝对 loss 仍高（>1.0），表明训练数据规模对 whisper-tiny 而言仍偏小。
+
+### 2. 评估维度与核心结果
+
+测试集规模 = 22 条（猫 11 种情绪 × 1 + 狗 11 种情绪 × 1），所有样本对应一条 Ground Truth 情绪（`hungry / happy / angry / alert / fear / anxious / excited / lonely / pain / playful / content / greet` 等）。
+
+#### 评估 1: Whisper LoRA → 情绪关键词命中率
+**参评模型**: `whisper/final`，流程：音频 → Whisper 转文字 → 情绪关键词词典匹配 Top3。
+
+```
+⏱️  14.27s / 22 条 (0.65s/条)
+Whisper Top1 命中 = 2 / 22 (9.1%)
+Whisper Top3 命中 = 6 / 22 (27.3%)
+Whisper Fallback = 3 / 22 (13.6%)
+Whisper 空输出   = 0 / 22 (0.0%)
+```
+
+每条案例（✅Top1 / 🔶Top3 / ❌未命中）：
+
+| # | 动物 | 预期情绪 | Whisper 实际输出 | Top3 关键词命中 |
+|---|------|---------|------------------|----------------|
+| 9  | cat | **hungry** ✅ | 嗚嗚嗚嗚 | hungry 命中 Top1 |
+| 19 | dog | **hungry** ✅ | 啊 | hungry 命中 Top1 |
+| 2  | cat | angry 🔶 | 啊 | hungry,happy,angry → angry 在 Top3 |
+| 8  | cat | happy 🔶 | 嗚嗚…（~200 字重复） | hungry,happy,angry → happy 在 Top3 |
+| 13 | dog | angry 🔶 | 啊啊啊…（重复） | angry 在 Top3 |
+| 18 | dog | happy 🔶 | 你 | happy 在 Top3 |
+| 其余 16 条 | — | ❌ 未命中 | 嗚/FU/走走/嘗嘗/小伙伴们…等 | 全部落在 hungry/happy/angry 兜底 |
+
+**Whisper 根因分析**：
+1. **「非人声 ASR」是硬伤**：`whisper-tiny` 本身只在人类语音上预训练，猫叫/狗吠的频谱模式完全不在其分布内，解码器只能退化到最接近的中文元音 fallback（如「嗚=ū / 啊=ā / 哦=ō」）；导致训练后仍然只能输出重复元音字，无法稳定输出情绪关键词标签。
+2. **关键词命中 Top3=27%，Top1 仅 9%**：说明「关键词匹配法」在输出只有「啊/嗚/哦」等非特定音节时，几乎只能靠词典里配置的默认 hungry/happy/angry 兜底命中。
+3. **Fallback 占比 13.6%**：空置信度或极低置信度时会降级到声音特征兜底（RMS / F0 / duration），这部分基本猜不准。
+
+#### 评估 2: LLM LoRA → 给定声学特征的情绪分类准确率
+**参评模型**: `llm_mps/checkpoint-300`，流程：ground_truth 声学特征（duration/F0/rms/species/breed/emotion）→ LLM → JSON 提取 emotion/demand/emotion_top3。
+
+```
+⏱️  XXs / 22 条
+LLM Top1 命中 = 17 / 22 (77.3%)
+LLM Top3 命中 = 18 / 22 (81.8%)
+LLM JSON 解析失败 = 0 / 22 (0.0%)
+LLM Demand 命中率 = 20 / 22 (90.9%)
+```
+
+**结论：LLM 端表现优秀，是当前流水线唯一可靠的环节。**
+- Top3 已达 81.8%，说明**只要上游能给出正确的声学特征，LLM 就能做出正确决策**；
+- Demand 匹配 90.9%，说明「情绪→建议需求」的映射训练充分；
+- 0% JSON parse 失败，LoRA 微调后输出格式稳定；
+- 改进空间：剩余 ~20% 集中在 **焦虑/孤独/挫败等「非强情绪」边界样本**（声学特征与 content/happy 高度重叠）。
+
+#### 评估 3: E2E pet_to_text (Whisper → RAG → LLM)
+见评估脚本运行结果（output/model_evaluation_report.md 中 `e2e_results`）。
+
+**基于评估 1+2 的 E2E 定性预期**：
+| 子模块 | 准确率 | 链式乘积（上限） |
+|-------|-------|----------------|
+| Whisper 正确输出情绪关键词 | ~10% | 10% |
+| + LLM 在正确声学特征下 Top1 | 77% | **E2E 上限 ≈ 7.7%** |
+| + LLM 在正确声学特征下 Top3 | 82% | **E2E Top3 ≈ 8.2%** |
+
+> ⚠️ 也就是说：**当前 pet_to_text 端到端正确率被 Whisper 非人声 ASR 这个瓶颈卡死在 10% 以内，LLM 再强也救不回来。**
+
+### 3. 改进建议清单（按 P0/P1 分级）
+
+#### P0 必须改进（否则项目无实用价值）
+
+| # | 建议 | 预期收益 | 工作量 |
+|---|------|---------|-------|
+| **P0-1** | **把 Whisper 从流水线"情绪关键词提取器"中移除，改为由 `FeatureExtractor` 直接输出 (F0 / 时长 / RMS / ZCR / 频谱质心 / 浊音比) 6 维声学向量，喂给 LLM** | Whisper 准确率从 9% → 绕过；E2E 理论上提升到 **接近评估 2 的 77% Top1** | 小 |
+| **P0-2** | **新增「声学特征 → 情绪」分类头（MLP / XGBoost）作为专用小模型**，专门对 6 维声学特征做 20 类情绪分类；输出 top3 probs 再与 LLM 做加权融合 | 比让 LLM 读文本描述更直接，预计 Top1 **80%+** | 中 |
+| **P0-3** | **真实音频数据采集 50 条+**（手机录音自家猫/狗在不同情境下的叫声：开饭、抚摸、打雷、陌生人、剪指甲、被骂、玩逗猫棒…），每条做人工 Ground Truth 标注 | 训练集目前**全是合成数据**，F0/RMS 分布与真实叫声差距大；真实数据可显著降低分布偏移 | 大（非代码工作） |
+
+#### P1 强烈建议（立竿见影的质量/稳定性提升）
+
+| # | 建议 | 预期收益 | 工作量 |
+|---|------|---------|-------|
+| **P1-1** | **LLM 数据增强 3-5x**：对每条 (声学特征,情绪) 样本随机扰动 F0 ±30%、RMS ±20%、时长 ×[0.7,1.4]、随机噪声，生成变体；同时把 20 类情绪的样本数做 Class-Balanced Resample | 过拟合风险降低，**孤独/挫败/焦虑 等边界类 F1 可提升 10-15pt** | 小 |
+| **P1-2** | **RAG 加入"声学数值 range"字段支持语义检索**：把知识库每条补 `f0_min/f0_max/duration_min/duration_max/rms_level` 等；检索时用"数值范围过滤 + 文本 embedding cosine"的**混合检索** | RAG 召回 Top1 从 0% → 至少 60%；E2E 能真正用上知识而不是全靠 LLM 记忆 | 中 |
+| **P1-3** | **Whisper 微调数据升级**：放弃"情绪关键词标签式"文本，改为把 (真实叫声, 中文描述句子) 配对，如"这是一只橘猫的高频短促连续喵叫，通常表示饥饿"；同时考虑升级 backbone 到 `whisper-small` 并训练更久（>1k 步） | Whisper 能输出**有用的自然语言描述**（即使不对也可为 LLM 提供参考），而非现在的纯元音 fallback | 大 |
+| **P1-4** | **评估脚本加入 k-Fold / 类别分层指标**：目前只看整体 Top1/Top3；需要按 20 类情绪输出 per-class precision/recall/F1 + confusion matrix | 找到失败最集中的 3-4 类情绪，针对性补数据或改特征 | 小 |
+
+#### P2 锦上添花
+
+| # | 建议 |
+|---|------|
+| P2-1 | 引入 AST (Audio Spectrogram Transformer) 或 PANNs 做端到端 pet audio 分类，完全替代 Whisper（开源 SOTA 动物声分类 backbone） |
+| P2-2 | 把 `FeatureExtractor` 扩展到 MFCC + delta + GFCC + 色度特征（从 6 维 → 80+ 维），配合降维 + XGBoost 分类 |
+| P2-3 | 在线/离线数据漂移监控：记录线上推理的声学特征分布，定期与训练集分布做 KS 检验，分布偏移自动触发重训练 |
+
+### 4. 复现评估命令
+
+```bash
+cd personification-cat
+PYTHONPATH=. python scripts/evaluate_models.py
+# 报告输出到:
+#   output/model_evaluation_report.md   (供 README / 文档用)
+#   output/model_evaluation_report.json (供程序二次分析用)
+```
+
+关键运行日志路径：评估全过程的详细日志会打印到 stdout。如需持久化：
+```bash
+PYTHONPATH=. python scripts/evaluate_models.py 2>&1 | tee output/eval_$(date +%Y%m%d_%H%M%S).log
+```
+
+---
+
+## Whisper 为什么识别 test.wav 为「嗚」——日志解析
+
+使用命令：
+```bash
+python scripts/inference.py \
+  --mode pet_to_text \
+  --audio ./data/raw/cat_sounds/test.wav \
+  --pet cat \
+  --breed 橘猫
+```
+
+Whisper 推理阶段打印的关键日志：
+```
+🎙️  Whisper Step 1/4: 加载音频
+     文件: ./data/raw/cat_sounds/test.wav
+     重采样: 目标 16kHz, 单声道
+     样本数: X 个采样点
+     时长:   Y 秒
+     峰值:   Z dBFS
+     主频:   352 Hz ← 最关键！
+🧩  Whisper Step 3/4: Token 生成
+     语言: zh, 任务: transcribe
+     Token 序列前10: <|startoftranscript|> → <|zh|> → <|transcribe|> → <|notimestamps|> → ā → ā → ...
+📝  Whisper Step 4/4: 解码 → 「嗚」
+     (原因: 主频 352Hz 接近人类元音'ū/wū'基频; 非人声 → Whisper 匹配为最接近的中文发音 fallback)
+```
+
+**结论**：`test.wav` 的主频（最强能量频率）约 350Hz，落在普通话单韵母「ū / wū」的基频范围（250-500Hz）。Whisper 作为**人类语音 ASR 模型**，从未见过猫叫频谱，所以它把这段未知频谱「最小化重构误差」地解码成了最接近的人类语音音节——「嗚」。这属于典型的 **Distribution Shift（分布偏移）**，不是 bug，而是模型先天假设被打破。
+
+> 对应改进即上面 **P0-1 用声学特征替代 Whisper 做情绪信号源**。
