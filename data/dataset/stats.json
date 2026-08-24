@@ -1,0 +1,21 @@
+{
+  "total_samples": 3200,
+  "train": 2560,
+  "val": 320,
+  "test": 320,
+  "ratio": {
+    "train": 0.8,
+    "val": 0.1,
+    "test": 0.1
+  },
+  "cat_breeds": 16,
+  "dog_breeds": 16,
+  "emotions": 10,
+  "random_seed": 42,
+  "data_sources": {
+    "cat_breeds": "data/crawler/cat_breeds_real.json",
+    "dog_breeds": "data/crawler/dog_breeds_real.json",
+    "ethology": "data/crawler/ethology_research.json"
+  },
+  "split_strategy": "stratified by (pet_type, breed, emotion)"
+}

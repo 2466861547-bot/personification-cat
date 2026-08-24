@@ -1,0 +1,912 @@
+{
+  "metadata": {
+    "description": "猫狗声音声学和行为学真实研究数据 - 用于宠物声音翻译项目知识库",
+    "crawled_at": "2026-08-18",
+    "crawler": "WebSearch + WebFetch",
+    "note": "数值范围来自学术论文原文。无对应数据的字段标记为 null。",
+    "key_papers_consulted": [
+      "Tavernier et al. (2020) Feline vocal communication - J Vet Sci 21(1):e18",
+      "Schötz (2015) Agonistic vocalisations in domestic cats - Fonetik 2015",
+      "McComb et al. (2009) The cry embedded within the purr - Current Biology 19(13):R507-8",
+      "Nicastro & Owren (2003) Classification of domestic cat vocalizations - J Comp Psychol 117:44-52",
+      "Nicastro (2004) Perceptual and Acoustic Evidence for Species-Level Differences - J Comp Psychol 118(3):287-296",
+      "Taylor, Reby & McComb (2010) Why Do Large Dogs Sound More Aggressive - Ethology 116(12):1155-1162",
+      "Yin & McCowan (2004) Barking in domestic dogs - Animal Behaviour 68:343-355",
+      "Pongrácz et al. (2006) Acoustic parameters of dog barks carry emotional information - Appl Anim Behav Sci 100:228-240",
+      "Sibiryakova et al. (2021) Polyphony of domestic dog whines - Current Zoology 67(2):165-176",
+      "Schötz et al. (2019) Phonetic Methods in Cat Vocalisation Studies - Meowsic project",
+      "Marangoni et al. (2023) Ethogram of acute pain behaviors in cats - PLoS ONE 18(9):e0292224",
+      "Piczak (2015) ESC-50 Dataset for Environmental Sound Classification"
+    ]
+  },
+  "cat_acoustics": {
+    "summary": {
+      "repertoire_size": 21,
+      "hearing_range_hz": [63, 79000],
+      "ultrasonic_hearing": true,
+      "source_filter_theory": true,
+      "classification_categories": [
+        "mouth_closed (闭口音: purr, trill, murmur)",
+        "mouth_opening_closing (开合口音: meow, mew, tweet, tweedle)",
+        "mouth_tensely_open (张口音: growl, howl, yowl, hiss, spit, snarl, chatter)"
+      ]
+    },
+    "vocalizations": [
+      {
+        "name": "meow",
+        "name_cn": "喵叫",
+        "f0_range_hz": [221, 1185],
+        "f0_mean_hz": 609,
+        "typical_duration_s": [0.3, 1.5],
+        "mean_duration_s": 0.42,
+        "spectral_centroid_hz": [1500, 3000],
+        "voiced_ratio": [0.7, 0.95],
+        "pitch_contour": "arched (拱形); 食物相关喵叫 F0 上升, 就医相关喵叫 F0 下降",
+        "formant_features": "diphthong-like vowel quality (双元音特质)",
+        "function": "请求/打招呼/求关注",
+        "contexts": ["饥饿", "求关注", "打招呼", "求开门", "障碍求助", "痛苦"],
+        "evolutionary_note": "家猫喵叫演化至 ~609 Hz, 是野猫 (255 Hz) 的 2.5 倍, 用以操纵人类 (Nicastro 2004)",
+        "wild_vs_domestic": {
+          "domestic_meow_mean_f0_hz": 609,
+          "wild_cat_meow_mean_f0_hz": 255,
+          "domestic_shorter_duration": true,
+          "domestic_higher_formant": true
+        },
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/",
+          "https://gwern.net/docs/cat/2004-nicastro.pdf",
+          "https://blog.catcognition.com/every-level-cat-sound-explained/",
+          "https://www.researchgate.net/publication/334120477_Phonetic_Methods_in_Cat_Vocalisation_Studies_A_report_from_the_Meowsic_project"
+        ]
+      },
+      {
+        "name": "purr",
+        "name_cn": "呼噜声",
+        "f0_range_hz": [25, 150],
+        "f0_typical_hz": [25, 30],
+        "typical_duration_s": [1, 600],
+        "duration_note": "持续可数分钟至数小时, 亦可短于 1 秒",
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.9, 1.0],
+        "intensity_db": [25, 30],
+        "production_mechanism": "声带振动 + 膈肌节律性收缩, 吸气与呼气期间均产生",
+        "function": "满足/安抚/自愈/求助",
+        "contexts": ["满足愉悦", "哺乳", "受伤自愈", "压力安抚", "乞食(请求性呼噜)"],
+        "healing_frequency_note": "25-150 Hz 范围被认为可促进骨骼生长与肌肉愈合",
+        "solicitation_purr": {
+          "embedded_cry_f0_hz": [220, 520],
+          "embedded_cry_mean_hz": 380,
+          "mechanism": "在低频呼噜中嵌入类婴儿哭声的高频成分, 触发人类哺育本能",
+          "perceived_as": "更紧急, 更不悦",
+          "similarity_to_human_infant_cry": true
+        },
+        "sources": [
+          "https://www.researchgate.net/publication/26671018_The_cry_embedded_within_the_purr",
+          "https://www.science.org/content/article/cat-purrs-evoke-baby-cries",
+          "https://animalsounds.io/sounds/cat",
+          "https://blog.catcognition.com/every-level-cat-sound-explained/"
+        ]
+      },
+      {
+        "name": "chirp",
+        "name_cn": "啁啾/唧声",
+        "f0_range_hz": [223, 1190],
+        "f0_mean_hz": 661,
+        "f0_sd_hz": 194,
+        "typical_duration_s": [0.1, 0.2],
+        "mean_duration_s": 0.15,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.6, 0.9],
+        "function": "接触呼叫/定位同种/打招呼",
+        "contexts": ["招呼", "招呼小猫", "母猫接近巢穴", "看见猎物"],
+        "sequence_note": "连续的 chirp 序列称为 chirrup",
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "trill",
+        "name_cn": "颤音",
+        "f0_range_hz": [250, 600],
+        "typical_duration_s": [0.3, 0.8],
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.7, 0.95],
+        "function": "打招呼/友好接触",
+        "contexts": ["打招呼", "友好接近", "母猫唤小猫", "向人类问候"],
+        "production_note": "软声产生, 类似 purr 加 meow 的混合",
+        "sources": [
+          "https://animalsounds.io/sounds/cat",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "growl",
+        "name_cn": "低吼",
+        "f0_range_hz": [70, 225],
+        "f0_during_fight_hz": [400, 800],
+        "typical_duration_s": [0.83, 4.46],
+        "mean_duration_s": 2.5,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.3, 0.6],
+        "intensity_db": [50, 65],
+        "production_mechanism": "声门摩擦 + 缓慢呼气, 声带 creaky voice",
+        "function": "警告/恐吓/示威",
+        "contexts": ["威胁", "恐吓", "极度不适", "守食"],
+        "phonetic_transcription": "[grrr..] 或 [ɹ̰]",
+        "sources": [
+          "https://konferens.ht.lu.se/fileadmin/user_upload/sol/ovrigt/konferens_fonetik2015/docs/WP55_Schoetz.pdf",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/",
+          "https://animalsounds.io/sounds/cat"
+        ]
+      },
+      {
+        "name": "howl",
+        "name_cn": "嚎叫",
+        "f0_range_hz": [128, 842],
+        "typical_duration_s": [0.22, 8.79],
+        "mean_duration_s": 1.9,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.5, 0.9],
+        "pitch_contour": "tonal rising-falling (上升-下降型)",
+        "vowel_qualities": ["[ɪ]", "[ɨ]", "[ɤ]", "[au]", "[ɛɔ]", "[ɑo]"],
+        "function": "警告/防御性回应",
+        "contexts": ["威胁情境", "防御", "领地警告"],
+        "distinguished_from_yowl": "howl 较短 (~0.8-1.5 s), F0 较高 (~700 Hz); yowl 较长 (3-10 s), F0 较低 (200-600 Hz)",
+        "sources": [
+          "https://konferens.ht.lu.se/fileadmin/user_upload/sol/ovrigt/konferens_fonetik2015/docs/WP55_Schoetz.pdf",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "yowl",
+        "name_cn": "长嚎/哀鸣",
+        "f0_range_hz": [200, 600],
+        "typical_duration_s": [3, 10],
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.4, 0.8],
+        "function": "繁殖求偶/温和威胁",
+        "contexts": ["求偶", "繁殖期", "温和威胁"],
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "caterwaul",
+        "name_cn": "嚎春",
+        "f0_range_hz": null,
+        "typical_duration_s": null,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": null,
+        "function": "繁殖/警告",
+        "contexts": ["雄性繁殖", "雌性警告"],
+        "acoustic_description": "loud, drawn-out whine with variable pitch (响亮且延长的哀鸣, 音高可变)",
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "hiss",
+        "name_cn": "嘶嘶声",
+        "f0_range_hz": null,
+        "frequency_range_hz": [2000, 10000],
+        "typical_duration_s": [0.42, 1.05],
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.0, 0.1],
+        "intensity_db": [60, 80],
+        "production_mechanism": "气流从口腔急速排出, 主要为摩擦音, 无声带振动",
+        "phonetic_transcription": "[ʂ], [ç], or [h]",
+        "function": "防御性警告",
+        "contexts": ["受惊吓", "防御", "设立边界", "遭遇敌人"],
+        "involuntary": true,
+        "sources": [
+          "https://konferens.ht.lu.se/fileadmin/user_upload/sol/ovrigt/konferens_fonetik2015/docs/WP55_Schoetz.pdf",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/",
+          "https://animalsounds.io/sounds/cat"
+        ]
+      },
+      {
+        "name": "spit",
+        "name_cn": "喷吐声",
+        "f0_range_hz": null,
+        "typical_duration_s": [0.27, 0.7],
+        "spectral_centroid_hz": "lower than hiss",
+        "voiced_ratio": [0.0, 0.1],
+        "production_mechanism": "突发爆炸性呼气, 类似塞擦音",
+        "phonetic_transcription": "[tʂ] or [tç]",
+        "function": "强烈警告/惊吓敌人",
+        "contexts": ["强烈警告", "惊吓对手", "hiss 之后更激烈版本"],
+        "sources": [
+          "https://konferens.ht.lu.se/fileadmin/user_upload/sol/ovrigt/konferens_fonetik2015/docs/WP55_Schoetz.pdf",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "snarl",
+        "name_cn": "咆哮",
+        "f0_range_hz": [301, 521],
+        "f0_mean_hz": 461,
+        "typical_duration_s": [0.19, 0.64],
+        "mean_duration_s": 0.46,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.3, 0.6],
+        "production_mechanism": "露齿发声, 类 growl 但更响更短更高",
+        "function": "恐吓/实战中惊吓对手",
+        "contexts": ["实战打斗", "恐吓对手"],
+        "vowel_qualities": ["[a]", "[æ]"],
+        "sources": [
+          "https://konferens.ht.lu.se/fileadmin/user_upload/sol/ovrigt/konferens_fonetik2015/docs/WP55_Schoetz.pdf"
+        ]
+      },
+      {
+        "name": "chatter",
+        "name_cn": "咯咯颤鸣",
+        "f0_range_hz": null,
+        "typical_duration_s": null,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.0, 0.2],
+        "production_mechanism": "下颌节律性咬合, 低振幅拍击音, 主要为无声",
+        "function": "挫败/转移行为",
+        "contexts": ["看见无法捕捉的猎物(窗外鸟)", "挫败"],
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "murmur",
+        "name_cn": "咕哝",
+        "f0_range_hz": null,
+        "typical_duration_s": null,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.6, 0.9],
+        "production_mechanism": "短促柔和的 trill 或 purr, 听似 [mhrn] 或 creak",
+        "function": "友好接近/玩耍",
+        "contexts": ["友好接近", "玩耍"],
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "squeak",
+        "name_cn": "短促尖鸣",
+        "f0_range_hz": null,
+        "typical_duration_s": null,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": null,
+        "production_mechanism": "raspy nasal high-pitched mew-like call (沙哑鼻音, 高音, 类喵)",
+        "function": "玩耍/期待食物",
+        "contexts": ["玩耍", "等待食物"],
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      },
+      {
+        "name": "pain_shriek",
+        "name_cn": "痛苦尖叫",
+        "f0_range_hz": null,
+        "typical_duration_s": null,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.5, 0.9],
+        "production_mechanism": "短促强烈紧张元音, 喉口极度紧张, 强力呼气",
+        "vowel_qualities": ["[æ]", "[ɛ]", "[i]"],
+        "function": "痛苦/实战",
+        "contexts": ["实战打斗", "剧烈疼痛"],
+        "sources": [
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+        ]
+      }
+    ],
+    "purrs": [
+      {
+        "name": "contentment_purr",
+        "name_cn": "满足性呼噜",
+        "f0_range_hz": [25, 30],
+        "embedded_cry": false,
+        "context": "放松/愉悦/哺乳/安抚"
+      },
+      {
+        "name": "solicitation_purr",
+        "name_cn": "请求性呼噜",
+        "f0_range_hz": [25, 30],
+        "embedded_cry_f0_hz": [220, 520],
+        "embedded_cry_mean_hz": 380,
+        "perceived_urgency": "高",
+        "perceived_pleasantness": "低",
+        "mechanism": "利用人类对婴儿哭声的先天敏感度 (sensory bias)",
+        "context": "乞食/求关注"
+      }
+    ],
+    "individual_variation": {
+      "breed_effects": {
+        "Siamese": "更高频更频繁的喵叫",
+        "Maine_Coon": "更深沉的喵叫",
+        "European_Shorthair": "中等频率"
+      },
+      "sex_effects": "未发现显著性别差异 (Fermo et al. 2019, p=0.08)",
+      "age_effects": "幼猫喵叫为前 infant-isolation call, 成猫喵叫仅用于人猫交流",
+      "individual_signature": "每只猫与主人发展出私有语言, 同种间非通用"
+    },
+    "evolutionary_explanation": {
+      "hypothesis": "learned vocal manipulation (习得性声音操纵)",
+      "neoteny": "成猫保留幼猫期喵叫行为, 因人类对婴儿式声音敏感",
+      "wild_vs_domestic": "野猫成年后很少喵叫, 家猫仅对人喵叫, 同种间很少使用",
+      "domestication_period_years": 10000,
+      "co_evolution_with_humans": true,
+      "key_researcher": "Dr. John Bradshaw, University of Bristol Anthrozoology Institute"
+    }
+  },
+  "dog_acoustics": {
+    "summary": {
+      "main_call_types": ["bark", "howl", "growl", "whine", "bay", "yip"],
+      "repertoire_size": 4,
+      "main_call_types_per_cohen_fox_1976": ["barks", "howls", "growls", "whines"],
+      "production_model": "source-filter (源-滤波器模型)",
+      "domestication_effect": "吠叫显著增加, 在多情境下使用 (野狼吠叫稀少, 多用于威胁)"
+    },
+    "vocalizations": [
+      {
+        "name": "bark",
+        "name_cn": "吠叫",
+        "f0_range_hz": [150, 2000],
+        "f0_typical_range_hz": [100, 1000],
+        "f0_malinois_mean_hz": 359.12,
+        "f0_malinois_range_hz": [91.78, 507.64],
+        "f0_domestic_dog_overall_hz": [60, 1500],
+        "typical_duration_s": [0.05, 0.5],
+        "inter_bark_interval_s": [0.1, 2.0],
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.3, 0.8],
+        "tonality": "可变 (atonal harsh 到 tonal harmonic)",
+        "production_mechanism": " lowering larynx + raising velum, plosive short bursts",
+        "function": "警觉/警告/玩耍/孤独/求关注",
+        "contexts": ["警觉陌生人", "孤独/隔离", "玩耍", "请求", "攻击"],
+        "context_subtypes_yin_mccowan_2004": {
+          "disturbance_bark": {
+            "description": "harsh, low-pitched, little amplitude/pitch modulation (粗糙低音, 振幅与音高调制少)",
+            "context": "警觉/打扰",
+            "f0_tendency": "low"
+          },
+          "isolation_bark": {
+            "description": "harmonically rich, higher frequency (谐波丰富, 频率较高)",
+            "context": "隔离/孤独",
+            "f0_tendency": "high"
+          },
+          "play_bark": {
+            "description": "harmonically rich, higher frequency, tonal (谐波丰富, 频率高, 调性)",
+            "context": "玩耍",
+            "f0_tendency": "high"
+          }
+        },
+        "three_class_taylor_classification": {
+          "high_frequency_bark": {
+            "contexts": ["walk", "play", "alone"],
+            "perceived_as": "nonaggressive, happy/playful, fearful/desperate"
+          },
+          "low_frequency_bark": {
+            "contexts": ["stranger", "schutzhund"],
+            "perceived_as": "aggressive, fearless"
+          },
+          "mixed_bark": "intermediate"
+        },
+        "emotional_acoustic_rules": {
+          "aggressive": "低音 + 短 inter-bark 间隔 + 非调性",
+          "fearful_desperate": "高音 + 长 inter-bark 间隔 + 调性",
+          "happy_playful": "高音 + 长 inter-bark 间隔 + 调性 (与 fearful 难区分)",
+          "rule_origin": "Morton 1977 motivational-structural rules"
+        },
+        "size_f0_relationship": "大型犬 F0 与 formant dispersion (Δf) 均较低; 听者据此推测体型并误判攻击性",
+        "sources": [
+          "https://www.semanticscholar.org/paper/Barking-in-domestic-dogs%3A-context-specificity-and-Yin-McCowan/5552c8e6aa70cf0968dab37973edfcdb60d049a5",
+          "https://molcsa.web.elte.hu/irattar/Pongracz_etal_2006.pdf",
+          "https://onlinelibrary.wiley.com/doi/10.1111/j.1439-0310.2010.01829.x",
+          "https://pdfs.semanticscholar.org/8692/10b07a24e5d1891a32d6925d842be56fc66e.pdf",
+          "https://aggietranscript.faculty.ucdavis.edu/vocal-communication-in-the-domestic-dog/"
+        ]
+      },
+      {
+        "name": "howl",
+        "name_cn": "嚎叫",
+        "f0_range_hz": [150, 780],
+        "f0_dog_typical_hz": [150, 600],
+        "f0_wolf_range_hz": [150, 780],
+        "f0_energy_concentration_hz": [300, 500],
+        "typical_duration_s": [0.5, 11],
+        "wolf_howl_duration_s": [1, 10],
+        "chorus_howl_duration_s": 60,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.7, 0.95],
+        "tonality": "tonal with frequency modulation",
+        "production_mechanism": "larynx wider open, vocal cords vibrate steadily, diaphragm sustains airflow",
+        "function": "长距离交流/群体定位/回应声音触发",
+        "contexts": ["分离焦虑", "回应警报/音乐", "与其他狗交流", "群体定位", "兴奋"],
+        "directionality": "nondirectional (无方向性, 与吠叫不同)",
+        "evolutionary_origin": "继承自灰狼 (Canis lupus), 用于群体定位/领地/协调",
+        "triggers": ["警报器", "音乐(小提琴/口琴/长笛)", "其他狗嚎叫", " soprano 人声"],
+        "trigger_frequency_hz": [50, 60],
+        "breed_proneness": ["Husky", "Malamute", "German Shepherd", "Beagle", "Basset Hound", "Bloodhound"],
+        "genetic_distance_effect": "与狼基因距离越近的犬种, 嚎叫反应越强",
+        "sources": [
+          "https://scispace.com/pdf/genetic-distance-from-wolves-affects-family-dogs-reactions-3ctk6ctx.pdf",
+          "https://furric.com/dog-howl-sounds/",
+          "https://happypaws.smartlifeitems.com/why-some-dogs-howl-at-sirens/",
+          "https://aggietranscript.faculty.ucdavis.edu/vocal-communication-in-the-domestic-dog/",
+          "https://canid.fandom.com/wiki/Gray_Wolf"
+        ]
+      },
+      {
+        "name": "growl",
+        "name_cn": "低吼",
+        "f0_range_hz": [100, 500],
+        "f0_wolf_range_hz": [380, 450],
+        "f0_malinois_mean_hz": null,
+        "typical_duration_s": [0.3, 2.0],
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.4, 0.7],
+        "formant_dispersion_note": "Δf 与体型相关, 用于推测体型大小",
+        "function": "威胁/警告/守食/玩耍",
+        "contexts": ["守食", "威胁", "玩耍", "警告"],
+        "context_classification_farago_2017": {
+          "food_guarding_growl": "正确识别率仅 6% (低)",
+          "threatening_growl": "正确识别率较高",
+          "play_growl": "正确识别率 81% (高)"
+        },
+        "size_honesty": "严肃对抗情境中诚实地传达体型与情绪; 防御与玩耍情境中可能操纵性地降低表观体型",
+        "sources": [
+          "https://onlinelibrary.wiley.com/doi/10.1111/j.1439-0310.2010.01829.x",
+          "https://www.sci-hub.ru/download/2024/6360/b01ce270622844bd06ce21e7a46eed46/10.1098@rsos.170134.pdf",
+          "https://canid.fandom.com/wiki/Gray_Wolf"
+        ]
+      },
+      {
+        "name": "whine",
+        "name_cn": "呜咽/哀鸣",
+        "f0_low_range_hz": [240, 2130],
+        "f0_high_range_hz": [2950, 10460],
+        "f0_ultra_high_range_hz": [9990, 23260],
+        "f0_low_min_hz": 240,
+        "f0_low_max_hz": 2130,
+        "typical_duration_s": null,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.5, 0.95],
+        "production_mechanism": "三种独立基频 (low/high/ultra-high), 可单独或同时出现 (单声/双声/三声)",
+        "function": "分离抗议/乞求/求助",
+        "contexts": ["分离焦虑", "乞食", "求关注", "抗议", "痛苦"],
+        "human_perception": "人类普遍将 whine 感知为悲伤的叫声",
+        "polyphony": "可呈现 biphonic (双声) 或 polyphonic (三声) 结构",
+        "body_size_correlation": "三种 F0 均与体重负相关 (体型小 = F0 高)",
+        "ultra_high_function_hypothesis": "允许群体成员之间近距离私密交流, 类似啮齿类超声呼唤",
+        "sources": [
+          "https://academic.oup.com/cz/article/67/2/165/5892256",
+          "https://academic.oup.com/cz/article-pdf/67/2/165/36971991/zoaa042.pdf"
+        ]
+      },
+      {
+        "name": "bay",
+        "name_cn": "长吠",
+        "f0_range_hz": null,
+        "typical_duration_s": null,
+        "spectral_centroid_hz": null,
+        "voiced_ratio": null,
+        "function": "追踪猎物时持续发声",
+        "contexts": ["追踪猎物", "群体追猎"],
+        "acoustic_description": "deep, prolonged bark used in tracking, common in hounds (比格、血猎犬)",
+        "sources": [
+          "https://happypaws.smartlifeitems.com/why-some-dogs-howl-at-sirens/"
+        ]
+      },
+      {
+        "name": "yip",
+        "name_cn": "短促尖吠",
+        "f0_range_hz": null,
+        "typical_duration_s": [0.05, 0.2],
+        "spectral_centroid_hz": null,
+        "voiced_ratio": [0.5, 0.8],
+        "function": "兴奋/玩耍/小型犬警觉",
+        "contexts": ["玩耍兴奋", "小型犬警觉", "求关注"],
+        "acoustic_description": "short, high-pitched vocalization, often in small breeds (小型犬多见)",
+        "sources": [
+          "https://aggietranscript.faculty.ucdavis.edu/vocal-communication-in-the-domestic-dog/"
+        ]
+      }
+    ],
+    "size_breed_f0_effects": {
+      "taylor_reby_mccomb_2010": {
+        "finding": "大型犬 F0 与 formant dispersion (Δf) 均较低",
+        "human_perception": "听者将大体型特征误判为高攻击性 (motivational misattribution)",
+        "independent_cues": ["F0", "Δf"],
+        "interaction_significant": true,
+        "paper": "Ethology 116(12):1155-1162"
+      },
+      "sibiryakova_2021_whines": {
+        "finding": "三种 F0 均与体重负相关",
+        "body_mass_range_kg": [3.5, 70.0],
+        "n_breeds": 16,
+        "n_individuals": 20
+      }
+    },
+    "bark_context_classification": {
+      "pongracz_2006": {
+        "high_pitched_bark": {
+          "acoustic_features": ["high F0", "high peak frequency", "long inter-bark interval", "tonal"],
+          "attributed_emotions": ["happy", "playful", "fearful", "desperate"]
+        },
+        "low_pitched_bark": {
+          "acoustic_features": ["low F0", "low peak frequency", "short inter-bark interval", "atonal", "rough"],
+          "attributed_emotions": ["aggressive", "fearless"]
+        },
+        "situations": {
+          "stranger": "低音, 短间隔 -> aggressive",
+          "alone": "高音, 长间隔 -> fearful/desperate",
+          "play": "高音, 长间隔 -> happy/playful",
+          "walk": "高音 -> happy"
+        }
+      },
+      "human_classification_accuracy_pongracz_2005": "above chance level for stranger, alone, play barks"
+    },
+    "howl_evolution": {
+      "wolf_ancestor": "Canis lupus",
+      "wolf_howl_functions": ["pack assembly", "territorial signaling", "stress vocalization", "post-hunt reassembly"],
+      "wolf_howl_f0_hz": [150, 780],
+      "wolf_howl_energy_concentration_hz": [300, 500],
+      "wolf_howl_duration_s": [1, 10],
+      "chorus_howl_duration_s_avg": 60,
+      "genetic_retention": "狗保留 ~99.9% 灰狼 DNA",
+      "domestication_difference": "狗嚎叫减少, 多为声音触发反应; 狼为日常长距离交流",
+      "breed_differences": "Sled dogs (Husky, Malamute) 与 hounds (Beagle, Bloodhound) 嚎叫倾向最强"
+    }
+  },
+  "emotion_mapping": {
+    "theoretical_framework": {
+      "morton_1977_motivational_structural_rules": {
+        "low_pitched_atonal": "aggressive (攻击)",
+        "high_pitched_tonal": "friendly/submissive (友好/屈服)",
+        "physical_basis": "大体型 -> 低频; 小体型/幼年 -> 高频",
+        "applies_to": "鸟类、哺乳类广泛跨物种"
+      },
+      "source_filter_framework": {
+        "source": "larynx/vocal folds (F0, amplitude, duration)",
+        "filter": "vocal tract shape/length (formants, spectral distribution)",
+        "emotional_effects_source": "F0, amplitude, duration 随情绪变化",
+        "emotional_effects_filter": "formant dispersion 反映体型与唤醒度"
+      },
+      "briefer_2012_emotion_vocal_rules": {
+        "increased_frequency_parameters": ["F0", "frequency range", "spectral shape shift upward"],
+        "increased_amplitude_contour": "high arousal",
+        "applies_across_mammals": true
+      }
+    },
+    "cat_emotion_vocalization_map": [
+      {
+        "emotion": "饥饿/求食",
+        "valence": "中性偏负(请求)",
+        "arousal": "高",
+        "vocalizations": ["meow (rising F0 contour)", "solicitation purr (embedded 380 Hz cry)", "yowl"],
+        "acoustic_cues": ["F0 上升", "嵌入高频婴儿哭声成分", "重复频率高"]
+      },
+      {
+        "emotion": "愉悦/满足",
+        "valence": "正",
+        "arousal": "低",
+        "vocalizations": ["purr (non-solicitation)", "trill", "murmur", "chirp"],
+        "acoustic_cues": ["F0 低且稳定", "voiced 比例高", "持续低频"]
+      },
+      {
+        "emotion": "恐惧",
+        "valence": "负",
+        "arousal": "高",
+        "vocalizations": ["hiss", "spit", "growl", "yowl", "caterwaul"],
+        "acoustic_cues": ["高频噪声成分", "voiceless 比例高", "突发性"]
+      },
+      {
+        "emotion": "攻击/威胁",
+        "valence": "负",
+        "arousal": "高",
+        "vocalizations": ["growl", "snarl", "howl", "spit"],
+        "acoustic_cues": ["低 F0", "harsh/atonal", "长持续时间"]
+      },
+      {
+        "emotion": "痛苦",
+        "valence": "负",
+        "arousal": "极高",
+        "vocalizations": ["pain_shriek", "caterwaul", "yowl"],
+        "acoustic_cues": ["短促高强度", "紧张元音 [æ][ɛ][i]", "极端喉口紧张"]
+      },
+      {
+        "emotion": "挫败",
+        "valence": "负",
+        "arousal": "中",
+        "vocalizations": ["chatter"],
+        "acoustic_cues": ["节律性咬合", "低振幅", "几乎无声"]
+      },
+      {
+        "emotion": "问候/友好",
+        "valence": "正",
+        "arousal": "中",
+        "vocalizations": ["trill", "chirp", "meow (arched contour)"],
+        "acoustic_cues": ["中等 F0", "voiced", "短促柔和"]
+      }
+    ],
+    "dog_emotion_vocalization_map": [
+      {
+        "emotion": "攻击",
+        "valence": "负",
+        "arousal": "高",
+        "vocalizations": ["low-frequency bark", "growl (food guarding/threatening)", "snarl"],
+        "acoustic_cues": ["F0 低", "Δf 低(大体型暗示)", "短 inter-bark 间隔", "atonal"]
+      },
+      {
+        "emotion": "恐惧/绝望",
+        "valence": "负",
+        "arousal": "高",
+        "vocalizations": ["high-frequency bark (alone)", "whine", "howl"],
+        "acoustic_cues": ["F0 高", "tonal", "长 inter-bark 间隔"]
+      },
+      {
+        "emotion": "快乐/玩耍",
+        "valence": "正",
+        "arousal": "高",
+        "vocalizations": ["play bark", "play growl", "yip"],
+        "acoustic_cues": ["F0 高", "tonal", "长 inter-bark 间隔 (与 fearful 难区分)"]
+      },
+      {
+        "emotion": "警觉/警告",
+        "valence": "中性",
+        "arousal": "高",
+        "vocalizations": ["disturbance bark", "low-frequency bark (stranger)"],
+        "acoustic_cues": ["F0 低", "harsh", "短 inter-bark 间隔", "振幅调制少"]
+      },
+      {
+        "emotion": "分离焦虑",
+        "valence": "负",
+        "arousal": "高",
+        "vocalizations": ["isolation bark", "whine", "howl"],
+        "acoustic_cues": ["F0 高", "harmonically rich", "重复持续"]
+      },
+      {
+        "emotion": "痛苦",
+        "valence": "负",
+        "arousal": "极高",
+        "vocalizations": ["yip", "whine", "howl"],
+        "acoustic_cues": ["突发高频", "重复"]
+      },
+      {
+        "emotion": "求关注/乞食",
+        "valence": "中性",
+        "arousal": "中",
+        "vocalizations": ["whine", "play bark", "yip"],
+        "acoustic_cues": ["F0 高", "tonal", "ultra-high frequency component"]
+      }
+    ],
+    "cross_species_differences": [
+      {
+        "dimension": "吠叫使用频率",
+        "cat": "喵叫仅用于人猫交流, 同种间很少",
+        "dog": "吠叫广泛用于多情境, 同种间亦使用"
+      },
+      {
+        "dimension": "情绪传达机制",
+        "cat": "嵌入式高频成分操纵人类 (solicitation purr)",
+        "dog": "Morton 规则: 低频攻击, 高频友好/恐惧"
+      },
+      {
+        "dimension": "体型-频率关系",
+        "cat": "未发现 purr F0 与体型相关 (Tavernier 2020)",
+        "dog": "F0 与 formant dispersion 均与体型负相关 (Taylor 2010, Sibiryakova 2021)"
+      },
+      {
+        "dimension": "家化影响",
+        "cat": "成猫保留幼猫喵叫, F0 提升至 609 Hz",
+        "dog": "吠叫频率显著增加, 用于多情境; 野狼吠叫稀少"
+      },
+      {
+        "dimension": "人类识别准确率",
+        "cat_meow": "modestly above chance (Nicastro & Owren 2003)",
+        "dog_bark": "above chance for stranger/alone/play (Pongrácz 2005)"
+      }
+    ]
+  },
+  "ethograms": {
+    "cat_ethogram_tavernier_2020": {
+      "n_vocalizations_described": 21,
+      "categories": [
+        {
+          "category": "mouth_closed (闭口音)",
+          "examples": ["purr", "trill", "murmur"],
+          "function": "友好接触/满足"
+        },
+        {
+          "category": "mouth_opening_closing (开合口音)",
+          "examples": ["meow", "mew", "tweet", "tweedle"],
+          "function": "请求/招呼/求食"
+        },
+        {
+          "category": "mouth_tensely_open (紧张张口音)",
+          "examples": ["growl", "howl", "yowl", "hiss", "spit", "snarl", "chatter", "pain_shriek"],
+          "function": "攻击/防御/痛苦"
+        }
+      ],
+      "interaction_contexts": ["mother_young", "agonistic", "sexual", "cat_human"]
+    },
+    "cat_pain_ethogram_marangoni_2023": {
+      "n_behavior_categories": 10,
+      "n_behaviors_final": 24,
+      "categories": [
+        "position in cage",
+        "exploratory behaviors",
+        "activity",
+        "posture and body position",
+        "affective-emotional states",
+        "vocalization",
+        "playing (with an object)",
+        "feeding",
+        "post-feeding",
+        "facial expressions/features"
+      ],
+      "key_pain_indicators": [
+        "positioned in the back of the cage",
+        "no attention to surroundings",
+        "feigned sleep",
+        "grooming",
+        "attention to wound",
+        "crouched/hunched",
+        "abnormal gait",
+        "depressed",
+        "difficulty grasping food",
+        "head shaking",
+        "eye squinting",
+        "blepharospasm",
+        "lowered head position"
+      ]
+    },
+    "cat_fas_spectrum_fear_free": {
+      "levels": [
+        {"level": 0, "state": "relaxed", "signs": ["neutral ears", "soft brow", "U-shaped tail", "normal pupils"]},
+        {"level": 1, "state": "mild/subtle", "signs": ["avoids eye contact", "head slightly down", "ears partially to side"]},
+        {"level": "2-3", "state": "moderate", "signs": ["ears to side", "pupil dilation", "brow furrowed", "body crouched"]},
+        {"level": 4, "state": "severe flight/freeze/fret", "signs": ["dilated pupils", "body flattened", "tail tucked", "increased respiratory rate"]},
+        {"level": 5, "state": "severe fight/aggression", "signs": ["offensive: ears forward, growling", "defensive: ears back, hissing, lips pulled back"]}
+      ]
+    },
+    "dog_ethogram_cohen_fox_1976": {
+      "main_call_types": ["barks", "howls", "growls", "whines"],
+      "additional_calls_wild_canids": ["yelps", "woofs/coughs", "yips", "screams", "coos", "mews", "grunts", "clicks"]
+    }
+  },
+  "public_datasets": [
+    {
+      "name": "ESC-50",
+      "full_name": "Dataset for Environmental Sound Classification",
+      "author": "Karol J. Piczak",
+      "year": 2015,
+      "samples": 2000,
+      "classes": 50,
+      "samples_per_class": 40,
+      "clip_duration_s": 5,
+      "sample_rate_hz": 44100,
+      "format": "WAV (single channel)",
+      "major_categories": 5,
+      "pet_sounds": 80,
+      "pet_sounds_detail": "Dog: 40 + Cat: 40",
+      "animals_category_total": 320,
+      "animals_category_classes": ["Dog", "Rooster", "Pig", "Cow", "Frog", "Cat", "Hen", "Insects (flying)", "Sheep", "Crow"],
+      "license": "CC BY-NC 3.0 (ESC-50); ESC-10 subset CC BY 3.0",
+      "source_url": "Freesound.org",
+      "url": "https://github.com/karolpiczak/ESC-50",
+      "paper": "Piczak 2015 - ESC: Dataset for Environmental Sound Classification",
+      "human_accuracy": 0.813,
+      "machine_best_accuracy": 0.97,
+      "cross_validation_folds": 5,
+      "sources": [
+        "https://github.com/karolpiczak/ESC-50",
+        "https://blog.csdn.net/gitblog_00840/article/details/157154211"
+      ]
+    },
+    {
+      "name": "CatMeows",
+      "full_name": "CatMeows: A Publicly-Available Dataset of Cat Vocalizations",
+      "authors": ["Luca A. Ludovico", "Stavros Ntalampiras", "Giorgio Presti", "Simona Cannas", "Monica Battini", "Silvana Mattiello"],
+      "year": 2020,
+      "institution": "University of Milan",
+      "samples": 440,
+      "n_cats": 21,
+      "breeds": ["Maine Coon", "European Shorthair"],
+      "contexts": [
+        "Brushing (梳理毛发)",
+        "Isolation in unfamiliar environment (陌生环境隔离)",
+        "Waiting for food (等待食物)"
+      ],
+      "clip_duration_s": [1, 3],
+      "sample_rate_hz": 8000,
+      "channels": 1,
+      "bitrate_kbps": 128,
+      "format": "PCM mono WAV",
+      "license": "CC BY 4.0",
+      "doi": "10.5281/zenodo.4008297",
+      "url": "https://zenodo.org/records/4008297",
+      "classification_accuracy_breed": 0.98,
+      "recording_devices": "low-cost commercially available microphones",
+      "sources": [
+        "https://air.unimi.it/bitstream/2434/811133/2/Ludovico2021_Chapter_CatMeowsAPublicly-AvailableDat.pdf",
+        "https://www.researchgate.net/publication/350548551_CatMeows_A_Publicly-Available_Dataset_of_Cat_Vocalizations",
+        "https://aifasthub.com/datasets/zeddez/CatMeows"
+      ]
+    },
+    {
+      "name": "Audio Cats and Dogs (Kaggle)",
+      "host": "Kaggle",
+      "author": "mmoreaux",
+      "samples": null,
+      "pet_sounds": null,
+      "url": "https://www.kaggle.com/mmoreaux/audio-cats-and-dogs",
+      "note": "Cat and dog audio clips dataset, used as source for meow_dataset"
+    },
+    {
+      "name": "meow_dataset (haydenroche5)",
+      "author": "Hayden Roche",
+      "year": 2020,
+      "samples": null,
+      "sample_rate_hz": 16000,
+      "bit_depth": "16-bit signed integer",
+      "format": "WAV",
+      "sources_combined": ["Kaggle audio-cats-and-dogs", "YouTube clips", "Owner recordings (Newton)"],
+      "url": "https://github.com/haydenroche5/meow_dataset",
+      "note": "Cat meow audio aggregation, used for ML training"
+    },
+    {
+      "name": "UrbanSound8K",
+      "samples": 8732,
+      "classes": 10,
+      "pet_sounds": 1000,
+      "pet_sounds_detail": "dog_bark class",
+      "clip_duration_s": 4,
+      "sample_rate_hz": 44100,
+      "format": "WAV",
+      "license": "CC BY-NC 3.0",
+      "url": "https://urbansounddataset.weebly.com/urbansound8k.html",
+      "note": "城市环境声音数据集, 包含 dog_bark 类别 (1000 samples)"
+    }
+  ],
+  "sources": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/",
+    "https://konferens.ht.lu.se/fileadmin/user_upload/sol/ovrigt/konferens_fonetik2015/docs/WP55_Schoetz.pdf",
+    "https://www.researchgate.net/publication/26671018_The_cry_embedded_within_the_purr",
+    "https://www.science.org/content/article/cat-purrs-evoke-baby-cries",
+    "https://www.scientificamerican.com/blog/news-blog/the-manipulative-meow-cats-learn-to-2009-07-13/",
+    "https://gwern.net/docs/cat/2004-nicastro.pdf",
+    "https://scispace.com/papers/classification-of-domestic-cat-felis-catus-vocalizations-by-21yix3rbtd",
+    "https://blog.catcognition.com/every-level-cat-sound-explained/",
+    "https://animalsounds.io/sounds/cat",
+    "https://www.researchgate.net/publication/334120477_Phonetic_Methods_in_Cat_Vocalisation_Studies_A_report_from_the_Meowsic_project",
+    "https://lup.lub.lu.se/search/files/5365178/4882242.pdf",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC7765146/",
+    "https://pdfs.semanticscholar.org/4994/52094769cf802526ffd6754915e0077fb127.pdf",
+    "https://www.semanticscholar.org/paper/Barking-in-domestic-dogs%3A-context-specificity-and-Yin-McCowan/5552c8e6aa70cf0968dab37973edfcdb60d049a5",
+    "https://onlinelibrary.wiley.com/doi/10.1111/j.1439-0310.2010.01829.x",
+    "https://www.semanticscholar.org/paper/Why-Do-Large-Dogs-Sound-More-Aggressive-to-Human-of-Taylor-Reby/5ceed43c21c242033939673669d58699727b9c97",
+    "https://scispace.com/pdf/auditory-communication-in-domestic-dogs-vocal-signalling-in-4eqmylfbe8.pdf",
+    "https://academic.oup.com/cz/article/67/2/165/5892256",
+    "https://academic.oup.com/cz/article-pdf/67/2/165/36971991/zoaa042.pdf",
+    "https://molcsa.web.elte.hu/irattar/Pongracz2011.pdf",
+    "https://molcsa.web.elte.hu/irattar/Pongracz_2009_VetJ.pdf",
+    "https://molcsa.web.elte.hu/irattar/Pongracz_etal_2006.pdf",
+    "https://molcsa.web.elte.hu/irattar/Molnar_etal_2006.pdf",
+    "https://www.sci-hub.ru/download/2024/6360/b01ce270622844bd06ce21e7a46eed46/10.1098@rsos.170134.pdf",
+    "https://academic.oup.com/cz/article-pdf/63/4/445/23653215/zox035.pdf",
+    "https://pdfs.semanticscholar.org/6a37/f00cb4c62c8d102c3dc8bc1f81c838cb4d32.pdf",
+    "https://pdfs.semanticscholar.org/8692/10b07a24e5d1891a32d6925d842be56fc66e.pdf",
+    "https://aggietranscript.faculty.ucdavis.edu/vocal-communication-in-the-domestic-dog/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC4911068/",
+    "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0146330",
+    "https://scispace.com/pdf/genetic-distance-from-wolves-affects-family-dogs-reactions-3ctk6ctx.pdf",
+    "https://furric.com/dog-howl-sounds/",
+    "https://happypaws.smartlifeitems.com/why-some-dogs-howl-at-sirens/",
+    "https://canid.fandom.com/wiki/Gray_Wolf",
+    "https://www.researchgate.net/publication/26286322_Barking_and_mobbing",
+    "https://www.fearfreehappyhomes.com/wp-content/uploads/2023/03/H-HO-001-EN-2404-FASSpectrumCats-FINAL-Screen.pdf",
+    "https://github.com/karolpiczak/ESC-50",
+    "https://blog.csdn.net/gitblog_00840/article/details/157154211",
+    "https://air.unimi.it/bitstream/2434/811133/2/Ludovico2021_Chapter_CatMeowsAPublicly-AvailableDat.pdf",
+    "https://www.researchgate.net/publication/350548551_CatMeows_A_Publicly-Available_Dataset_of_Cat_Vocalizations",
+    "https://aifasthub.com/datasets/zeddez/CatMeows",
+    "https://github.com/haydenroche5/meow_dataset"
+  ]
+}

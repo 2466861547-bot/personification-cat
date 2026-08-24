@@ -5,7 +5,12 @@ Agent 工具集: 定义 LangChain Agent 可调用的工具
 import os
 from typing import Dict, Optional
 from langchain_core.tools import tool
-from langchain_core.pydantic_v1 import BaseModel, Field
+
+# 兼容性导入: langchain 0.3.x 用 pydantic_v1, 1.x 直接用 pydantic
+try:
+    from langchain_core.pydantic_v1 import BaseModel, Field
+except (ImportError, ModuleNotFoundError):
+    from pydantic import BaseModel, Field
 
 
 class AnalyzeSoundInput(BaseModel):

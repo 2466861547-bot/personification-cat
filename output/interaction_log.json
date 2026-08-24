@@ -1,0 +1,36 @@
+[
+  {
+    "timestamp": "2026-08-19T15:27:27.591043",
+    "plan": {
+      "mode": "singing",
+      "pet_type": "cat",
+      "time_slot": "下午",
+      "mood_target": "happy",
+      "reason": "当前时段(下午)推荐singing模式",
+      "alternatives": [
+        "xiangsheng",
+        "teasing"
+      ]
+    },
+    "performance": {
+      "output_path": "./output/entertainment/cat/singing_20260819_152727.wav",
+      "duration": 37.1
+    },
+    "observation": {
+      "reaction": "purrs",
+      "engagement": 0.75,
+      "mood_after": "happy",
+      "energy_after": 0.4,
+      "mode_played": "singing",
+      "preferred_modes": [
+        "singing",
+        "soothing"
+      ]
+    },
+    "pet_state": {
+      "mood": "happy",
+      "energy": 0.4,
+      "interaction_count": 1
+    }
+  }
+]

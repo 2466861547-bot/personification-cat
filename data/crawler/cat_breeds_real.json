@@ -1,0 +1,601 @@
+[
+  {
+    "breed_cn": "英国短毛猫",
+    "breed_en": "British Shorthair",
+    "origin": "英国（古罗马家猫与本地野猫自然杂交，19世纪末哈里森·威尔系统选育）",
+    "body_type": "中大型，圆润厚重，'五短身材'（毛短、身短、尾短、四肢短、耳朵短）",
+    "weight_kg": "3.2-7.7",
+    "lifespan_years": "12-20",
+    "f0_range_hz": "250-550",
+    "vocal_frequency": 2,
+    "typical_sounds": [
+      "极少叫，叫声轻柔低沉",
+      "偶尔短促的咕噜声",
+      "求食时低频呜咽",
+      "满足时持续呼噜"
+    ],
+    "temperament": "温和、冷静、独立、稳定、不粘人但有分寸陪伴、对家人忠诚",
+    "coat_type": "双层短密绒毛，外层防水、底层柔软，触感如天鹅绒，蓝/白/乳/虎斑等数十种颜色",
+    "genetic_diseases": [
+      "肥厚性心肌病(HCM)",
+      "多囊肾病(PKD)",
+      "进行性视网膜萎缩(PRA)",
+      "肥胖倾向",
+      "血型B型携带"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "800-1600",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.20-0.50"
+    },
+    "ethology_notes": "源自古罗马随军捕鼠猫与本地野猫的自然杂交，19世纪末由哈里森·威尔在伦敦水晶宫首届猫展上首次正式展出。二战后曾濒临灭绝，引入波斯猫血统补充基因库。叫声稀少，符合猫科动物'安静捕食者'本能；F0集中250-550Hz中低频区间，与其浑厚的胸腔构造相匹配。Schötz(2012)研究中家猫miaow平均F0为698Hz(221-1185Hz)，英短作为中大型猫F0偏向该范围下限。HCM与PKD为繁育中需重点筛查的遗传缺陷，CFA/TICA均建议年度心脏超声筛查。极易肥胖，需严格控制食量并保证每日30分钟互动。",
+    "sources": [
+      "https://m.baike.com/wiki/英国短毛猫/1065373",
+      "https://cfa.org/breed/british-shorthair/",
+      "https://www.researchgate.net/publication/232732229_A_phonetic_pilot_study_of_vocalisations_in_three_cats",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+    ]
+  },
+  {
+    "breed_cn": "布偶猫",
+    "breed_en": "Ragdoll",
+    "origin": "美国加利福尼亚州河滨市（1960年代 Ann Baker 用白色长毛猫 Josephine 系统繁育，1965年定名）",
+    "body_type": "大型，半长毛，肌肉发达，胸部宽阔，骨骼粗壮，被抱起时体态松弛如布偶",
+    "weight_kg": "4.5-9.0",
+    "lifespan_years": "12-17",
+    "f0_range_hz": "300-650",
+    "vocal_frequency": 2,
+    "typical_sounds": [
+      "柔和短促的mew问候",
+      "满足时持续低频呼噜",
+      "求关注时轻柔鼻音",
+      "极少大声喵叫"
+    ],
+    "temperament": "温顺、亲人、松弛、信赖、像长不大的小猫、对儿童和其他宠物友好",
+    "coat_type": "半长毛，以护卫毛为主、缺少厚密底绒，触感丝滑，海豹/蓝/巧克力/丁香/红/白六色重点色分布",
+    "genetic_diseases": [
+      "肥厚性心肌病(HCM)",
+      "多囊肾病(PKD)",
+      "膀胱结石(草酸钙)",
+      "猫传染性腹膜炎(FIP)易感",
+      "肥胖倾向"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "900-1700",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.30-0.60"
+    },
+    "ethology_notes": "Ann Baker于1960年代以白色家猫Josephine为母本繁育而成，声称其被车撞后后代出现松弛、不易打结的毛质与温顺个性，1993年CFA注册，2000年获冠军。重点色基因导致体色浅于耳、面、四肢、尾。大型晚熟品种，4岁才达全身体与毛色峰值。性情温和、信赖人类、极少发声，叫声轻柔短促，F0集中于300-650Hz区间。HCM为唯一已知高发遗传缺陷，繁育者常规DNA检测剔除携带者。因其信赖性强，与既有猫狗需小心介绍。",
+    "sources": [
+      "https://cfa.org/breed/ragdoll/",
+      "https://m.baike.com/wiki/布偶猫/19707215",
+      "https://www.meowinggoods.com/breeds/ragdoll/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+    ]
+  },
+  {
+    "breed_cn": "缅因猫",
+    "breed_en": "Maine Coon",
+    "origin": "美国缅因州（北美最古老自然长毛品种，18世纪中叶稳定，1985年定为缅因州州猫）",
+    "body_type": "大型长毛，骨架粗壮，胸宽阔，四肢中等长度，颈部蓬松'围脖'，尾粗如扫帚，耳尖猞猁状饰毛",
+    "weight_kg": "4-11",
+    "lifespan_years": "10-15",
+    "f0_range_hz": "200-500",
+    "vocal_frequency": 3,
+    "typical_sounds": [
+      "鸟鸣般chirp颤音（标志性）",
+      "短促trill颤鸣打招呼",
+      "温和低频呼噜",
+      "极少大声嚎叫"
+    ],
+    "temperament": "温柔巨人、亲人、像狗一样忠诚、聪明可训、独立但好奇、对儿童友好",
+    "coat_type": "双层被毛，外层粗硬防水、内层柔软保暖，颈有围脖，尾蓬松如羽毛掸子，60余种毛色（除重点色）",
+    "genetic_diseases": [
+      "肥厚性心肌病(HCM)",
+      "髋关节发育不良",
+      "脊肌萎缩症(SMA, OSH exon1缺失)",
+      "多囊肾病(PKD)",
+      "猫肥厚性视网膜变性(HCR)"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "700-1500",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.10-0.30"
+    },
+    "ethology_notes": "北美最古老自然长毛品种，源于缅因州农场猫，传为维京船猫与本地猫杂交后代，1985年定为缅因州官方州猫。1895年纽约猫展冠军'Cosey'即缅因猫。被称为'温柔巨人'，最大记录个体Stewie达1.23米。叫声极具特色，不嚎叫而是发出鸟鸣般chirp颤音，F0集中于200-500Hz低频区间，与其大体型与长共鸣腔匹配。晚熟品种，3-5岁才完全成熟。HCM、SMA、髋关节发育不良为繁育必检遗传缺陷。喜欢水，可学会巡回、开门等指令。",
+    "sources": [
+      "https://m.baike.com/wiki/缅因猫/264200",
+      "https://cfa.org/breed/maine-coon/",
+      "https://www.nimomo.com/wiki/breeds/cat/maine-coon/",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+    ]
+  },
+  {
+    "breed_cn": "暹罗猫",
+    "breed_en": "Siamese",
+    "origin": "泰国（古暹罗，14世纪《猫书诗》记载，1884年英国领事Gould带回英国）",
+    "body_type": "中型，纤瘦修长，长楔形头，大耳，长颈长尾长腿，杏仁蓝眼，重点色",
+    "weight_kg": "2.7-6.4",
+    "lifespan_years": "12-20",
+    "f0_range_hz": "600-1100",
+    "vocal_frequency": 5,
+    "typical_sounds": [
+      "持续高频'Meezer'嚎叫（猫界女高音）",
+      "求关注时低频长嚎",
+      "兴奋时chirp颤音",
+      "对话式强烈发声"
+    ],
+    "temperament": "极度话痨、极度粘人、聪明、好奇、强求关注、像狗一样跟随主人、对孤独极敏感",
+    "coat_type": "短毛，触感细腻，重点色（海豹/蓝/巧/丁香四色CFA标准），蓝眼由 tyrosinase 温度敏感突变导致",
+    "genetic_diseases": [
+      "进行性视网膜萎缩(PRA, rdAc)",
+      "系统性淀粉样变性",
+      "哮喘",
+      "先天性心脏病",
+      "斜视与kink尾（传统特征）"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "1200-2500",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.50-1.20"
+    },
+    "ethology_notes": "源自暹罗王室与寺院饲养的'Wichienmaat'（月钻石），14世纪《猫书诗》记载。1884年英国领事Gould引入英国，1885年伦敦水晶宫猫展引起轰动，1906年CFA首批认证品种之一。被称为'猫界女高音'，叫声大且高频，CFA官方描述'large repertoire of vocalizations'。F0在所有品种中偏高，集中于600-1100Hz区间（Schötz 2012测家猫miaow均值698Hz，暹罗偏向该范围上限）。温度敏感的tyrosinase突变导致重点色，四肢尾部温度低色素深。极度粘人，不适合长时间独处。淀粉样变性是该品种特色遗传缺陷，繁育者需家族系谱筛查。",
+    "sources": [
+      "https://m.baike.com/wiki/暹罗猫/82",
+      "https://cfa.org/breed/siamese/",
+      "https://siamesebc.org/aboutSiamese.html",
+      "https://www.royalcanin.com/us/cats/breeds/siamese",
+      "https://www.researchgate.net/publication/232732229_A_phonetic_pilot_study_of_vocalisations_in_three_cats"
+    ]
+  },
+  {
+    "breed_cn": "波斯猫",
+    "breed_en": "Persian",
+    "origin": "波斯（今伊朗，1620年意大利旅行家Pietro della Valle带入欧洲，19世纪英美选育定型）",
+    "body_type": "中型，短粗腿，cobby矮壮型，大圆头，扁平脸（peke-face极端型/doll-face传统型），短颈宽胸",
+    "weight_kg": "3-5.5",
+    "lifespan_years": "12-16",
+    "f0_range_hz": "250-500",
+    "vocal_frequency": 1,
+    "typical_sounds": [
+      "极少发声，柔软低频'咕哝'",
+      "满足时持续低频呼噜",
+      "求食时轻柔短促meow",
+      "用表情与眼神沟通"
+    ],
+    "temperament": "宁静、温和、慵懒、皇室尊严、爱静卧、对家人忠诚、对噪声敏感、对其他宠物友好",
+    "coat_type": "超长双层被毛，外层丝长、内层厚密，颈部丰满鬃毛，7色CFA组（纯色/金银/烟色/虎斑/双色/三花/喜马拉雅）",
+    "genetic_diseases": [
+      "多囊肾病(PKD, PKD1基因突变, 占36-49%)",
+      "短头综合征(Brachycephalic Syndrome)",
+      "泪溢症(Epiphora)",
+      "进行性视网膜萎缩(PRA)",
+      "牙颌畸形"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "700-1400",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.20-0.45"
+    },
+    "ethology_notes": "1620年意大利旅行家Pietro della Valle从波斯Khorasan带回欧洲，19世纪英美繁育者定型现代peke-face极端型。CFA 1906年创始认证品种之一，至今CFA注册量常居前五。短脸型(brachycephalic)导致短共鸣腔，F0偏低集中于250-500Hz，叫声稀少柔软。声音主要通过呼噜与表情传达。PKD为该品种标志性疾病（PKD1基因突变阳性率36-49%），繁育必检。泪溢需每日清理面部折痕。oll-face传统型比peke-face健康，呼吸与牙齿问题较轻。",
+    "sources": [
+      "https://cfa.org/breed/persian/",
+      "https://www.gccfcats.org/getting-a-cat/choosing/cat-breeds/Persian/",
+      "https://cat-world.com/persian-cat-breed-profile.pdf",
+      "https://kureansiklopedi.com/en/detay/iranian-cat-c530e",
+      "https://www.petful.com/cat-breeds/persian-cat/"
+    ]
+  },
+  {
+    "breed_cn": "孟加拉豹猫",
+    "breed_en": "Bengal",
+    "origin": "美国（1963年Jean Mill用亚洲豹猫Prionailurus bengalensis×家猫杂交，1980年代稳定，TICA 1991冠军）",
+    "body_type": "中大型，肌肉发达修长，后腿略长于前腿，楔形头，颊骨高突，运动型外观",
+    "weight_kg": "3.5-7",
+    "lifespan_years": "12-16",
+    "f0_range_hz": "400-900",
+    "vocal_frequency": 4,
+    "typical_sounds": [
+      "独特的chirp颤音（保留野性）",
+      "高频trill问候",
+      "求食时连续急促meow",
+      "兴奋时持续呼噜"
+    ],
+    "temperament": "极度活跃、聪明、自信、好奇、爱水、强猎驱、可训、像小孩一样爱玩、不适合低活动量家庭",
+    "coat_type": "短毛，极密贴身、有'glitter'金光质感，玫瑰斑(rosette)/斑点(spots)/marble大理石三种花纹",
+    "genetic_diseases": [
+      "肥厚性心肌病(HCM)",
+      "进行性视网膜萎缩 Bengal型(PRA-b, b3删)",
+      "丙酮酸激酶缺乏症(PK Def)",
+      "猫传染性腹膜炎(FIP)易感",
+      "膝关节脱位"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "1100-2200",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.25-0.70"
+    },
+    "ethology_notes": "1963年Jean Mill首次用亚洲豹猫(Prionailurus bengalensis)与家猫杂交，1980年代稳定繁育，TICA 1991年冠军地位。F1-F3保留较多野性，F4及以上为合法家养。名字源自亚洲豹猫学名。叫声多样化，含野性chirp颤音与高频trill，F0 400-900Hz区间，比一般家猫高且多变。爱水是其野生祖先特征，常把水碗溅得到处都是。HCM、PRA-b、PK Def 为必检DNA疾病，繁育者常规提供检测结果。F1-F3在美国多个州受限或禁止，需查当地法规。不适合低活动量主人，弃养率高。",
+    "sources": [
+      "https://m.baike.com/wiki/孟加拉豹猫/773190",
+      "https://www.petful.com/cat-breeds/bengal-cat/",
+      "https://www.furrycritter.com/pages/descriptions/cats/bengal.htm",
+      "https://petsvines.com/bengal-cat-temperament-care-activity-needs-and-cost-2026/"
+    ]
+  },
+  {
+    "breed_cn": "斯芬克斯无毛猫",
+    "breed_en": "Sphynx",
+    "origin": "加拿大（1966年安大略省家猫黑白色母猫Elizabeth生下无毛小猫Prune，隐性基因突变；1978年多伦多再次发现）",
+    "body_type": "中型，肌肉发达健壮，皮肤仅有细微绒毛（peach-fuzz），耳大眼大，额头颈腿明显皱纹，尾长细",
+    "weight_kg": "3-5.4",
+    "lifespan_years": "8-14",
+    "f0_range_hz": "500-900",
+    "vocal_frequency": 4,
+    "typical_sounds": [
+      "高频持续meow求关注",
+      "对话式与主人交流",
+      "满足时持续呼噜",
+      "急促'咩咩'声"
+    ],
+    "temperament": "极度粘人、爱社交、像小孩、聪明、爱玩、像狗一样跟随、不能独处、对温度敏感",
+    "coat_type": "无毛（实际有细微桃绒），皮肤褶皱明显，触感温热如麂皮，所有颜色与图案均允许",
+    "genetic_diseases": [
+      "肥厚性心肌病(HCM)",
+      "遗传性肌病(Hereditary myopathy)",
+      "色素性荨麻疹(Urticaria pigmentosa)",
+      "皮肤酵母/细菌感染",
+      "牙周病"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "1000-2000",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.30-0.80"
+    },
+    "ethology_notes": "1966年加拿大安大略省黑白色母猫Elizabeth生下无毛小猫Prune为现代品种起点，1978年多伦多再次出现无毛猫，与Devon Rex杂交扩基因池。CFA 2002年认证，TICA 2005年认证。无毛性状为隐性基因突变（hr基因）。皮肤非完全无毛，有细微桃绒触感如麂皮，体温较他种稍高（并非真高）。极度社交粘人，'people cat'，发声频繁，F0集中于500-900Hz高频区间。HCM为高发遗传缺陷，需年度心脏超声。皮肤分泌油脂多，需每周洗浴避免痤疮与酵母感染。晒太阳易晒伤，需室内饲养。是研究人类心肌病的优秀模型。",
+    "sources": [
+      "https://m.baike.com/wiki/斯芬克斯猫/284963",
+      "https://www.gccfcats.org/getting-a-cat/choosing/cat-breeds/Sphynx/",
+      "https://www.meowinggoods.com/breeds/sphynx/",
+      "https://a-z-animals.com/animals/sphynx/"
+    ]
+  },
+  {
+    "breed_cn": "苏格兰折耳猫",
+    "breed_en": "Scottish Fold",
+    "origin": "英国苏格兰珀斯郡Tayside（1961年农场白色母猫Susie为品种始祖，繁殖者William Ross系统繁育）",
+    "body_type": "中型，圆头大眼，向前折叠紧贴头部的耳朵（Fd显性基因），短粗四肢，圆滚滚身躯",
+    "weight_kg": "2.5-6",
+    "lifespan_years": "11-15",
+    "f0_range_hz": "250-500",
+    "vocal_frequency": 1,
+    "typical_sounds": [
+      "极少发声，安静温和",
+      "满足时低频呼噜",
+      "偶尔轻柔短促meow",
+      "用眼神与坐姿沟通"
+    ],
+    "temperament": "安静、温和、黏人有分寸、佛系、独特的'人坐'姿势（Buddha pose）、对儿童宠物友好",
+    "coat_type": "短毛/长毛（Highland Fold）两种，密实有弹性，颜色图案多样",
+    "genetic_diseases": [
+      "骨软骨发育不良(Osteochondrodysplasia, OCD, TRPV4基因突变, 所有折耳均不同程度发病)",
+      "退行性关节病",
+      "肥厚性心肌病(HCM)",
+      "耳螨（耳道折叠易积垢）",
+      "肥胖"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "800-1500",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.20-0.45"
+    },
+    "ethology_notes": "1961年苏格兰珀斯郡农场白色母猫Susie为现代品种始祖，William Ross系统繁育。Fd基因是不完全显性突变影响TRPV4基因，导致软骨发育异常，所有折耳个体不同程度发病。CFA 1978年短毛冠军地位，1992年长毛冠军。GCCF（英国）出于健康考虑不认可该品种。所有Fd/Fd纯合子必发严重 crippling 骨骼病，因此伦理繁育只用Fd/fd折耳×fd/fd立耳。'Buddha pose'后腿伸直背靠垂直坐姿既可爱也可能是关节不适信号。声音极少，F0偏低集中于250-500Hz区间。建议提供低边猫砂盆、记忆棉床与爬坡避免高跳。英国兽医协会与iCatCare建议停止繁育该品种。",
+    "sources": [
+      "https://miaohuoban.com/breed-scottish-fold.html",
+      "https://catsmastery.com/scottish-fold-cat-breed-profile/",
+      "https://petscarewiki.com/cat-breeds/scottish-fold.html",
+      "https://www.sacbr.co.za/scottish-fold.pdf"
+    ]
+  },
+  {
+    "breed_cn": "矮脚拿破仑猫",
+    "breed_en": "Napoleon/Minuet",
+    "origin": "美国（1996年阿肯色州Joe Smith用曼基康猫×波斯猫/异国短毛猫杂交培育，2015年TICA更名Minuet）",
+    "body_type": "小型，短腿（曼基康显性基因Mk），波斯式圆头大眼短鼻，圆滚滚身躯，比例协调",
+    "weight_kg": "2.5-4.5",
+    "lifespan_years": "9-15",
+    "f0_range_hz": "450-750",
+    "vocal_frequency": 3,
+    "typical_sounds": [
+      "柔和的trill颤音问候",
+      "轻柔短促的soft meow",
+      "求关注时低频呼噜",
+      "兴奋时chirp颤音"
+    ],
+    "temperament": "温和、亲人、爱社交、活泼好奇、爱说话但声音轻柔、保留曼基康活力与波斯温柔",
+    "coat_type": "短毛/长毛两种，毛质如波斯柔软华丽但不像波斯般浓密，所有波斯毛色均认可",
+    "genetic_diseases": [
+      "多囊肾病(PKD, 来自波斯祖先)",
+      "短头综合征(Brachycephalic Syndrome, 来自波斯祖先)",
+      "曼基康致死纯合子(Mk/Mk宫内死亡，仅Mk/mk杂合子可活)",
+      "肥厚性心肌病(HCM)",
+      "泪溢症"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "900-1700",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.25-0.55"
+    },
+    "ethology_notes": "1996年阿肯色州巴吉度猎犬繁育者Joe Smith受《华尔街日报》一篇曼基康猫报道启发，将曼基康与波斯/异国短毛猫杂交，目标为'短腿、波斯头型、温顺个性'的新品种。2002年TICA实验性认可，2005年注册认可，2011年初步新品种，2015年冠军地位并更名Minuet（小步舞曲，更优雅）。CFA、GCCF、FIFe均不认可。曼基康显性短腿基因Mk纯合子致死，所有Napoleon/Minuet均为Mk/mk杂合子。波斯圆头基因带来短共鸣腔，F0集中于450-750Hz偏高中频区间。声音轻柔爱说话但不大声，trill与soft meow为主。性格融合曼基康活力与波斯温柔，热衷陪伴主人，对人类极度友善。允许的杂交品种为波斯、异国短毛猫、曼基康以保持基因多样性。",
+    "sources": [
+      "https://m.baike.com/wiki/拿破仑猫/7998370",
+      "https://funfactorium.com/cats/napoleon",
+      "https://www.ilmiogattoeleggenda.it/gatto-minuet-storia/",
+      "https://www.gatobras.com.br/guiadegatos/minuet-longhair",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7000907/"
+    ]
+  },
+  {
+    "breed_cn": "美国短毛猫",
+    "breed_en": "American Shorthair",
+    "origin": "美国（1620年五月花号欧洲移民带来的工作猫，1906年CFA首批注册品种，1966年更名American Shorthair）",
+    "body_type": "中大型，工作猫型，方正比例略长于高，骨骼粗壮，肌肉发达，胸宽阔，四肢中等长度",
+    "weight_kg": "3.5-6.5",
+    "lifespan_years": "15-20",
+    "f0_range_hz": "300-600",
+    "vocal_frequency": 2,
+    "typical_sounds": [
+      "中等频率温和meow",
+      "满足时持续呼噜",
+      "狩猎时短促chirp",
+      "极少大声嚎叫"
+    ],
+    "temperament": "活泼、勇敢、聪明、独立但亲人、对儿童友好、低维护需求、强适应力、爱捕猎",
+    "coat_type": "短密硬质毛，触感光滑、底层防水，80余种颜色图案，银虎斑最经典",
+    "genetic_diseases": [
+      "肥厚性心肌病(HCM)",
+      "多囊肾病(PKD)",
+      "肥胖倾向",
+      "牙周病",
+      "髋关节发育不良"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "900-1700",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.25-0.55"
+    },
+    "ethology_notes": "1620年五月花号欧洲移民带来的工作捕鼠猫，1906年CFA首批5个注册品种之一，原名Domestic Shorthair，1966年更名American Shorthair以区分杂种。CFA将其归类为自然品种，强调工作猫体型，无任何夸张构造。1895年纽约猫展首次展即获冠军。抵抗力强很少生病，平均寿命15-20年。F0集中于300-600Hz中频区间，与其工作猫体型匹配。银虎斑为最经典花色。HCM、PKD为繁育必检遗传缺陷。低维护需求，每周一次梳毛即可。对家庭、儿童、其他宠物均友好，是CFA注册量第8大品种（2020年）。",
+    "sources": [
+      "https://m.baike.com/wiki/美国短毛猫/85",
+      "https://cfa.org/breed/american-shorthair/",
+      "https://cfa.org/wp-content/uploads/2024/06/american-shorthair-full-presentation.pdf",
+      "https://animalia.bio/pets/american-shorthair",
+      "https://pet-pedia.org/cats/american-shorthair/"
+    ]
+  },
+  {
+    "breed_cn": "挪威森林猫",
+    "breed_en": "Norwegian Forest Cat",
+    "origin": "挪威（斯堪的纳维亚自然品种，约1000年维京船猫演化，1938年挪威森林猫俱乐部成立，1970年代注册）",
+    "body_type": "大型，骨架粗壮，腿后高于前，三角头等边，杏仁眼斜置，耳大有猞猁饰毛，尾蓬松长如扫帚",
+    "weight_kg": "4-9",
+    "lifespan_years": "14-16",
+    "f0_range_hz": "250-550",
+    "vocal_frequency": 2,
+    "typical_sounds": [
+      "柔和低频meow",
+      "兴奋时鸟鸣chirp颤音",
+      "满足时持续呼噜",
+      "受激时高频trill"
+    ],
+    "temperament": "温柔、独立、友善、聪明、爱攀爬、爱高处、对家人忠诚、与狗猫儿童友好",
+    "coat_type": "双层防水被毛，外层粗长光滑防水、内层厚密羊毛状保暖，颈有围脖，除重点色外所有颜色均认可",
+    "genetic_diseases": [
+      "肥厚性心肌病(HCM)",
+      "髋关节发育不良",
+      "糖原贮积病IV型(GSD IV, GBE1基因)",
+      "多囊肾病(PKD)",
+      "视网膜萎缩"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "800-1600",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.25-0.55"
+    },
+    "ethology_notes": "挪威自然品种（Norsk Skogkatt），约1000年维京船猫演化，挪威神话中女神Freya双Skogkatt拉车。二战期间几乎绝种，1938年挪威森林猫俱乐部成立被中断，1970年代Carl-Fredrik Nordane推动恢复。FIFe 1977年认可，CFA 1987年注册、1993年冠军，1950年代挪威国王Olav V定为挪威国猫。大型晚熟品种，4-5岁才完全成熟。双层防水毛适应斯堪的纳维亚严冬，可下水游泳。爱攀爬，需高大猫爬架。F0集中于250-550Hz中低频，与其大体型匹配。GSD IV（GBE1基因）为该品种特色遗传病，可致死。声音柔和多样，含鸟鸣chirp。",
+    "sources": [
+      "https://cfa.org/breed/norwegian-forest-cat/",
+      "https://cfa.org/wp-content/uploads/2023/09/norwegian-forest-cat-brochure.pdf",
+      "https://www.gccfcats.org/getting-a-cat/choosing/cat-breeds/Norwegian-Forest-Cat/",
+      "https://www.sacbr.co.za/norwegian-forest-cat.pdf",
+      "https://furlyo.com/norwegian-forest-cat/"
+    ]
+  },
+  {
+    "breed_cn": "狸花猫",
+    "breed_en": "Dragon Li",
+    "origin": "中国（自然本土猫种，可追溯至宋朝'狸猫换太子'记载，2010年CFA临时认证Chinese Li Hua）",
+    "body_type": "中型，方正比例匀称，胸宽阔肌肉发达，四肢粗壮敏捷，圆头宽颊大杏眼，耳距宽",
+    "weight_kg": "3.5-6.5",
+    "lifespan_years": "12-15",
+    "f0_range_hz": "350-700",
+    "vocal_frequency": 3,
+    "typical_sounds": [
+      "中等频率meow",
+      "狩猎时急促chirp",
+      "满足时持续呼噜",
+      "警觉时短促咆哮"
+    ],
+    "temperament": "独立、聪明、外冷内热、警觉、对主人忠诚极度依恋、对陌生人疏离、强猎驱、适应力强",
+    "coat_type": "短毛密实无厚下绒毛，有光泽，棕黄色mackerel虎斑+额头M形纹+颈部四肢尾巴环状斑纹为标准",
+    "genetic_diseases": [
+      "无明显品种特异性遗传病",
+      "皮肤敏感（饲养环境相关）",
+      "肠胃'玻璃胃'（换粮易腹泻）",
+      "牙周病",
+      "室外散养易感染寄生虫"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "1000-1900",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.25-0.55"
+    },
+    "ethology_notes": "中国本土自然猫种，千年自然淘汰保留下来的品种，宋朝《狸猫换太子》记载最早。2010年CFA临时认证为Chinese Li Hua，2018年因血统不纯CFA移除，但TICA仍认可为原生自然品种。基因多样性极高，免疫系统强悍，无明显品种特异性遗传病。骨骼密度比品种猫高约15%，捕猎成功率达68%。智商等同2-4岁儿童，能听懂多组指令。性格'外冷内热'，对主人极度忠诚，对陌生人警觉。换主人会心理受伤。F0集中于350-700Hz中频区间，介于中小型家猫范围。肠胃强但易敏感，需科学喂养。中国唯一国际认证本土猫种，海外Dragon Li赛级售价可达6000-14000美元。",
+    "sources": [
+      "https://m.baike.com/wiki/玳瑁色虎斑猫/1482210",
+      "https://post.m.smzdm.com/p/aqrg3o9k/",
+      "https://post.m.smzdm.com/p/a3m2nv75/",
+      "https://www.toutiao.com/group/6267283089274749185/"
+    ]
+  },
+  {
+    "breed_cn": "橘猫",
+    "breed_en": "Orange Tabby",
+    "origin": "全球（非品种，毛色/图案分类；ARHGAP36基因X染色体5.1kb缺失突变，约900年前出现）",
+    "body_type": "因所属品种不同而异，常见家猫多为中型，肌肉中等，圆头宽颊，比例协调",
+    "weight_kg": "3-7",
+    "lifespan_years": "12-18",
+    "f0_range_hz": "350-700",
+    "vocal_frequency": 3,
+    "typical_sounds": [
+      "中等频率meow",
+      "求食时持续呼叫",
+      "满足时持续呼噜",
+      "兴奋时chirp颤音"
+    ],
+    "temperament": "传闻性格友好爱亲、活泼、贪吃、胖倾向、像小孩、有'一个神经元共享'梗（实际个性差异大）",
+    "coat_type": "短/长毛均有，5种虎斑图案（mackerel/classic/spotted/ticked/patched），颜色从浅杏黄到深橘红，必为tabby无纯色",
+    "genetic_diseases": [
+      "无品种特异性遗传病（家猫混血优势）",
+      "肥胖倾向（贪吃）",
+      "牙周病",
+      "下泌尿道疾病(FLUTD)",
+      "慢性肾病(CKD, 老年)"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "900-1800",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.30-0.65"
+    },
+    "ethology_notes": "橘猫非品种而是毛色与图案组合，2025年5月两个独立研究团队在《Current Biology》发表论文，将橘色基因定位于X染色体ARHGAP36基因的5.1kb缺失突变，导致PKA信号通路被抑制、真黑色素合成减少而褐黑色素增加。该突变约900年前出现，因X染色体连锁，约80%橘猫为公猫（XY只需1个O基因），母橘猫需两个X均带O基因（XOXO）占20%。橘猫必显示虎斑条纹，因橘色色素无法形成纯色。性格友好传闻多源于'多数为公猫'，公猫体型大亲人，但个性差异远大于颜色。F0集中于350-700Hz中频区间，符合典型家猫范围（Schötz 2012均值698Hz）。家猫混血优势，无明显品种遗传病，但易贪吃肥胖。可作为品种如美短、缅因、波斯等的颜色变体。",
+    "sources": [
+      "https://www.petful.com/cat-breeds/orange-tabby-cat/",
+      "https://www.omia.org/OMIA001201/9685/",
+      "https://www.nature.com/articles/s41598-025-31536-7",
+      "https://www.researchgate.net/publication/232732229_A_phonetic_pilot_study_of_vocalisations_in_three_cats"
+    ]
+  },
+  {
+    "breed_cn": "异国短毛猫",
+    "breed_en": "Exotic Shorthair",
+    "origin": "美国（1950年代美国短毛猫×波斯猫/缅甸猫/俄罗斯蓝猫杂交，1967年CFA冠军，1987年限定波斯为唯一杂交品种）",
+    "body_type": "中型cobby矮壮型，重骨，胸肩宽，腿短粗，圆头大圆眼，扁平脸与波斯同标准，仅毛长不同",
+    "weight_kg": "3-6.8",
+    "lifespan_years": "12-15",
+    "f0_range_hz": "250-500",
+    "vocal_frequency": 2,
+    "typical_sounds": [
+      "稀少发声，柔和低频",
+      "满足时持续呼噜",
+      "求食时轻柔短meow",
+      "用眼神沟通"
+    ],
+    "temperament": "温顺、亲人、爱玩耍、好奇、活泼但不多动、像波斯温和但更活泼、爱跟随主人",
+    "coat_type": "短毛密实立绒状，触感如泰迪熊毛，颜色图案与波斯同标准（6个CFA组）",
+    "genetic_diseases": [
+      "多囊肾病(PKD, 来自波斯祖先)",
+      "短头综合征(Brachycephalic Syndrome)",
+      "泪溢症(Epiphora)",
+      "肥厚性心肌病(HCM)",
+      "进行性视网膜萎缩(PRA)"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "700-1400",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.20-0.45"
+    },
+    "ethology_notes": "1950年代美国短毛猫繁育者想引入波斯的银色毛发与绿色眼，将波斯×美短（含缅甸猫×俄罗斯蓝猫），后代意外像短毛版波斯。1966年CFA建立hybrid class，1967年冠军地位。1987年CFA禁止与缅甸猫、俄罗斯蓝猫杂交，仅波斯为允许杂交品种，所以现异国短毛猫=短毛波斯。GCCF 1986年认可，1995年冠军。与波斯共享同一品种标准，仅毛长不同。短脸型(brachycephalic)导致短共鸣腔，F0偏低集中于250-500Hz，叫声稀少。PKD为必检遗传缺陷。毛短但需每周梳理。'加菲猫'Garfield原型为异国短毛猫。CFA注册量常居前五。",
+    "sources": [
+      "https://m.baike.com/wiki/异国短毛猫/88",
+      "https://www.gccfcats.org/getting-a-cat/choosing/cat-breeds/exotic-shorthair/",
+      "https://www.furrycritter.com/pages/descriptions/cats/exotic_shorthair.htm",
+      "https://worldanimalrescuenetwork.org/wildlife-guides/cat/exotic-shorthair/"
+    ]
+  },
+  {
+    "breed_cn": "美国卷耳猫",
+    "breed_en": "American Curl",
+    "origin": "美国加利福尼亚州莱克伍德市（1981年Ruga夫妇收养黑色长毛流浪猫Shulamith，1986年CFA注册，1993年冠军）",
+    "body_type": "中型矩形，肌肉结实优雅，腿后略长于前，长尾等于身长，楔形头，核桃形眼，向后卷曲耳90-180度",
+    "weight_kg": "2.7-5",
+    "lifespan_years": "12-16",
+    "f0_range_hz": "350-700",
+    "vocal_frequency": 2,
+    "typical_sounds": [
+      "稀少发声，柔和chirp颤音",
+      "求关注时轻柔meow",
+      "满足时持续呼噜",
+      "像小猫般chirpy音"
+    ],
+    "temperament": "好奇、活泼、温和、聪明、像狗跟随、对儿童友好、'永远的小猫'个性保留至成年",
+    "coat_type": "短毛/长毛两种，丝滑平贴底层稀疏，所有颜色图案均认可",
+    "genetic_diseases": [
+      "无明显品种特异性遗传病（基因池极多样）",
+      "外耳道感染（耳软骨特殊易积垢）",
+      "肥厚性心肌病(HCM, 罕见)",
+      "牙周病",
+      "耳螨"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "1000-1800",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.20-0.50"
+    },
+    "ethology_notes": "1981年加州莱克伍德Ruga夫妇门口黑色长毛流浪猫Shulamith为品种始祖，耳向后卷曲为显性基因突变。1983年首次猫展，1986年CFA注册，1993年冠军地位，2015年前允许与家猫杂交扩基因池，故基因池极多样，无品种特异性遗传病。耳软骨特殊需小心清洁，避免折损。出生时耳朵直立，3-5天开始卷曲，16周定型，分3度（轻度、中度、crescent月牙形）。'永远的小猫'个性保留至成年，爱玩爱探索。F0集中于350-700Hz中频区间。叫声柔和chirp颤音，发声稀少。TICA 1987年认可，FIFe 2002年认可。",
+    "sources": [
+      "https://cfa.org/breed/american-curl/",
+      "https://cfa.org/american-curl-article/",
+      "https://www.nimomo.com/wiki/breeds/cat/american-curl/",
+      "https://mail.furrycritter.com/pages/descriptions/cats/american_curl.htm",
+      "https://en.top-cat.org/breeds-articles/189"
+    ]
+  },
+  {
+    "breed_cn": "俄罗斯蓝猫",
+    "breed_en": "Russian Blue",
+    "origin": "俄罗斯阿尔汉格尔斯克港（北冰洋港口，1860年代英国水手带回欧洲，1875年伦敦水晶宫首展'Archangel Cat'）",
+    "body_type": "中型半外型，骨架细致但肌肉发达，腿长，长尾锥形，楔形头，大耳宽距，杏仁眼斜置",
+    "weight_kg": "3-5.5",
+    "lifespan_years": "15-20",
+    "f0_range_hz": "300-600",
+    "vocal_frequency": 2,
+    "typical_sounds": [
+      "稀少发声，柔和低频meow",
+      "求关注时轻柔chirp颤音",
+      "满足时持续呼噜",
+      "仪式性'对话'柔音"
+    ],
+    "temperament": "温柔、害羞、对陌生人内敛、对主人极度忠诚、像狗跟随、聪明可训玩巡回、爱秩序怕变化",
+    "coat_type": "双层短密毛，外层银蓝带银尖光泽，内层柔软如天鹅绒，纯蓝灰色无图案，祖母绿色眼",
+    "genetic_diseases": [
+      "无明显品种特异性遗传病（自然品种健康）",
+      "肥胖倾向",
+      "肥厚性心肌病(HCM, 罕见)",
+      "尿路感染(FLUTD)",
+      "糖尿病（肥胖相关）"
+    ],
+    "acoustic_features": {
+      "formant_f0_hz": "1000-1800",
+      "purr_f0_hz": "25-30",
+      "meow_duration_s": "0.25-0.55"
+    },
+    "ethology_notes": "源自俄罗斯北冰洋港口阿尔汉格尔斯克（Archangel），1860年代英国水手带回欧洲，1875年伦敦水晶宫首展名'Archangel Cat'。1912年获独立分类。二战期间几乎绝种，曾引入暹罗与英短血统补充基因池，现已基本剔除。CFA、TICA、GCCF、FIFe均认可。'蓝'为黑色基因稀释表达(b基因)，双层短密毛质与沙特尔猫共享独特触感。祖母绿大眼为品种标志（幼猫蓝眼4月变绿）。F0集中于300-600Hz中低频，叫声稀少柔和chirp。生产较少Fel d 1蛋白，对轻度猫过敏者较友好。3-4岁完全成熟。爱秩序怕变化，换家具/迟到喂食/陌生客均能引发可见焦虑。可学会玩巡回。寿命长，15-20年。",
+    "sources": [
+      "https://russianbluecat.org/",
+      "https://www.sacbr.co.za/russian-blue.pdf",
+      "https://furlyo.com/russian-blue/",
+      "https://myrussianbluekittens.com/about-the-breed.html",
+      "https://www.proplan.ru/cat/breeds/russkaya-golubaya-koshka"
+    ]
+  }
+]

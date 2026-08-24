@@ -7,12 +7,18 @@
 """
 
 import os
+import sys
 import json
 import random
 import numpy as np
 import librosa
 from typing import List, Dict
 from scipy.io import wavfile
+
+# 添加项目根目录到 sys.path, 确保 'src' 包可被导入
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
 
 
 # =====================================
