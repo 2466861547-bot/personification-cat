@@ -80,7 +80,16 @@ EMOTION_TO_DESCRIPTION = {
 
 
 class AudioGenerator:
-    """宠物声音合成器 - 支持优雅降级"""
+    """宠物声音合成器 - 支持优雅降级 + CosyVoice 声纹克隆"""
+
+    # 预置声线注册表: 声线名 → 参考音频文件路径
+    # 用户可在此注册常用声线的参考音频
+    PRESET_VOICE_REFS: Dict[str, str] = {}
+
+    # 内置声线定义: 声线名 → 参考音频文件相对路径 (相对于项目根目录)
+    _BUILTIN_VOICE_REFS: Dict[str, str] = {
+        "林志玲": "data/voices/linzhiling_ref.wav",
+    }
 
     def __init__(self, model_name: str = "suno/bark"):
         self.model_name = model_name
@@ -88,7 +97,22 @@ class AudioGenerator:
         self.processor = None
         self.is_ready = False
         self._generation_config_fixed = False  # 只修一次
+        self.cosyvoice_model = None  # CosyVoice 声纹克隆模型
+        self.cosyvoice_ready = False
+        self._register_builtin_voices()
         self._load_model()
+
+    @classmethod
+    def _register_builtin_voices(cls):
+        """自动注册内置声线 (懒加载，只注册一次)"""
+        if getattr(cls, "_builtin_registered", False):
+            return
+        project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        for name, rel_path in cls._BUILTIN_VOICE_REFS.items():
+            full_path = os.path.join(project_root, rel_path)
+            if os.path.isfile(full_path) and name not in cls.PRESET_VOICE_REFS:
+                cls.PRESET_VOICE_REFS[name] = full_path
+        cls._builtin_registered = True
 
     def _load_model(self):
         """加载 Bark 模型 - 三级降级: 本地缓存 → HF → ModelScope → 模拟音频"""
@@ -216,6 +240,127 @@ class AudioGenerator:
             self.processor = None
             self.is_ready = False
 
+    def _load_cosyvoice(self, model_dir: Optional[str] = None) -> bool:
+        """加载 CosyVoice 声纹克隆模型
+
+        使用自包含的 CosyVoice2 推理模块 (cosyvoice_wrapper.py)，
+        不依赖 PyPI 上的 cosyvoice 包 (那是不同的库)。
+
+        Args:
+            model_dir: 本地模型目录，None 则自动检测
+        Returns:
+            是否加载成功
+        """
+        if self.cosyvoice_ready:
+            return True
+
+        try:
+            from .cosyvoice_wrapper import CosyVoice2
+
+            if model_dir is None:
+                possible_dirs = [
+                    os.path.expanduser("~/.cache/modelscope/hub/iic--CosyVoice2-0.5B"),
+                    os.path.expanduser("~/.cache/huggingface/hub/models--iic--CosyVoice2-0.5B"),
+                    os.path.expanduser("~/pretrained_models/CosyVoice2-0.5B"),
+                    os.path.expanduser("~/pretrained_models/CosyVoice-300M-2512"),
+                ]
+                for d in possible_dirs:
+                    if os.path.isdir(d) and (
+                        os.path.exists(os.path.join(d, "flow.safetensors"))
+                        or os.path.exists(os.path.join(d, "flow.bin"))
+                    ):
+                        model_dir = d
+                        break
+
+            if model_dir is None or not os.path.isdir(model_dir):
+                print("  ⚠️  未找到 CosyVoice2 模型，尝试自动下载...")
+                try:
+                    from modelscope import snapshot_download
+                    print("    正在从 ModelScope 下载 iic/CosyVoice2-0.5B ...")
+                    model_dir = snapshot_download("iic/CosyVoice2-0.5B")
+                    print(f"  ✅ CosyVoice2 下载成功: {model_dir}")
+                except Exception:
+                    try:
+                        os.environ.setdefault("HF_ENDPOINT", "https://hf-mirror.com")
+                        from huggingface_hub import snapshot_download as hf_download
+                        model_dir = hf_download("iic/CosyVoice2-0.5B")
+                        print(f"  ✅ CosyVoice2 下载成功 (HF): {model_dir}")
+                    except Exception as e2:
+                        print(f"  ⚠️  CosyVoice2 下载失败: {e2}")
+                        return False
+
+            print(f"  加载 CosyVoice2 模型: {model_dir}")
+            self.cosyvoice_model = CosyVoice2(model_dir=model_dir)
+            self.cosyvoice_ready = True
+            print(f"  ✅ CosyVoice2 加载成功")
+            return True
+
+        except ImportError as e:
+            print(f"  ⚠️ CosyVoice 模块导入失败: {e}")
+            print("    请确保已安装: pip install torch transformers modelscope safetensors librosa")
+            return False
+        except Exception as e:
+            print(f"  ⚠️ CosyVoice2 加载失败: {e}")
+            return False
+
+    def clone_voice_cosyvoice(
+        self,
+        text: str,
+        reference_audio: str,
+        reference_text: str = "",
+        output_path: Optional[str] = None,
+    ) -> Optional[np.ndarray]:
+        """使用 CosyVoice 进行真实声纹克隆
+
+        Args:
+            text: 要合成的文本
+            reference_audio: 参考音频文件路径 (3-15 秒)
+            reference_text: 参考音频的文字内容 (为空则使用 cross_lingual 模式)
+            output_path: 输出文件路径
+        Returns:
+            音频数组，失败返回 None
+        """
+        if not self.cosyvoice_ready:
+            if not self._load_cosyvoice():
+                return None
+
+        if not os.path.isfile(reference_audio):
+            print(f"  ⚠️ 参考音频不存在: {reference_audio}")
+            return None
+
+        try:
+            if reference_text:
+                print(f"  🎙️  CosyVoice zero-shot 克隆 (参考文本: {reference_text[:30]}...)")
+                chunks = list(self.cosyvoice_model.inference_zero_shot(
+                    text, reference_text, reference_audio
+                ))
+            else:
+                print(f"  🎙️  CosyVoice cross-lingual 克隆")
+                chunks = list(self.cosyvoice_model.inference_cross_lingual(
+                    text, reference_audio
+                ))
+
+            if not chunks:
+                print("  ⚠️ CosyVoice 未生成任何音频")
+                return None
+
+            audio = np.concatenate(chunks) if len(chunks) > 1 else chunks[0]
+            sample_rate = 22050
+            print(f"  ✅ CosyVoice 声纹克隆完成 ({len(audio)/sample_rate:.1f}s)")
+
+            if output_path:
+                os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+                wavfile.write(output_path, sample_rate, audio.astype(np.float32))
+                print(f"  🎵 音频已保存: {output_path}")
+
+            return audio
+
+        except Exception as e:
+            print(f"  ⚠️ CosyVoice 克隆失败: {e}")
+            import traceback
+            traceback.print_exc()
+            return None
+
     def get_preset(self, pet_type: str, emotion: str) -> str:
         """获取声音预设"""
         presets = VOICE_PRESETS.get(pet_type, {})
@@ -239,23 +384,61 @@ class AudioGenerator:
     def list_human_voices(self) -> list:
         """列出所有可用的人类声线"""
         voices = [k for k in HUMAN_VOICE_PRESETS.keys() if k != "default"]
-        return voices
+        # 也列出预置声线注册表
+        preset_voices = list(self.PRESET_VOICE_REFS.keys())
+        return voices + preset_voices
+
+    @classmethod
+    def register_preset_voice(cls, voice_name: str, reference_audio_path: str):
+        """注册预置声线 (声线名 → 参考音频文件)
+
+        Args:
+            voice_name: 声线名 (如 "林志玲")
+            reference_audio_path: 参考音频文件路径 (.wav, 3-15秒)
+        """
+        if not os.path.isfile(reference_audio_path):
+            raise FileNotFoundError(f"参考音频不存在: {reference_audio_path}")
+        cls.PRESET_VOICE_REFS[voice_name] = reference_audio_path
+        print(f"  ✅ 注册声线 '{voice_name}' → {reference_audio_path}")
 
     def text_to_human_sound(
         self,
         text: str,
         target_voice: str = "default",
         output_path: Optional[str] = None,
+        reference_audio: Optional[str] = None,
+        reference_text: Optional[str] = None,
     ) -> np.ndarray:
         """
-        文本 → 人类声音 (支持指定声线/声纹克隆)
+        文本 → 人类声音 (支持 CosyVoice 真实声纹克隆 + Bark 降级)
         Args:
             text: 要合成的文本
-            target_voice: 目标声线名 (如 "林志玲", "檀健次") 或自定义 embedding 文件路径 (.json/.npz)
+            target_voice: 目标声线名 (如 "林志玲") 或自定义 embedding 文件路径
             output_path: 输出文件路径
+            reference_audio: 参考音频路径 (3-15秒)，提供则优先使用 CosyVoice 克隆
+            reference_text: 参考音频的文字内容 (用于 zero-shot 模式)
         Returns:
             audio: 音频数组
         """
+        # 优先使用 CosyVoice 声纹克隆 (真实克隆目标人的声音)
+        cosyvoice_result = None
+        if reference_audio or (target_voice in self.PRESET_VOICE_REFS):
+            ref_audio = reference_audio or self.PRESET_VOICE_REFS.get(target_voice)
+            if ref_audio and os.path.isfile(ref_audio):
+                print(f"  🎯 检测到参考音频，使用 CosyVoice 声纹克隆")
+                print(f"     参考音频: {ref_audio}")
+                print(f"     声线名: {target_voice}")
+                cosyvoice_result = self.clone_voice_cosyvoice(
+                    text=text,
+                    reference_audio=ref_audio,
+                    reference_text=reference_text or "",
+                    output_path=output_path,
+                )
+                if cosyvoice_result is not None:
+                    return cosyvoice_result
+                print(f"  ⚠️ CosyVoice 克隆失败，降级为 Bark 合成")
+
+        # Bark 降级路径 (使用内置 speaker 预设)
         if self.model is not None and self.is_ready:
             voice_preset = self.get_human_preset(target_voice)
             try:
@@ -266,7 +449,6 @@ class AudioGenerator:
                 if torch.cuda.is_available():
                     inputs = {k: v.to("cuda") for k, v in inputs.items()}
 
-                # 只在首次生成前修复 generation_config，避免重复警告
                 if not self._generation_config_fixed and hasattr(self.model, "generation_config"):
                     cfg = self.model.generation_config
                     cfg.max_length = None
@@ -274,7 +456,6 @@ class AudioGenerator:
                     cfg.do_sample = False
                     self._generation_config_fixed = True
 
-                # 根据文本长度自适应调整生成 token 数
                 input_len = inputs["input_ids"].shape[1] if "input_ids" in inputs else 10
                 max_new_tokens = min(768, max(256, input_len * 8))
 
@@ -285,7 +466,7 @@ class AudioGenerator:
                     )
                     audio = audio_array.cpu().numpy().squeeze()
                     sample_rate = self.model.generation_config.sample_rate
-                print(f"  🗣️  人类声音合成完成 (声线: {target_voice} / preset: {voice_preset})")
+                print(f"  🗣️  Bark 人类声音合成完成 (声线: {target_voice} / preset: {voice_preset})")
             except Exception as e:
                 print(f"  ⚠️  Bark 人类声音合成失败: {e}，降级为模拟音频")
                 audio = self._generate_mock_human_audio(text)
@@ -294,8 +475,7 @@ class AudioGenerator:
             audio = self._generate_mock_human_audio(text)
             sample_rate = 22050
 
-        # 保存
-        if output_path:
+        if output_path and not os.path.exists(output_path):
             os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
             wavfile.write(output_path, sample_rate, audio.astype(np.float32))
             print(f"  🎵 音频已保存: {output_path}")

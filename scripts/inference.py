@@ -16,6 +16,41 @@ import os
 import sys
 import glob
 import argparse
+import subprocess
+
+
+COSYVOICE_DEPS = [
+    ("modelscope", "modelscope>=1.18.0"),
+    ("safetensors", "safetensors>=0.4.0"),
+    ("librosa", "librosa>=0.10.2"),
+    ("yaml", "pyyaml>=6.0.2"),
+    ("sentencepiece", "sentencepiece>=0.1.99"),
+]
+
+
+def _ensure_cosyvoice_deps():
+    """自动安装 CosyVoice 所需依赖"""
+    missing = []
+    for module_name, pip_spec in COSYVOICE_DEPS:
+        try:
+            __import__(module_name)
+        except ImportError:
+            missing.append(pip_spec)
+
+    if missing:
+        print(f"  📦 CosyVoice 缺少依赖，正在自动安装: {', '.join(missing)}")
+        try:
+            subprocess.check_call(
+                [sys.executable, "-m", "pip", "install", "--quiet"] + missing,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            print(f"  ✅ 依赖安装完成")
+        except subprocess.CalledProcessError:
+            print(f"  ⚠️ 自动安装失败，请手动运行: pip install {' '.join(missing)}")
+            return False
+    return True
+
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
@@ -24,17 +59,36 @@ from src.models.audio_generation import AudioGenerator, HUMAN_VOICE_PRESETS
 
 
 def list_available_voices():
-    """列出所有可用的人类声线预设"""
+    """列出所有可用的人类声线预设 (Bark 内置 + CosyVoice 预置声线)"""
     print("\n" + "=" * 50)
-    print("🎤 可用的人类声线预设")
+    print("🎤 可用的人类声线")
     print("=" * 50)
+
+    # Bark 内置声线
+    print("\n📦 Bark 内置声线预设:")
     for name, preset in HUMAN_VOICE_PRESETS.items():
         if name == "default":
             print(f"  (默认) {name}: {preset}")
         else:
             print(f"  ✅ {name}: {preset}")
-    print("=" * 50)
-    print("提示: 你也可以传入自定义声纹文件 (.json/.npz) 作为 --target-voice 参数")
+
+    # CosyVoice 预置声线 - 通过类方法自动注册 (不加载模型)
+    from src.models.audio_generation import AudioGenerator
+    AudioGenerator._register_builtin_voices()
+    cosyvoice_voices = AudioGenerator.PRESET_VOICE_REFS
+    if cosyvoice_voices:
+        print("\n🎯 CosyVoice 真实声纹克隆预置 (克隆目标人物声音):")
+        for name, path in cosyvoice_voices.items():
+            exists = "✅" if os.path.isfile(path) else "⚠️"
+            print(f"  {exists} {name}: {path}")
+    else:
+        print("\n🎯 CosyVoice 预置声线: (暂无)")
+
+    print("\n" + "=" * 50)
+    print("提示:")
+    print("  1. 使用 --reference-audio 指定自定义参考音频进行克隆")
+    print("  2. 使用 --reference-text 指定参考音频文字 (更精准)")
+    print("  3. 直接用 --target-voice '林志玲' 即可触发 CosyVoice 克隆")
     print("=" * 50 + "\n")
 
 
@@ -99,6 +153,10 @@ def main():
     parser.add_argument("--breed", default="通用", help="品种")
     parser.add_argument("--target-voice", default="default",
                         help="目标人类声线 (如 '林志玲', '檀健次', '温柔女声', '磁性男声') 或自定义声纹文件 (.json/.npz)")
+    parser.add_argument("--reference-audio", default="",
+                        help="参考音频路径 (3-15秒 .wav)，用于 CosyVoice 真实声纹克隆 (如林志玲的声音样本)")
+    parser.add_argument("--reference-text", default="",
+                        help="参考音频的文字内容，用于 CosyVoice zero-shot 克隆 (留空则使用 cross-lingual 模式)")
     parser.add_argument("--list-voices", action="store_true",
                         help="列出所有可用的人类声线预设")
     parser.add_argument("--output", default="", help="输出音频路径")
@@ -108,6 +166,8 @@ def main():
                         help="Embedding 模型名 (覆盖默认，MPS 默认 BAAI/bge-small-zh-v1.5, GPU 默认 BAAI/bge-large-zh-v1.5)")
     parser.add_argument("--no-rag", action="store_true",
                         help="禁用 RAG 检索 (无需 Embedding 模型)")
+    parser.add_argument("--no-llm-polish", action="store_true",
+                        help="禁用 LLM 润色 (仅使用模板生成拟人化文本)")
     parser.add_argument("--list-models", action="store_true",
                         help="列出可用的模型 (自动检测结果)")
     args = parser.parse_args()
@@ -163,6 +223,10 @@ def main():
         print(f"  📥 人类声音输入 → 声纹克隆输出")
         print(f"     输入音频: {args.audio}")
         print(f"     目标声线: {args.target_voice}")
+        if args.reference_audio:
+            print(f"     参考音频: {args.reference_audio}")
+            if args.reference_text:
+                print(f"     参考文本: {args.reference_text}")
         print(f"     输出路径: {args.output or './output/'}")
     elif args.mode == "human_to_pet":
         print(f"  📥 人类声音输入 → 宠物声音输出")
@@ -174,6 +238,10 @@ def main():
         print(f"     输入音频: {args.audio}")
         print(f"     宠物类型: {args.pet}")
         print(f"     目标声线: {args.target_voice}")
+        if args.reference_audio:
+            print(f"     参考音频: {args.reference_audio}")
+            if args.reference_text:
+                print(f"     参考文本: {args.reference_text}")
         print(f"     输出路径: {args.output or './output/'}")
     elif args.mode == "chat":
         print(f"  💬 对话模式")
@@ -259,10 +327,13 @@ def main():
 
     elif args.mode == "human_to_human":
         # 人类声音 → 人类声音 (声纹克隆)
+        _ensure_cosyvoice_deps()
         result = pipeline.human_sound_to_human_sound(
             audio_path=args.audio,
             target_voice=args.target_voice,
             output_path=args.output,
+            reference_audio=args.reference_audio or None,
+            reference_text=args.reference_text or None,
         )
         print("\n" + "=" * 50)
         print("声纹克隆结果")
@@ -299,12 +370,16 @@ def main():
 
     elif args.mode == "pet_to_human_voice":
         # 宠物声音 → 人类声音 (声纹克隆)
+        _ensure_cosyvoice_deps()
         result = pipeline.pet_sound_to_human_sound(
             audio_path=args.audio,
             target_voice=args.target_voice,
             pet_type=args.pet,
             breed=args.breed,
             output_path=args.output,
+            use_llm_polish=not args.no_llm_polish,
+            reference_audio=args.reference_audio or None,
+            reference_text=args.reference_text or None,
         )
         print("\n" + "=" * 50)
         print("宠物声音 → 人类声音 (声纹克隆) 结果")
@@ -315,7 +390,9 @@ def main():
         if result.get("description"):
             print(f"情绪描述: {result.get('description')}")
         if result.get("human_text"):
-            print(f"拟人化文本: {result.get('human_text')[:150]}...")
+            source = result.get("human_text_source", "unknown")
+            source_label = "LLM润色" if source == "llm_polished" else "模板生成"
+            print(f"拟人化文本 [{source_label}]: {result.get('human_text')[:150]}...")
         print(f"目标声线: {result.get('target_voice')}")
         print(f"状态: {result.get('status')}")
         if result.get("output_path"):

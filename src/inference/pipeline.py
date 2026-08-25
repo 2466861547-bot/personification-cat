@@ -390,8 +390,17 @@ class TranslationPipeline:
         pet_type: str = "cat",
         breed: str = "通用",
         output_path: str = "",
+        use_llm_polish: bool = True,
+        reference_audio: str = "",
+        reference_text: str = "",
     ) -> Dict:
-        """宠物声音 → 人类语言 → 人类声音 (声纹克隆)"""
+        """宠物声音 → 人类语言 → 人类声音 (声纹克隆)
+
+        Args:
+            use_llm_polish: 是否使用 LLM 润色模板文本 (默认 True)
+            reference_audio: 参考音频路径 (3-15秒)，提供则使用 CosyVoice 真实声纹克隆
+            reference_text: 参考音频的文字内容 (用于 zero-shot 克隆)
+        """
         result = {
             "input_audio": audio_path,
             "target_voice": target_voice,
@@ -447,28 +456,51 @@ class TranslationPipeline:
             result["description"] = description
             print(f"    ↑ ⚠️  无可用模型")
 
-        # Step 2: 生成拟人化描述 (可爱的人类语言)
-        print(f"  Step 2/3: 生成拟人化描述")
+        # Step 2: 生成拟人化描述 (模板 + LLM 润色 混合方案)
+        print(f"  Step 2/3: 生成拟人化描述 (混合方案)")
         emotion = result.get('emotion', 'unknown')
         description = result.get('description', '')
+        pet_names = {"cat": "猫咪", "dog": "狗狗", "bird": "鸟", "rabbit": "兔子"}
+        pet_cn = pet_names.get(pet_type, pet_type)
+        print(f"    ↑ 宠物类型: {pet_cn} | 品种: {breed} | 情绪: {emotion}")
 
-        # 策略: 使用模板生成 (可靠, 不依赖 LLM, 因为 LLM 未训练过此任务)
-        human_text = self._template_anthropomorphic(
+        # 2.1 模板生成基础文本 (100% 可靠)
+        template_text = self._template_anthropomorphic(
             pet_type=pet_type,
             breed=breed,
             emotion=emotion,
             description=description,
         )
-        result["human_text"] = human_text
+        print(f"    ↑ [模板] 基础文本: {template_text}")
 
-        # Log
-        pet_names = {"cat": "猫咪", "dog": "狗狗", "bird": "鸟", "rabbit": "兔子"}
-        pet_cn = pet_names.get(pet_type, pet_type)
-        print(f"    ↑ 宠物类型: {pet_cn} | 品种: {breed} | 情绪: {emotion}")
-        print(f"    ↑ 拟人化文本: {human_text}")
+        # 2.2 LLM 润色 (可选，失败则回退模板)
+        if use_llm_polish and self.llm and self.llm.is_ready:
+            print(f"    ↑ [LLM] 正在润色...")
+            human_text = self._llm_polish_text(
+                template_text=template_text,
+                pet_type=pet_type,
+                breed=breed,
+                emotion=emotion,
+            )
+            if human_text != template_text:
+                print(f"    ↑ [润色] 润色文本: {human_text}")
+                print(f"    ↑ ✅ 使用 LLM 润色版本")
+            else:
+                print(f"    ↑ ℹ️ LLM 未改进，使用模板文本")
+        else:
+            human_text = template_text
+            if not use_llm_polish:
+                print(f"    ↑ ℹ️ LLM 润色已禁用 (--no-llm-polish)")
+            else:
+                print(f"    ↑ ℹ️ LLM 不可用，使用模板文本")
+
+        result["human_text"] = human_text
+        result["human_text_source"] = "llm_polished" if human_text != template_text else "template"
+        print(f"    ↑ 最终拟人化文本: {human_text}")
 
         # Step 3: 文字 → 人类声音 (声纹克隆)
-        print(f"  Step 3/3: 文字 → 人类声音 (目标声线: {target_voice})")
+        cosyvoice_info = f"CosyVoice声纹克隆 (参考: {reference_audio})" if reference_audio else target_voice
+        print(f"  Step 3/3: 文字 → 人类声音 ({cosyvoice_info})")
         if self.audio_generator:
             if not output_path:
                 os.makedirs("./output", exist_ok=True)
@@ -478,10 +510,14 @@ class TranslationPipeline:
                 text=human_text,
                 target_voice=target_voice,
                 output_path=output_path,
+                reference_audio=reference_audio or None,
+                reference_text=reference_text or None,
             )
             result["status"] = "success"
             result["output_path"] = output_path
-            if not self.audio_generator.is_ready:
+            if reference_audio:
+                result["voice_cloning"] = "cosyvoice"
+            elif not self.audio_generator.is_ready:
                 result["note"] = "使用模拟音频生成 (Bark 模型不可用)"
         else:
             result["status"] = "no_audio_generator"
@@ -535,8 +571,15 @@ class TranslationPipeline:
         audio_path: str,
         target_voice: str = "default",
         output_path: str = "",
+        reference_audio: str = "",
+        reference_text: str = "",
     ) -> Dict:
-        """人类声音 → 人类语言 → 人类声音 (声纹克隆)"""
+        """人类声音 → 人类语言 → 人类声音 (声纹克隆)
+
+        Args:
+            reference_audio: 参考音频路径 (3-15秒)，提供则使用 CosyVoice 真实声纹克隆
+            reference_text: 参考音频的文字内容 (用于 zero-shot 克隆)
+        """
         result = {
             "input_audio": audio_path,
             "target_voice": target_voice,
@@ -582,9 +625,13 @@ class TranslationPipeline:
                 text=text_for_tts,
                 target_voice=target_voice,
                 output_path=output_path,
+                reference_audio=reference_audio or None,
+                reference_text=reference_text or None,
             )
             result["status"] = "success"
             result["output_path"] = output_path
+            if reference_audio:
+                result["voice_cloning"] = "cosyvoice"
             if not self.audio_generator.is_ready:
                 result["note"] = "使用模拟音频生成 (Bark 模型不可用，降级模式)"
         else:
@@ -1116,6 +1163,199 @@ class TranslationPipeline:
             hint = hints[0] if hints else breed
             fallback = f"{hint}：{fallback}"
         return fallback
+
+    def _llm_polish_text(
+        self,
+        template_text: str,
+        pet_type: str,
+        breed: str,
+        emotion: str,
+    ) -> str:
+        """LLM 润色模板文本 — 混合方案第二阶段
+
+        将模板生成的可靠文本交给 LLM 进行润色，
+        使表达更自然、更口语化，同时严格约束不得丢失关键信息。
+
+        Args:
+            template_text: 模板生成的基础文本 (可靠、正确)
+            pet_type: 宠物类型 (cat/dog)
+            breed: 品种名
+            emotion: 情绪标签
+
+        Returns:
+            润色后的文本，如果 LLM 不可用或失败则返回原模板文本
+        """
+        if not self.llm or not self.llm.is_ready:
+            return template_text
+
+        import re
+
+        # 获取品种昵称 (模板中实际使用的标识)
+        breed_hints = {
+            "橘猫": ["橘胖", "小胖橘"],
+            "英短": ["英短", "蓝胖子"],
+            "美短": ["美短", "花纹"],
+            "布偶": ["布偶", "小仙女"],
+            "狸花": ["狸花", "小狸"],
+            "加菲猫": ["加菲", "胖喵"],
+            "俄罗斯蓝猫": ["俄蓝", "蓝猫"],
+            "柯基": ["柯基", "小短腿"],
+            "金毛": ["金毛", "大暖男"],
+            "泰迪": ["泰迪", "小机灵"],
+            "柴犬": ["柴犬", "小柴"],
+            "哈士奇": ["二哈", "撒手没"],
+            "比熊": ["比熊", "棉花糖"],
+            "边牧": ["边牧", "小天才"],
+            "阿拉斯加": ["阿拉斯加", "阿拉"],
+            "博美": ["博美", "小狐狸"],
+            "雪纳瑞": ["雪纳瑞", "小老头"],
+            "拉布拉多": ["拉布拉多", "拉拉"],
+        }
+        breed_hint = breed_hints.get(breed, [breed])[0] if breed and breed != "通用" else ""
+
+        pet_cn = {"cat": "猫咪", "dog": "狗狗", "bird": "小鸟", "rabbit": "兔兔"}.get(pet_type, pet_type)
+        emotion_cn = {
+            "hungry": "饿了", "happy": "开心", "angry": "生气",
+            "sad": "难过", "playful": "想玩耍", "greeting": "打招呼",
+            "seek_attention": "求关注", "fearful": "害怕", "content": "满足",
+            "alert": "警觉", "pain": "疼痛", "lonely": "孤独",
+            "anxious": "焦虑", "excited": "兴奋", "frustrated": "沮丧",
+            "relaxed": "放松", "curious": "好奇", "territorial": "护领地",
+            "confused": "困惑", "jealous": "嫉妒",
+        }.get(emotion, emotion)
+
+        system_prompt = (
+            "你是一个宠物语言翻译助手。请将下面宠物想说的话，"
+            "改写得更加自然、可爱、口语化。要求：\n"
+            "1. 保持原意不变，不要添加新内容\n"
+            "2. 必须包含品种名称\n"
+            "3. 只输出一句中文，不要任何解释或前缀\n"
+            "4. 控制在 30 字以内\n"
+            "5. 不要使用外语"
+        )
+
+        user_input = (
+            f"宠物类型: {pet_cn}\n"
+            f"品种: {breed}\n"
+            f"情绪: {emotion_cn}\n"
+            f"宠物想说: {template_text}\n"
+            f"请润色这句话，使其更自然可爱："
+        )
+
+        try:
+            polished = self.llm.inference(
+                user_input=user_input,
+                system_prompt=system_prompt,
+                max_new_tokens=80,
+                temperature=0.3,
+                repetition_penalty=1.3,
+            )
+
+            if self._validate_polished_text(polished, template_text, breed, breed_hint):
+                return polished
+            else:
+                print(f"    ⚠️  LLM 润色未通过质量检查，使用模板文本")
+                return template_text
+
+        except Exception as e:
+            print(f"    ⚠️  LLM 润色失败: {e}，使用模板文本")
+            return template_text
+
+    @staticmethod
+    def _validate_polished_text(
+        polished: str,
+        template_text: str,
+        breed: str,
+        breed_hint: str = "",
+    ) -> bool:
+        """验证 LLM 润色输出质量
+
+        检查项:
+        1. 非中文字符比例 (俄语/德语/英语等外语检测)
+        2. 重复 n-gram 模式
+        3. 长度合理性 (5-150 字)
+        4. 品种标识是否保留 (品种名或品种昵称)
+        5. 是否为有效中文句子
+
+        Args:
+            polished: LLM 润色后的文本
+            template_text: 原始模板文本 (用于对比)
+            breed: 品种名 (如 "橘猫")
+            breed_hint: 品种昵称 (如 "橘胖")，模板中实际使用的标识
+
+        Returns:
+            True=通过检查, False=未通过，应回退到模板文本
+        """
+        import re
+
+        if not polished or not polished.strip():
+            return False
+
+        text = polished.strip()
+
+        # 1. 长度检查
+        if len(text) < 5:
+            return False
+        if len(text) > 150:
+            return False
+
+        # 2. 检测非中文字符比例
+        # 中文字符范围: \u4e00-\u9fff
+        chinese_chars = re.findall(r'[\u4e00-\u9fff]', text)
+        total_chars = len(text)
+        chinese_ratio = len(chinese_chars) / max(total_chars, 1)
+
+        # 中文比例低于 60% 则拒绝 (可能混入大量外语)
+        if chinese_ratio < 0.6:
+            return False
+
+        # 3. 检测明显的外语单词 (俄语/德语/英语等)
+        # 连续 3 个以上拉丁字母且不在常见英文单词中
+        foreign_patterns = re.findall(r'[a-zA-Z]{3,}', text)
+        # 允许少量常见英文 (如 cat/dog/hello)，但禁止像 Биография 这样的长串
+        for fp in foreign_patterns:
+            if len(fp) > 5:
+                return False
+
+        # 4. 重复模式检测
+        # 检测连续重复的短片段 (如 "棒棒喂食棒棒喂食")
+        for n in [2, 3, 4]:
+            pattern = re.compile(r'(.{' + str(n) + r',})\1{2,}')
+            if pattern.search(text):
+                return False
+
+        # 5. 品种标识保留检查
+        # 检查 breed (如 "橘猫") 或 breed_hint (如 "橘胖") 是否出现在文本中
+        if breed and breed != "通用":
+            breed_found = breed in text
+            hint_found = bool(breed_hint and breed_hint in text)
+            if not breed_found and not hint_found:
+                return False
+
+        # 6. 关键信息保留检查
+        # 从模板中提取关键名词 (品种、情绪相关词汇)，检查润色文本是否包含
+        # 放宽检查：只要保留了品种标识即可，不强求字符重叠度
+        # 因为 LLM 润色可能使用完全不同的表达，只要关键信息正确就通过
+        template_chars = set(template_text)
+        polished_chars = set(text)
+        overlap = template_chars & polished_chars
+        overlap_ratio = len(overlap) / max(len(template_chars), 1)
+
+        # 如果保留了品种标识，适当放宽重叠度要求
+        if breed and breed != "通用":
+            breed_in_text = breed in text or (breed_hint and breed_hint in text)
+            if breed_in_text:
+                # 品种标识保留，重叠度要求降低到 0.15
+                if overlap_ratio < 0.15:
+                    return False
+            else:
+                return False
+        else:
+            # 无品种信息时，要求更高的重叠度
+            if overlap_ratio < 0.25:
+                return False
+
+        return True
 
     def chat(self, user_input: str) -> str:
         """对话模式"""

@@ -97,7 +97,7 @@
 | **音频处理** | librosa, torchaudio, audiomentations | 音频加载、分段、特征提取、数据增强 |
 | **语音识别** | faster-whisper (CTranslate2) + LoRA | 宠物声音 → 文字 (3-4x 加速) |
 | **大语言模型** | vLLM + Qwen2.5-7B + AWQ 量化 | 情绪理解、意图分析、翻译 (5x 加速) |
-| **音频生成** | Suno Bark | 文本 → 宠物叫声合成 |
+| **音频生成** | Suno Bark + CosyVoice2-0.5B | Bark: 宠物叫声合成 / CosyVoice: 真实声纹克隆 (零样本) |
 | **RAG 检索** | ChromaDB + bge-large + BM25 + Rerank | 混合检索宠物知识 (准确率 +30%) |
 | **Agent 编排** | LangChain + 多智能体协作 | 工具调用、工作流编排、娱乐决策 |
 | **定时调度** | schedule + threading | 动态配置逗宠时间表 (3-5 次/天) |
@@ -767,20 +767,41 @@ python scripts/inference.py \
 
 #### 人类声音 → 人类声音 (声纹克隆)
 
-将一段人类说话的音频，转换为**指定声线**的人类声音输出（声纹克隆）。支持预设声线名（林志玲、檀健次等），也支持自定义声纹 embedding 文件。
+将一段人类说话的音频，转换为**指定声线**的人类声音输出（声纹克隆）。支持两种模式：
+- **CosyVoice 真实声纹克隆**（推荐）：通过 3-15 秒参考音频真实克隆目标人物声音
+- **Bark 内置 speaker 预设**：使用 Bark 内置的声线预设（音色近似但非真实克隆）
 
 ```bash
-# 查看所有可用的人类声线预设
+# 查看所有可用声线 (Bark 预设 + CosyVoice 预置)
 python scripts/inference.py --list-voices
 
-# 将你的语音转换为"林志玲"声线
+# === CosyVoice 真实声纹克隆 (推荐) ===
+
+# 方式 1: 使用已注册的预置声线 ("林志玲" 已内置)
 python scripts/inference.py \
     --mode human_to_human \
     --audio ./input/my_voice.wav \
     --target-voice "林志玲" \
     --output ./output/linzhiling_voice.wav
 
-# 将语音转换为"檀健次"声线
+# 方式 2: 显式指定参考音频 (zero-shot 精准克隆)
+python scripts/inference.py \
+    --mode human_to_human \
+    --audio ./input/my_voice.wav \
+    --reference-audio ./data/voices/linzhiling_ref.wav \
+    --reference-text "大家好，我是林志玲" \
+    --output ./output/linzhiling_voice.wav
+
+# 方式 3: Cross-lingual 跨语言克隆 (无需参考文本)
+python scripts/inference.py \
+    --mode human_to_human \
+    --audio ./input/my_voice.wav \
+    --reference-audio ./data/voices/linzhiling_ref.wav \
+    --output ./output/linzhiling_crosslingual.wav
+
+# === Bark 内置声线 (降级方案) ===
+
+# 将你的语音转换为"檀健次"声线 (Bark 预设)
 python scripts/inference.py \
     --mode human_to_human \
     --audio ./input/my_voice.wav \
@@ -847,6 +868,29 @@ python scripts/inference.py \
     --output ./output/cat_custom.wav
 ```
 
+##### 拟人化文本生成方式
+
+`pet_to_human_voice` 模式支持两种拟人化文本生成方式，默认使用 **LLM 润色**（模板基础 + LLM 润色 + 质量检查兜底），可通过 `--no-llm-polish` 切换为纯模板模式。
+
+```bash
+# 使用 LLM 润色 (默认) — 模板生成基础文本，LLM 进行自然润色，质量检查兜底
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --pet cat \
+    --breed 橘猫 \
+    --target-voice "林志玲"
+
+# 禁用 LLM 润色 (仅模板) — 使用预定义模板直接生成文本，更稳定但表达较固定
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --pet cat \
+    --breed 橘猫 \
+    --target-voice "林志玲" \
+    --no-llm-polish
+```
+
 ### 完整音频处理流程
 
 ```
@@ -890,7 +934,7 @@ python scripts/inference.py \
 **技术流程总结**：
 
 ```
-宠物声音 → 声学特征分类 → 情绪 → LLM拟人化 → Bark声纹克隆 → 人类声音
+宠物声音 → 声学特征分类 → 情绪 → 模板+LLM润色 → Bark声纹克隆 → 人类声音
 宠物声音 → 声学特征分类 → 情绪 → LLM意图分析 → Bark合成 → 宠物声音
 人类声音 → Whisper → 文字 → LLM分析 → Bark合成 → 宠物声音
 人类声音 → Whisper → 文字 → Bark声纹克隆 → 人类声音
@@ -912,12 +956,79 @@ python scripts/inference.py --mode chat
 | `./data/raw/cat_sounds/test.wav` | 1.5秒模拟猫叫 (16kHz, 单声道) |
 | `./data/raw/dog_sounds/` | 放置你的狗叫音频 |
 | `./data/raw/human_sounds/` | 放置你的人类语音 |
+| `./data/voices/linzhiling_ref.wav` | 林志玲声纹克隆参考音频 (3.96秒, 22050Hz) |
 
 > 如需生成更多测试音频：
 > ```bash
 > # 使用 ffmpeg 录制 5 秒音频
 > ffmpeg -f avfoundation -i ":0" -t 5 ./data/raw/cat_sounds/my_cat.wav
 > ```
+
+#### CosyVoice 真实声纹克隆
+
+本项目集成了 **CosyVoice2-0.5B**（阿里巴巴开源零样本语音克隆模型），只需 3-15 秒参考音频即可真实克隆目标人物的声音。
+
+**两种克隆模式**：
+
+| 模式 | 说明 | 适用场景 |
+|------|------|---------|
+| **Zero-shot** | `inference_zero_shot(text, reference_text, reference_audio)` | 已知参考音频文字内容，精准克隆 |
+| **Cross-lingual** | `inference_cross_lingual(text, reference_audio)` | 跨语言克隆，无需参考文本 |
+
+**使用方式**：
+
+```bash
+# 1. 使用已注册的预置声线 (如 "林志玲")
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --target-voice "林志玲" \
+    --output ./output/linzhiling_cat.wav
+
+# 2. 显式传入参考音频 (zero-shot)
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --reference-audio ./data/voices/linzhiling_ref.wav \
+    --reference-text "大家好，我是林志玲" \
+    --output ./output/linzhiling_cat.wav
+
+# 3. Cross-lingual 跨语言克隆
+python scripts/inference.py \
+    --mode pet_to_human_voice \
+    --audio ./data/raw/cat_sounds/test.wav \
+    --reference-audio ./data/voices/linzhiling_ref.wav \
+    --output ./output/linzhiling_cat_cross.wav
+```
+
+**注册自定义声线**：
+
+```bash
+# 方式 1: 使用注册脚本
+python scripts/register_voice.py
+
+# 方式 2: 代码中动态注册
+python3 -c "
+from src.models.audio_generation import AudioGenerator
+AudioGenerator.register_preset_voice(
+    '我的声线',
+    '/path/to/my_reference.wav'
+)
+"
+```
+
+**参考音频要求**：
+- 时长：3-15 秒
+- 格式：WAV (16-bit PCM)
+- 要求：单人纯净语音，无背景音乐、无其他说话人
+- 采样率：推荐 22050 Hz 或 16000 Hz
+
+**降级策略**：
+1. 有参考音频 → 优先 CosyVoice 真实声纹克隆
+2. CosyVoice 失败 → 降级 Bark 内置 speaker 预设
+3. Bark 也失败 → 降级模拟音频（保证任何情况都有输出）
+
+**首次运行**会自动下载 `iic/CosyVoice2-0.5B` 模型（约 1.2GB），存放到 `~/.cache/modelscope/` 或 `~/.cache/huggingface/`。
 
 #### 常见问题 (FAQ)
 
@@ -979,6 +1090,30 @@ A: Embedding 模型用于 RAG 知识库检索，加载失败时 RAG 会自动降
 **Q: 如何查看当前可用的模型？**
 ```bash
 python scripts/inference.py --list-models
+```
+
+**Q: CosyVoice 声纹克隆和 Bark 声纹克隆有什么区别？**
+
+A: 两者有本质区别：
+- **CosyVoice**：通过 3-15 秒参考音频提取声纹 embedding，**真实克隆目标人物的音色、韵律和说话风格**。输出的是真正的"林志玲声音"。
+- **Bark**：使用 `v2/en_speaker_X` 内置 speaker 预设，是预训练的声线模板，**不是真实人物声音**，只是音色相似的预置声线。
+
+当提供 `--reference-audio` 参数或使用已注册的预置声线（如"林志玲"）时，系统自动优先使用 CosyVoice；CosyVoice 不可用时降级为 Bark。
+
+**Q: CosyVoice 首次运行如何下载模型？**
+
+A: 首次运行时会自动下载 `iic/CosyVoice2-0.5B` 模型（约 1.2GB）：
+- 优先从 ModelScope 国内镜像下载（国内速度更快）
+- 失败则尝试 HuggingFace 镜像
+- 缓存路径：`~/.cache/modelscope/` 或 `~/.cache/huggingface/`
+
+也可以手动下载：
+```bash
+# ModelScope
+python3 -c "from modelscope import snapshot_download; snapshot_download('iic/CosyVoice2-0.5B')"
+
+# HuggingFace
+HF_ENDPOINT=https://hf-mirror.com huggingface-cli download iic/CosyVoice2-0.5B
 ```
 
 **Q: 为什么 test.wav 会被 Whisper 识别成「嗚」？识别过程是怎样的？**
